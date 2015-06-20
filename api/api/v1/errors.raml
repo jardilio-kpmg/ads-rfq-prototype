@@ -1,0 +1,54 @@
+  #used by default in the error handler service in the preloader module
+  displayName: error
+  is: [mock]
+  description: |
+    When an error is encountered by a client, it will send diagnositc information to this service which will log the information for later analysis.
+  type:
+    collection-writeonly:
+      member-example:  |
+        {
+          "errorId": "abc",
+          "errorCode": "1000",
+          "message": "An error occurred",
+          "url": "http://www.app.com/#page",
+          "logHistory": [
+           "stack trace line 1",
+           "stack trace line 2"
+          ]
+        }
+      member-schema:  |
+        {
+          "id": "Error",
+          "type": "object",
+          "$schema": "http://json-schema.org/draft-03/schema",
+          "properties": {
+            "errorId": {
+              "description": "The identifier of the object",
+              "type": "string",
+              "required": true
+            },
+            "errorCode": {
+                "type": "integer",
+                "required": true,
+                "format": "int32"
+            },
+            "message": {
+                "type": "string",
+                "required": true,
+                "description": "diagnostic error message"
+            },
+            "url": {
+                "type": "string",
+                "required": true,
+                "description": "full URL the user was viewing when the error occurred"
+            },
+            "logHistory": {
+                "description": "most recent client-side logging messages",
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string"
+                }
+            }
+          }
+        }

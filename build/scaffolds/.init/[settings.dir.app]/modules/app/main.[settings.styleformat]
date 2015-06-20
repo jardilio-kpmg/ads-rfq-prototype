@@ -1,0 +1,7 @@
+.app {
+    /*TODO: add application specific styles here*/
+}
+
+.app.ready {
+   /*TODO: application is ready and loaded*/
+}

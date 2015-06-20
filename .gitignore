@@ -1,0 +1,9 @@
+node_modules
+bin
+.temp
+www/libs
+.sass-cache
+.idea
+npm-debug.log
+**/*.generated.*
+**/*.DS_Store

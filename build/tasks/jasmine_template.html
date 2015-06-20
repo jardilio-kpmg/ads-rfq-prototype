@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="application/javascript">
+        $(function(){
+            $('.panel.passed').addClass('panel-success');
+            $('.panel.failed').addClass('panel-danger');
+            $('.label.passed').addClass('label-success');
+            $('.label.failed').addClass('label-danger');
+            $('.list-group-item.passed').addClass('text-success');
+            $('.list-group-item.failed').addClass('text-danger');
+        })
+    </script>
+</head>
+
+<body>
+<div class="container-fluid">
+    {{#results}}
+        <div class="page-header {{#hasFailed}}text-danger{{/hasFailed}}{{^hasFailed}}{{#hasSuccess}}text-success{{/hasSuccess}}{{/hasFailed}}">
+            <h1>
+                {{#hasFailed}}
+                      {{failed}} of {{total}} failed
+                {{/hasFailed}}
+                {{^hasFailed}}
+                    {{#hasSuccess}}
+                        All {{total}} passed
+                    {{/hasSuccess}}
+                {{/hasFailed}}
+                <small>{{browserName}} @ {{timestamp}}</small>
+            </h1>
+        </div>
+    {{/results}}
+
+    {{#results}}{{#hasFailed}}
+        <h2>Failures</h2>
+    {{/hasFailed}}{{/results}}
+
+    {{#failedSuites}}
+        {{#specs}}
+        <div class="panel failed">
+            <div class="panel-heading"><b>{{name}} {{description}}</b></div>
+            <div class="panel-body">
+                <pre>{{log}}</pre>
+            </div>
+        </div>
+    {{/specs}}
+    {{/failedSuites}}
+
+    {{#results}}{{#hasFailed}}
+        <hr/>
+    {{/hasFailed}}{{/results}}
+    <div>
+        <h2>Summary</h2>
+        {{#suites}}
+            <div class="panel {{state}}">
+                <div class="panel-heading"><b>{{name}}</b></div>
+                <ul class="list-group">
+                    {{#specs}}
+                        <li class="list-group-item {{state}}">
+                            <span class="label {{state}}">&nbsp;</span> {{description}}
+                        </li>
+                    {{/specs}}
+                </ul>
+            </div>
+        {{/suites}}
+
+    </div>
+</div>
+</body>
+</html>

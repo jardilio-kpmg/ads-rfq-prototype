@@ -1,0 +1,158 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 id="{{uniqueId}}" class="panel-title">
+          <a data-toggle="collapse" href="#{{uniqueId}}_details">
+            {{parentUrl}}<b>{{relativeUri}}</b>
+          </a>
+        </h3>
+    </div>
+
+    <div id="{{uniqueId}}_details" class="panel-collapse collapse in">
+      <div class="panel-body">
+        {{#if description}}
+            <div class="top-resource-description">
+              {{md description}}
+            </div>
+        {{/if}}
+
+
+        {{#methods}}
+          <div class="panel panel-{{methodToBootstrapContext method}}">
+              <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a data-toggle="collapse" href="#{{../uniqueId}}_{{method}}">
+                      {{lock securedBy}} <span style="text-transform: uppercase;"><b>{{method}}</b></span> {{../parentUrl}}{{../relativeUri}}
+                    </a>
+                  </h3>
+              </div>
+              <div id="{{../uniqueId}}_{{method}}"  class="panel-collapse collapse">
+
+                <div class="panel-body alert-{{methodToBootstrapContext method}}">
+                    <p>{{md description}}</p>
+
+                    <div class="panel panel-{{methodToBootstrapContext method}}">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a data-toggle="collapse" href="#{{../uniqueId}}_{{method}}_request">
+                                    Request
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="{{../uniqueId}}_{{method}}_request" class="panel-collapse collapse">
+                            <div class="panel-body">
+
+                              {{#if ../allUriParameters}}
+                                  <h4>URI Parameters</h4>
+                                  <ul>
+                                    {{#each ../../allUriParameters}}
+                                      {{> item}}
+                                    {{/each}}
+                                  </ul>
+                              {{/if}}
+
+                              {{#if headers}}
+                                  <h4>Headers</h4>
+                                  <ul>
+                                    {{#each headers}}
+                                      {{> item}}
+                                    {{/each}}
+                                  </ul>
+                              {{/if}}
+
+                              {{#if queryParameters}}
+                                  <h4>Query Parameters</h4>
+                                  <ul>
+                                    {{#each queryParameters}}
+                                      {{> item}}
+                                    {{/each}}
+                                  </ul>
+                              {{/if}}
+
+                              {{#if body}}
+                                  <h4>Body</h4>
+                                {{#each body}}
+                                    <p><strong>Type: {{@key}}</strong></p>
+                                  {{#if formParameters}}
+                                      <strong>Form Parameters</strong>
+                                      <ul>
+                                        {{#each formParameters}}
+                                          {{> item}}
+                                        {{/each}}
+                                      </ul>
+                                  {{/if}}
+
+                                  {{#if this.schema}}
+                                      <p><strong>Schema</strong>:</p>
+                                      <pre><code>{{this.schema}}</code></pre>
+                                  {{/if}}
+
+                                  {{#if this.example}}
+                                      <p><strong>Example</strong>:</p>
+                                      <pre><code>{{this.example}}</code></pre>
+                                  {{/if}}
+                                {{/each}}
+                              {{/if}}
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-{{methodToBootstrapContext method}}">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a data-toggle="collapse" href="#{{../uniqueId}}_{{method}}_response">
+                                    Response
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="{{../uniqueId}}_{{method}}_response" class="panel-collapse collapse">
+                            <div class="panel-body">
+
+
+                              {{#each responses}}
+                                  <h4>HTTP status code <a href="http://httpstatus.es/{{@key}}" target="_blank">{{@key}}</a></h4>
+                                {{md this.description}}
+
+                                {{#if this.headers}}
+                                    <p><strong>Headers</strong></p>
+                                    <ul>
+                                      {{#each this.headers}}
+                                        {{> item}}
+                                      {{/each}}
+                                    </ul>
+                                {{/if}}
+
+                                {{#if this.body}}
+                                  {{#each this.body}}
+                                    <p><strong>Type: {{@key}}</strong></p>
+
+                                    {{#if this.schema}}
+                                        <p><strong>Schema</strong>:</p>
+                                        <pre><code>{{this.schema}}</code></pre>
+                                    {{/if}}
+
+                                    {{#if this.example}}
+                                        <p><strong>Example</strong>:</p>
+                                        <pre><code>{{this.example}}</code></pre>
+                                    {{/if}}
+                                  {{/each}}
+                                {{/if}}
+                              {{/each}}
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+          </div>
+        {{/methods}}
+
+      </div>
+    </div>
+</div>
+
+{{#resources}}
+  {{> resourceDetails }}
+{{/resources}}

@@ -1,0 +1,26 @@
+{
+  "dir": {
+    "temp": ".temp",
+    "app": "www",
+    "dist": "bin",
+    "cordova": ".",
+    "docs": "bin/documentation"
+  },
+  "globs": {
+    "scripts": "/**/*.js",
+    "specs": "/**/*.spec.js",
+    "mocks": "/**/*.mock.js",
+    "e2e": "/**/*.e2e.js",
+    "sprites": "modules/**/*.png",
+    "fonts": "modules/**/*.svg"
+  },
+  "isolateModules": [
+    "preloader"
+  ],
+  "spritebasedir": "/",
+  "styleformat": "scss",
+  "defaultmodule": "ads",
+  "cordovaenabled": false,
+  "servertask": "server",
+  "defaultlocale": "en"
+}

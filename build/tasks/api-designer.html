@@ -1,0 +1,106 @@
+<!doctype html>
+<html role="api-designer">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>KPMG API Designer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="styles/vendor.css"/>
+
+    <link rel="stylesheet" href="styles/main.css"/>
+  </head>
+  <body ng-app="ramlEditorApp">
+    <div class="container">
+        <raml-editor></raml-editor>
+    </div>
+
+    <script src="scripts/vendor.js"></script>
+
+    <script src="scripts/main.js"></script>
+
+    <style>
+        .menu-item-mocking-service { display: none !important; }
+    </style>
+
+    <script>
+      // Derived from https://github.com/brianmc/raml-store/blob/master/sample-designer.html
+
+      // This part is needed only if you want to provide your own Persistance Implementation
+      // Angular Module must match "ramlEditorApp"
+      angular.module('ramlEditorApp')
+        .factory('MyFileSystem', function ($http, $q, config, eventService) {
+          var service = { supportsFolders: true},
+              encodePath = function(path){
+                  return '/' + path.substr(1).replace(/\//g,'!')
+              };
+
+
+          service.directory = function (path) {
+            var deferred = $q.defer();
+            $http({
+              method: 'GET',
+              data: '',
+              url : '/files',
+              withCredentials: false
+            }).success(function (data, status, headers, config) {
+              deferred.resolve(data);
+            }).error(deferred.reject.bind(deferred));
+
+            return deferred.promise;
+          };
+          service.load = function (path) {
+            var deferred = $q.defer();
+
+            $http({
+              method: 'GET',
+              data: '',
+              url : '/files'+ encodePath(path),
+              withCredentials: false
+            }).success(function (data, status, headers, config) {
+              deferred.resolve(data);
+            })
+              .error(deferred.reject.bind(deferred));
+            return deferred.promise;
+          };
+          service.remove = function (path) {
+            var deferred = $q.defer();
+            $http({
+              method: 'DELETE',
+              data: '',
+              url : '/files' + encodePath(path),
+              withCredentials: false
+            }).success(deferred.resolve.bind(deferred))
+              .error(deferred.reject.bind(deferred));
+            return deferred.promise;
+          };
+          service.save = function (path, contents) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                data: {contents: contents },
+                url : '/files' + encodePath(path),
+                withCredentials: false
+              }).success(deferred.resolve.bind(deferred))
+                .error(deferred.reject.bind(deferred));
+          return deferred.promise;
+        };
+        return service;
+      })
+        .run(function (MyFileSystem, config, eventService) {
+          // Set MyFileSystem as the filesystem to use
+          config.set('fsFactory', 'MyFileSystem');
+
+          // In case you want to send notifications to the user
+          // (for instance, that he must login to save).
+          // The expires flags means whether
+          // it should be hidden after a period of time or the
+          // user should dismiss it manually.
+          eventService.broadcast('event:notification',
+            {message: 'File saved.', expires: true});
+        });
+    </script>
+
+  </body>
+</html>

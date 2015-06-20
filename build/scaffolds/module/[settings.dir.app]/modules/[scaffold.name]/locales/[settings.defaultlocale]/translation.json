@@ -1,0 +1,5 @@
+{
+    "<%= scaffold.name %>": {
+        "title": "<%= scaffold.name %>"
+    }
+}

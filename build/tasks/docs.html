@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/cerulean/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <style>
+        .tab-pane, iframe {
+            height: 100%;
+            width: 100%;
+        }
+        .tab-content {
+            position: absolute;
+            top: 45px;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="panel">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#jsdoc" role="tab" data-toggle="tab">Client</a></li>
+        <% _.forEach(apis, function (api) { %>
+        <li><a href="#api-<%= api.id %>" role="tab" data-toggle="tab"><%= api.prettyname %></a></li>
+        <% });%>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="jsdoc">
+            <iframe src="js">Loading JSDocs...</iframe>
+        </div>
+        <% _.forEach(apis, function (api) { %>
+        <div class="tab-pane" id="api-<%= api.id %>">
+            <iframe src="api/<%= api.name %>.html">Loading API Docs...</iframe>
+        </div>
+        <% });%>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <style>
+        .tab-pane, iframe {
+            height: 100%;
+            width: 100%;
+        }
+        .tab-content {
+            position: absolute;
+            top: 45px;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="panel">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#results" role="tab" data-toggle="tab">Results</a></li>
+        <li><a href="#coverage" role="tab" data-toggle="tab">Coverage</a></li>
+        <li><a href="#jshint" role="tab" data-toggle="tab">JSHint</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="results">
+            <iframe src="results"></iframe>
+        </div>
+        <div class="tab-pane" id="coverage">
+            <iframe src="coverage"></iframe>
+        </div>
+        <div class="tab-pane" id="jshint">
+            <iframe src="jshint"></iframe>
+        </div>
+    </div>
+</div>
+</body>
+</html>

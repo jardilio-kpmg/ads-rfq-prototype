@@ -1,0 +1,103 @@
+#example using standard collection and memeber types
+displayName: user
+is: [secured,mock]
+type:
+  collection:
+    collection-example: |
+      [
+        {
+          "userId": "1",
+          "firstName": "John",
+          "lastName": "Doe",
+          "userName": "jdoe"
+        },
+        {
+          "userId": "2",
+          "firstName": "Jane",
+          "lastName": "Doe",
+          "userName": "jdoe2"
+        }
+      ]
+    collection-schema: |
+      {
+        "id": "UserCollection",
+        "type": "array",
+        "$schema": "http://json-schema.org/draft-03/schema",
+        "items":
+        {
+          "type": "object",
+          "$schema": "http://json-schema.org/draft-03/schema",
+          "properties": {
+            "userId": {
+              "description": "The identifier of the object",
+              "type": "string",
+              "required": true
+            },
+            "firstName": {
+              "description": "The users first name",
+              "type": "string",
+              "required": true
+            },
+            "lastName": {
+              "description": "The users last name",
+              "type": "string",
+              "required": true
+            },
+            "userName": {
+              "description": "The users login user name",
+              "type": "string",
+              "required": true
+            }
+          }
+        }
+      }
+    member-example: &user-example |
+      {
+        "userId": "1",
+        "firstName": "John",
+        "lastName": "Doe",
+        "userName": "jdoe"
+      }
+    member-schema: &user-schema  |
+      {
+        "id": "User",
+        "type": "object",
+        "$schema": "http://json-schema.org/draft-03/schema",
+        "properties": {
+          "userId": {
+            "description": "The identifier of the object",
+            "type": "string",
+            "required": true
+          },
+          "firstName": {
+            "description": "The users first name",
+            "type": "string",
+            "required": true
+          },
+          "lastName": {
+            "description": "The users last name",
+            "type": "string",
+            "required": true
+          },
+          "userName": {
+            "description": "The users login user name",
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+get:
+  queryParameters:
+    terms:
+      description: A string of terms to query for users by
+      type: string
+      example: ?terms=john
+      required: false
+
+/{userId}:
+  displayName: user
+  type:
+    member:
+      member-example: *user-example
+      member-schema: *user-schema
+  is: [secured,mock]

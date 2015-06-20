@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{{title}} API documentation</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="generator" content="https://github.com/kevinrenskers/raml2html {{config.raml2HtmlVersion}}">
+
+    <!--<link rel="stylesheet" href="{{config.protocol}}//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="{{config.protocol}}//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/cerulean/bootstrap.min.css">
+    <link rel="stylesheet" href="{{config.protocol}}//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <script type="text/javascript" src="{{config.protocol}}//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="{{config.protocol}}//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{config.protocol}}//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+    <style>
+        .get {
+            color: #63a8e2;
+        }
+        .post {
+            color: #6cbd7d;
+        }
+        .put {
+            color: #22bac4;
+        }
+        .delete {
+            color: #d26460;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="page-header">
+      <h1>{{title}}{{#if version}} <small>version {{version}}</small>{{/if}}</h1>
+      <h3>{{baseUri}}</h3>
+      <p><a href="#" class="small" onclick="$('.collapse:not(.in)').collapse('show')">Expand All</a> | <a href="#" class="small" onclick="$('.collapse.in').collapse('hide')">Collapse All</a></p>
+  </div>
+
+  <div>
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">
+                  <a data-toggle="collapse" href="#documentation">
+                      <b>Documentation</b>
+                  </a>
+              </h3>
+          </div>
+          <div id="documentation" class="panel-collapse collapse in">
+              <div class="panel-body">
+
+                {{#documentation}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <a data-toggle="collapse" href="#{{uniqueId}}">
+                                    {{title}}
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="{{uniqueId}}"  class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p>{{md description}}</p>
+                                {{md content}}
+                            </div>
+                        </div>
+                    </div>
+                {{/documentation}}
+              </div>
+          </div>
+      </div>
+
+    {{#resources}}
+      {{> resourceDetails }}
+    {{/resources}}
+
+  </div>
+</div>
+</body>
+</html>

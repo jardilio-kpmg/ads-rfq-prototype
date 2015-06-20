@@ -1,0 +1,10 @@
+{
+    "preloader": {
+        "locale": "en",
+        "title": "KPMG Web Starter",
+        "UnhandledExceptionMessage": "Sorry, an unexpected problem has occurred.  Click OK to restart and try again.",
+        "errorDialog-title": "Whoops!",
+        "errorDialog-id": "If this problem continues, please contact tech support and reference error #__id__",
+        "errorDialog-confirm": "Reload"
+    }
+}

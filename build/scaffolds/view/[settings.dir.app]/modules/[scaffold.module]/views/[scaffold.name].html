@@ -1,0 +1,4 @@
+<div class="<%= hyphenCase(scaffold.module) %> <%= hyphenCase(scaffold.name) %>">
+    <h1><%= scaffold.name %></h1><% if (scaffold.controller) { %>
+    <h2>Controller: {{<%= headlessCamelCase(scaffold.name) %>.getName()}}</h2><% } %>
+</div>
