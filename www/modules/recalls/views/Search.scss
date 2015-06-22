@@ -1,0 +1,34 @@
+.recalls.search {
+  .backdrop {
+    background: lightgrey;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  md-content {
+    background: transparent;
+  }
+  md-list-item {
+    margin: 10px;
+    background: lighten(lightgrey, 10%);
+    border: 1px solid darken(lightgrey, 10%);
+    border-radius: 6px;
+    padding: 10px;
+    a {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-weight: inherit !important;
+      display: block;
+      height: 100%;
+      background: transparent;
+    }
+    .status md-icon {
+      font-size: 36px;
+      height: 36px;
+      width: 36px;
+      margin: 0 20px 0 0;
+    }
+  }
+}

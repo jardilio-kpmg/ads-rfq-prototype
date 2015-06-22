@@ -1,0 +1,47 @@
+<div class="recalls search" layout="column" layout-fill>
+    <div class="backdrop"></div>
+    <md-toolbar  md-scroll-shrink="true">
+        <div class="md-toolbar-tools">
+            <nav-back-button></nav-back-button>
+            <h2 flex>Relevant Recalls</h2>
+            <md-menu>
+                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+                    <md-icon>more_vert</md-icon>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button scan-button ng-click><!--menu throws exception if we don't have an ng-click-->
+                            <md-icon>photo_camera</md-icon>
+                            Scan Another Barcode
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="search.selectAllItems()">
+                            <md-icon>check_circle</md-icon>
+                            Select All
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="search.unselectAllItems()">
+                            <md-icon>radio_button_unchecked</md-icon>
+                            Unselect All
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+    <md-content>
+        <md-list>
+            <md-list-item ng-repeat="item in search.recalls" layout="row" layout-align="start center">
+                <md-button class="md-icon-button status" ng-click="search.toggleItemSelection(item)">
+                    <md-icon class="md-warn" ng-show="!search.selecting">looks_one</md-icon>
+                    <md-icon ng-show="search.selecting && item.$selected">check_circle</md-icon>
+                    <md-icon ng-show="search.selecting && !item.$selected">radio_button_unchecked</md-icon>
+                </md-button>
+                <a ng-href="#/recalls/campaigns/{{item.id}}" flex>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
+                <a ng-href="#/recalls/campaigns/{{item.id}}"><md-icon>chevron_right</md-icon></a>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</div>
