@@ -1,8 +1,6 @@
-var login = require('./main');
+describe('ads/directives/ScanButton.js', function () {
 
-describe('login/main.js', function () {
 
-    'use strict';
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -14,25 +12,25 @@ describe('login/main.js', function () {
      */
     var $httpBackend;
 
-    beforeEach(angular.mock.module('ngMock','login'));
+    var directive, $scope;
 
-    beforeEach(inject(function ($injector) {
+    beforeEach(angular.mock.module('ngMock','ads'));
+
+    beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
+        $scope = $rootScope.$new();
         $httpBackend = $injector.get('$httpBackend');
+        directive = angular.element('<scan-button></scan-button>');
+        directive = $compile(directive)($scope);
+        $rootScope.$digest();
         $httpBackend.resetExpectations();
     }));
 
-    it('should return login instance', function () {
-        expect(login).toBeDefined();
-    });
-
-    it('should return app name', function () {
-        expect(login.name).toBe('login');
-    });
+    //TODO: write test cases
 
     afterEach(function () {
+        $scope.$destroy();
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
 
 });
-

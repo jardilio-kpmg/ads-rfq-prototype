@@ -34,8 +34,6 @@ require('./main.scss');
  * @module ads
  * @type {angular.Module}
  */
-var ads = angular.module('ads', ['ng','ngRoute','kpmgAngular','ngMaterial','login']);
-
-//TODO: register angular module dependencies, run and config functions...
+var ads = angular.module('ads', ['ng','ngRoute','kpmgAngular','ngMaterial']);
 
 module.exports = ads;

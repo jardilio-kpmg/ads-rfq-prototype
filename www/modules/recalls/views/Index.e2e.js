@@ -1,20 +1,20 @@
 /**
- * End-to-end integration tests for the view at route /login/
+ * End-to-end integration tests for the view at route /recalls/
  * @see http://angular.github.io/protractor/#/
  * @see http://jasmine.github.io/
  */
-describe('URL Route: /login/', function () {
+describe('URL Route: /recalls/', function () {
 
 
 
     beforeEach(function() {
-        browser.get('/login/');
+        browser.get('/recalls/');
         //TODO: any additional setup for each test
     });
 
     it('should route to view if authenticated', function () {
         //TODO: add required steps to login
-        expect(browser.getLocationAbsUrl()).toMatch(/#\/login\/$/);
+        expect(browser.getLocationAbsUrl()).toMatch(/#\/recalls\/$/);
         expect(element(by.css('.index')).isPresent()).toBe(true);
     });
 

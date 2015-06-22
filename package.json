@@ -88,6 +88,7 @@
     "touch": "0.0.3"
   },
   "dependencies": {
+    "quagga": "^0.6.9",
     "scriptjs": "2.5.7"
   },
   "browserify": {

@@ -1,8 +1,8 @@
 /**
- * Unit tests for the view at route /login/
+ * Unit tests for the view at route /recalls/search
  * @see http://jasmine.github.io/
  */
-describe('URL Route: /login/', function () {
+describe('URL Route: /recalls/search', function () {
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -21,7 +21,7 @@ describe('URL Route: /login/', function () {
      */
     var kSession;
 
-    beforeEach(angular.mock.module('ngMock','login'));
+    beforeEach(angular.mock.module('ngMock','recalls'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/ $rootScope, $injector) {
         $scope = $rootScope;
@@ -36,17 +36,17 @@ describe('URL Route: /login/', function () {
 
     it('should route to view if authenticated', function () {
         kSession.isAuthenticated(true);
-        $location.path('/login/');
+        $location.path('/recalls/search');
         $scope.$apply();
-        expect($ngView[0].querySelector('.index')).not.toBe(null);
+        expect($ngView[0].querySelector('.search')).not.toBe(null);
     });
 
     //TODO: you need to determine if this view requires authentication
     xit('should not route to view if not authenticated', function () {
         kSession.isAuthenticated(false);
-        $location.path('/login/');
+        $location.path('/recalls/search');
         $scope.$apply();
-        expect($ngView[0].querySelector('.index')).toBe(null);
+        expect($ngView[0].querySelector('.search')).toBe(null);
     });
 
     afterEach(function () {
