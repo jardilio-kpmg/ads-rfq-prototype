@@ -41,6 +41,8 @@
   </PropertyGroup>
   <!-- start:files -->
   <ItemGroup>
+    <None Include="www\modules\recalls\services\RecallSearchService.spec.js" />
+    <None Include="www\modules\recalls\services\RecallSearchService.js" />
     <None Include="www\modules\ads\directives\NavBackButton.spec.js" />
     <None Include="www\modules\ads\directives\NavBackButton.js" />
     <None Include="www\modules\ads\directives\NavBackButton.html" />

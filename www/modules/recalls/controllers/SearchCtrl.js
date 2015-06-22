@@ -20,7 +20,7 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location) {
+main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, /**recalls/services/RecallSearchService*/ recallSearchService) {
 
     var self = this;
 
@@ -41,8 +41,9 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
     };
 
     self.barcode = $location.search().barcode;
-    self.recalls = [{id:1},{id:2},{id:3},{id:4},{id:5}];
+    self.recalls = null;
     self.selecting = false;
+    self.searchResultsFeedback = '';
 
     self.toggleItemSelection = function (item) {
         item.$selected = !item.$selected;
@@ -75,6 +76,43 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
         self.selecting = false;
     };
 
-    //TODO: integrate with service and perform search
+    /**
+     * Requests recall results based on the code or search terms provided.
+     * @param barcode {string} A UPC barcode string to search for.
+     */
+    self.performSearchByBarcode = function(barcode) {
+        recallSearchService.getRecallsByBarcode(barcode).success(function (result) {
+            self.searchResultsFeedback = '';
+            self.recalls = result.results;
+        }).error(function(error) {
+            self.searchResultsFeedback = error.error.message;
+            self.recalls = [];
 
+            if(error.error.code === 'NOT_FOUND') {
+                //TODO: If no results then call to service that will try and get more product info from the supplied upc and then call performSearchByKeyword
+                self.performSearchByKeyword(['chocolate']);
+            }
+        });
+    };
+
+    /**
+     * Requests recall results based on one or more keyword strings.
+     * @param keywords {array} An array of keyword strings to match recall records against.
+     */
+    self.performSearchByKeyword = function(keywords) {
+        recallSearchService.getRecallsByKeyword(keywords).success(function (result) {
+            self.searchResultsFeedback = 'No Exact Matches Found!';
+            self.recalls = result.results;
+        }).error(function(error) {
+            self.searchResultsFeedback = error.error.message;
+            self.recalls = [];
+        });
+    };
+
+
+    /**
+     * Search for recalls when this view loads based
+     * on the provided search key (code).
+     */
+    self.performSearchByBarcode(self.barcode);
 });
