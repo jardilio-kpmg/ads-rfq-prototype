@@ -19,7 +19,7 @@ describe('recalls/controllers/ScanButtonCtrl.js', function () {
 
     var $scope;
 
-    beforeEach(angular.mock.module('ngMock','ads'));
+    beforeEach(angular.mock.module('ngMock','recalls'));
 
     beforeEach(inject(function ($injector, $controller, $rootScope) {
         $scope = $rootScope.$new();

@@ -34,7 +34,7 @@ require('./main.scss');
  * @module recalls
  * @type {angular.Module}
  */
-var recalls = angular.module('recalls', ['ng','ngRoute','kpmgAngular','ngMaterial','login']);
+var recalls = angular.module('recalls', ['ng','ngRoute','kpmgAngular','ngMaterial']);
 
 //TODO: register angular module dependencies, run and config functions...
 

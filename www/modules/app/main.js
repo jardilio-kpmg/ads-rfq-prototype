@@ -48,8 +48,7 @@ var app = angular.module('app', [
     'ngAnimate',
     'ngRoute',
     'kpmgAngular',
-    'ngMaterial',
-    'login'
+    'ngMaterial'
 ]);
 
 app.config(function ($mdThemingProvider, $routeProvider) {
@@ -64,7 +63,7 @@ app.config(function ($mdThemingProvider, $routeProvider) {
     //TODO: we could have additional functional areas in this app later, for now all we have is recalls
     $routeProvider.when('/', {
         redirectTo: '/recalls'
-    })
+    });
 });
 
 app.run(function ($rootElement) {

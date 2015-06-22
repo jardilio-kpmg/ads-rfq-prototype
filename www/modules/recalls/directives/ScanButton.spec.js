@@ -25,14 +25,7 @@ describe('ads/directives/ScanButton.js', function () {
         $httpBackend.resetExpectations();
     }));
 
-    it('should add custom class to element', function () {
-        expect(directive.hasClass('scan-button')).toBe(true);
-        expect(directive.hasClass('ads')).toBe(true);
-    });
-
-    it('should add template children', function () {
-        expect(directive.children().length).not.toBe(0);
-    });
+    //TODO: write test cases
 
     afterEach(function () {
         $scope.$destroy();
