@@ -1,5 +1,6 @@
 var angular = require('angular');
 
+require('../../libs/angular-material/angular-material.css');
 require('./main.scss');
 
 /**
