@@ -1,6 +1,6 @@
 // Shows and removes the loading screen
 
-require('./loadingscreen.less');
+require('./loadingScreen.less');
 var html = require('./loading.html');
 var loadingScreen = document.createElement('div');
 
