@@ -20,7 +20,7 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, /**recalls/services/RecallSearchService*/ recallSearchService) {
+main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, /**openfda.services.FoodEnforcementService*/ foodEnforcementService) {
 
     var self = this;
 
@@ -66,7 +66,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
             return;
         }
 
-        recallSearchService.getRecallsByBarcode(barcode).success(function(result) {
+        foodEnforcementService.getRecallsByBarcode(barcode).success(function(result) {
             self.displayFeedback();
             self.recalls = result.results || [];
         }).error(function(error) {
@@ -90,11 +90,11 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
             return;
         }
 
-        //TODO: Implement when barcode service is ready.
+        //TODO: Implement when barcode product data service is ready.
         /*var barcodeData;
 
-        recallSearchService.getBarcodeData(barcode).success(function(result) {
-            //TODO: compile barcode data and pass to performSearchByKeyword([])
+         someNewService.getBarcodeData(barcode).success(function(result) {
+            //TODO: parse results and pass to openfda service to query recalls.
             self.performSearchByKeyword([]);
         }).error(function(error) {
             //No matching results after searching based on barcode product data. Move to manual search method.
@@ -112,7 +112,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
             return;
         }
 
-        recallSearchService.getRecallsByKeyword(keywords).success(function(result) {
+        foodEnforcementService.getRecallsByKeyword(keywords).success(function(result) {
             self.displayFeedback();
             self.recalls = result.results || [];
         }).error(function(error) {

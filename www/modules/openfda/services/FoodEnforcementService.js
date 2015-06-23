@@ -2,13 +2,13 @@ var main = require('../main'),
     angular = require('angular');
 
 /**
- * @class recalls.services.recallSearchService
+ * @class openfda.services.foodEnforcementService
  * @see kpmgAngular.services.kHttp
  * @see https://docs.angularjs.org/guide/services
  * @see http://docs.angularjs.org/api/ngResource.$resource
  * @example
- * function MyCtrl(recallSearchService) {
- *      recallSearchService.getRecallsByBarcode('111111111111', 0)
+ * function MyCtrl(foodEnforcementService) {
+ *      foodEnforcementService.getRecallsByBarcode('111111111111', 0)
  *          .success(function (result) {
  *
  *          })
@@ -17,14 +17,9 @@ var main = require('../main'),
  *          });
  * }
  */
-main.service('recallSearchService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
+main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/ kHttp, /**openfda.openFdaConfig*/ openFdaConfig) {
 
-    var self = this,
-        fdaApiBase = 'https://api.fda.gov/food/enforcement.json',
-        fdaApiKey = 'CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic',
-        defaultResultsLimit = 30,
-        defaultRecallStatus = 'ongoing',
-        defaultProductType = 'food';
+    var self = this;
 
     /**
      * Search for recall records based on a UPC code.
@@ -36,14 +31,16 @@ main.service('recallSearchService', function (/**kpmgAngular.services.kHttp*/ kH
         if(!recordToStartWith) {
             recordToStartWith = 0;
         }
-        return kHttp.get(fdaApiBase + '?api_key=:apiKey&limit=:limit&skip=:skip&search=status::status+AND+product_type::type+AND+code_info::barcode', {
+
+        /*Setup of api_key and search query parameters are intended here for two reasons:
+        * 1) According to documentation, the api_key param must come before other params.
+        * 2) The search param items are separated  by '+AND+' and the openFDA API is refusing
+        * the requests when they are url encoded. Passing search as a param object property is causing
+        * the values to get encoded so I'm hard-coding them as part of the url.*/
+        return kHttp.get(openFdaConfig.apiBase + '?api_key=' + openFdaConfig.apiKey + '&search=status:'  + openFdaConfig.defaultRecallStatus + '+AND+product_type:' + openFdaConfig.defaultProductType + '+AND+code_info:' + barcode, {
             params: {
-                apiKey: fdaApiKey,
-                limit: defaultResultsLimit,
-                skip: recordToStartWith,
-                status: defaultRecallStatus,
-                type: defaultProductType,
-                barcode: barcode
+                limit: openFdaConfig.defaultResultsLimit,
+                skip: recordToStartWith
             }
         });
     };
@@ -75,25 +72,17 @@ main.service('recallSearchService', function (/**kpmgAngular.services.kHttp*/ kH
             combinedKeywords = '+AND+product_description:' + combinedKeywords;
         }
 
-        return kHttp.get(fdaApiBase + '?api_key=:apiKey&limit=:limit&skip=:skip&search=status::status+AND+product_type::type' + combinedKeywords, {
+        /*Setup of api_key and search query parameters are intended here for two reasons:
+         * 1) According to documentation, the api_key param must come before other params.
+         * 2) The search param items are separated  by '+AND+' and the openFDA API is refusing
+         * the requests when they are url encoded. Passing search as a param object property is causing
+         * the values to get encoded so I'm hard-coding them as part of the url.*/
+        return kHttp.get(openFdaConfig.apiBase + '?api_key=' + openFdaConfig.apiKey + '&search=status:'  + openFdaConfig.defaultRecallStatus + '+AND+product_type:' + openFdaConfig.defaultProductType + combinedKeywords, {
             params: {
-                apiKey: fdaApiKey,
-                limit: defaultResultsLimit,
-                skip: recordToStartWith,
-                status: defaultRecallStatus,
-                type: defaultProductType
+                limit: openFdaConfig.defaultResultsLimit,
+                skip: recordToStartWith
             }
         });
-    };
-
-    /**
-     * Gets additional product data bound to the upc barcode.
-     * @param barcode {string} A UPC barcode string to search for. The string will be matched against code_info.
-     * @returns {{success: Function, error: Function}}
-     */
-    self.getBarcodeData = function(barcode) {
-        //TODO: The call to getRecallsByBarcode is temporary. Call new service when it is ready.
-        return self.getRecallsByBarcode(barcode, 0);
     };
 
     /**
@@ -102,14 +91,15 @@ main.service('recallSearchService', function (/**kpmgAngular.services.kHttp*/ kH
      * @returns {{success: Function, error: Function}}
      */
     self.getRecallById = function(recallId) {
-        return kHttp.get(fdaApiBase + '?api_key=:apiKey&limit=:limit&skip=:skip&search=status::status+AND+product_type::type&search=recall_number::recallId', {
+        /*Setup of api_key and search query parameters are intended here for two reasons:
+         * 1) According to documentation, the api_key param must come before other params.
+         * 2) The search param items are separated  by '+AND+' and the openFDA API is refusing
+         * the requests when they are url encoded. Passing search as a param object property is causing
+         * the values to get encoded so I'm hard-coding them as part of the url.*/
+        return kHttp.get(openFdaConfig.apiBase + '?api_key=' + openFdaConfig.apiKey + '&search=status:'  + openFdaConfig.defaultRecallStatus + '+AND+product_type:' + openFdaConfig.defaultProductType + '+AND+recall_number:' + recallId, {
             params: {
-                apiKey: fdaApiKey,
                 limit: 1,
-                skip: 0,
-                status: defaultRecallStatus,
-                type: defaultProductType,
-                recallId: recallId
+                skip: 0
             }
         });
     };
