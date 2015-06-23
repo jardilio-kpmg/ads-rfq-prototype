@@ -42,40 +42,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
 
     self.barcode = $location.search().barcode;
     self.recalls = null;
-    self.selecting = false;
     self.searchResultsFeedback = '';
     self.emptyResultsMessage = 'No Matches Found!';
-
-    self.toggleItemSelection = function (item) {
-        item.$selected = !item.$selected;
-        if (item.$selected) {
-            self.selecting = true;
-        }
-        else {
-            var i = 0, len = self.recalls ? self.recalls.length : 0;
-            for (i; i < len; i++) {
-                if (self.recalls[i].$selected) {
-                    self.selecting = true;
-                    return;
-                }
-            }
-            self.selecting = false;
-        }
-    };
-
-    self.selectAllItems = function () {
-        angular.forEach(self.recalls, function (item) {
-            item.$selected = true;
-        });
-        self.selecting = true;
-    };
-
-    self.unselectAllItems = function () {
-        angular.forEach(self.recalls, function (item) {
-            item.$selected = false;
-        });
-        self.selecting = false;
-    };
 
     /**
      * Populates a feedback message.

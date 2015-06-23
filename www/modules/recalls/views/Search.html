@@ -15,18 +15,6 @@
                             Scan Another Barcode
                         </md-button>
                     </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="search.selectAllItems()">
-                            <md-icon>check_circle</md-icon>
-                            Select All
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="search.unselectAllItems()">
-                            <md-icon>radio_button_unchecked</md-icon>
-                            Unselect All
-                        </md-button>
-                    </md-menu-item>
                 </md-menu-content>
             </md-menu>
         </div>
@@ -38,13 +26,11 @@
         <md-list class="recall-list">
             <md-list-item ng-repeat="item in search.recalls"
                           layout="row" layout-align="start center">
-                <md-button class="md-icon-button status" ng-click="search.toggleItemSelection(item)">
-                    <md-icon class="classification-1" ng-if="!search.selecting && item.classification === 'Class I'">looks_one</md-icon>
-                    <md-icon class="classification-2" ng-if="!search.selecting && item.classification === 'Class II'">looks_two</md-icon>
-                    <md-icon class="classification-3" ng-if="!search.selecting && item.classification === 'Class III'">looks_three</md-icon>
-                    <md-icon ng-show="search.selecting && item.$selected">check_circle</md-icon>
-                    <md-icon ng-show="search.selecting && !item.$selected">radio_button_unchecked</md-icon>
-                </md-button>
+                <a ng-href="#/recalls/campaigns/{{item.recall_number}}">
+                    <md-icon class="classification-1" ng-if="item.classification === 'Class I'">looks_one</md-icon>
+                    <md-icon class="classification-2" ng-if="item.classification === 'Class II'">looks_two</md-icon>
+                    <md-icon class="classification-3" ng-if="item.classification === 'Class III'">looks_3</md-icon>
+                </a>
                 <a ng-href="#/recalls/campaigns/{{item.recall_number}}" flex>{{item.recall_number}} - {{item.product_description}}</a>
                 <a ng-href="#/recalls/campaigns/{{item.recall_number}}"><md-icon>chevron_right</md-icon></a>
             </md-list-item>

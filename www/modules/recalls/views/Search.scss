@@ -41,5 +41,13 @@
     last item in list being cut off at bottom of page.*/
     .recall-list {
         margin-bottom: 45px;
+
+        .classification-1, .classification-2, .classification-3 {
+            font-size: 32px;
+            height: 26px;
+            width: 26px;
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
     }
 }
