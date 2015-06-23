@@ -1,4 +1,5 @@
-var main = require('../main');
+var main = require('../main'),
+    angular = require('angular');
 
 /**
  * @class recalls.services.recallSearchService
