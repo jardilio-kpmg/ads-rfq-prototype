@@ -1,4 +1,4 @@
-describe('recalls/services/RecallSearchService.js', function () {
+describe('openfda/services/FoodEnforcementService.js', function () {
 
 
 
@@ -13,16 +13,16 @@ describe('recalls/services/RecallSearchService.js', function () {
     var $httpBackend;
 
     /**
-     * @type {recalls.services.recallSearchService}
+     * @type {openfda.services.foodEnforcementService}
      */
     var service, service2;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','openfda'));
 
     beforeEach(inject(function ($injector) {
         $httpBackend = $injector.get('$httpBackend');
-        service = $injector.get('recallSearchService');
-        service2 = $injector.get('recallSearchService');
+        service = $injector.get('foodEnforcementService');
+        service2 = $injector.get('foodEnforcementService');
         $httpBackend.resetExpectations();
     }));
 
@@ -34,9 +34,13 @@ describe('recalls/services/RecallSearchService.js', function () {
         expect(service).toBe(service2);
     });
 
-    //TODO: write your unit tests for RecallSearchService
+    //TODO: write your unit tests for FoodEnforcementService
 
-    /*it('should properly construct getData request without optionals', function () {
+    /*it('should return proper name value', function () {
+        expect(service.getName()).toBe('FoodEnforcementService');
+    });
+
+    it('should properly construct getData request without optionals', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
@@ -67,19 +71,19 @@ describe('recalls/services/RecallSearchService.js', function () {
 
 });
 
-angular.module('recalls').config(function ($provide) {
+angular.module('openfda').config(function ($provide) {
 
 
 
-    $provide.decorator('recallSearchService', function ($delegate, $httpBackend) {
+    $provide.decorator('foodEnforcementService', function ($delegate, $httpBackend) {
         /**
-         * This allows us to decorate our service during unit tests with expectations
+         * This is allows us to decorate our service during unit tests with expectations
          * that can then be shared across all spec files. Not only will we need to set expectionations
          * on this service, but also in any dependency chains. If a controller references this service, we
          * need to set the expectations that the service will be called. Likewise if that controller is
          * defined in a directive and that directive in a view, we need to set these expectation there as well.
-         * @class recalls.services.recallSearchService.expect
-         * @extends recalls.services.recallSearchService
+         * @class openfda.services.foodEnforcementService.expect
+         * @extends openfda.services.foodEnforcementService
          */
         $delegate.expect = {
             /*getData: function (required1, required2, optionals) {
@@ -87,7 +91,7 @@ angular.module('recalls').config(function ($provide) {
                     required1: required1,
                     required2: required2
                 });
-                $httpBackend.expectGET('/recalls/recall-search-service/data?' + $.param(params)).respond();
+                $httpBackend.expectGET('/openfda/food-enforcement-service/data?' + $.param(params)).respond();
             }*/
         };
 
