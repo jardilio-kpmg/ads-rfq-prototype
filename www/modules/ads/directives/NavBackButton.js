@@ -1,6 +1,8 @@
 var main = require('../main'),
     previousUrl = null;
 
+require('./NavBackButton.scss');
+
 /**
  * @name ads.directives.nav-back-button
  * @propertyOf ads.directives

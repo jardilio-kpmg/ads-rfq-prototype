@@ -1,38 +1,27 @@
 <div class="recalls search" layout="column" layout-fill>
-    <div class="backdrop"></div>
-    <md-toolbar  md-scroll-shrink="true">
+    <div class="backdrop">
+        <div class="search-results-feedback" layout-fill
+             layout="column" layout-align="center center"
+             ng-if="search.recalls.length == 0">
+            <div>No results were found...</div>
+            <md-button scan-button class="md-primary md-raised">Try Again?</md-button>
+        </div>
+    </div>
+    <md-toolbar md-scroll-shrink="true">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
             <h2 flex>Relevant Recalls</h2>
-            <md-menu>
-                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
-                <md-menu-content>
-                    <md-menu-item>
-                        <md-button scan-button ng-click><!--menu throws exception if we don't have an ng-click-->
-                            <md-icon>photo_camera</md-icon>
-                            Scan Another Barcode
-                        </md-button>
-                    </md-menu-item>
-                </md-menu-content>
-            </md-menu>
+            <md-button class="md-icon-button" scan-button>
+                <md-icon>search</md-icon>
+            </md-button>
         </div>
     </md-toolbar>
     <md-content>
-        <div class="search-results-feedback"
-             layout="row" layout-align="center center"
-             ng-if="search.searchResultsFeedback.length">{{search.searchResultsFeedback}}</div>
         <md-list class="recall-list">
-            <md-list-item ng-repeat="item in search.recalls"
-                          layout="row" layout-align="start center">
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}">
-                    <md-icon class="classification-1" ng-if="item.classification === 'Class I'">looks_one</md-icon>
-                    <md-icon class="classification-2" ng-if="item.classification === 'Class II'">looks_two</md-icon>
-                    <md-icon class="classification-3" ng-if="item.classification === 'Class III'">looks_3</md-icon>
-                </a>
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}" flex>{{item.recall_number}} - {{item.product_description}}</a>
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}"><md-icon>chevron_right</md-icon></a>
+            <md-list-item layout="row" ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.recall_number}}">
+                <classification-icon classification="{{item.classification}}"></classification-icon>
+                <span flex class="description">{{item.product_description}}</span>
+                <md-icon>chevron_right</md-icon>
             </md-list-item>
         </md-list>
     </md-content>

@@ -21,7 +21,7 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location) {
+main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, $mdDialog) {
 
     var self = this;
 
@@ -145,7 +145,12 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
                 }
                 //TODO: we could leverage a server side solution to try and scan the image as a backup
                 else {
-                    window.alert('Whoops! I couldn\'t find a UPC, lets try that again with a new image.');
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .title('Whoops!')
+                            .content('I couldn\'t read a UPC, lets try that again with a new image.')
+                            .ok('Close')
+                    );
                 }
             }
         );
