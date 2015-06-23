@@ -20,7 +20,10 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location) {
+main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location,
+                                        /**server.services.upcService*/ upcService) {
+
+    'use strict';
 
     var self = this;
 
@@ -41,7 +44,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
     };
 
     self.barcode = $location.search().barcode;
-    self.recalls = [{id:1},{id:2},{id:3},{id:4},{id:5}];
+    self.recalls = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}];
     self.selecting = false;
 
     self.toggleItemSelection = function (item) {
@@ -76,5 +79,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
     };
 
     //TODO: integrate with service and perform search
+
+    var result = upcService.getData('042800111005');
 
 });

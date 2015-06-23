@@ -41,6 +41,13 @@
   </PropertyGroup>
   <!-- start:files -->
   <ItemGroup>
+    <None Include="www\modules\server\services\upcService.spec.js" />
+    <None Include="www\modules\server\services\upcService.mock.js" />
+    <None Include="www\modules\server\services\upcService.js" />
+    <None Include="www\modules\server\main.spec.js" />
+    <None Include="www\modules\server\main.js" />
+    <None Include="www\modules\server\main.scss" />
+    <None Include="www\modules\server\locales\en\translation.json" />
     <None Include="www\modules\ads\directives\NavBackButton.spec.js" />
     <None Include="www\modules\ads\directives\NavBackButton.js" />
     <None Include="www\modules\ads\directives\NavBackButton.html" />
