@@ -20,7 +20,7 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location) {
+main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, /**recalls/services/RecallSearchService*/ recallSearchService) {
 
     var self = this;
 
@@ -41,40 +41,103 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
     };
 
     self.barcode = $location.search().barcode;
-    self.recalls = [{id:1},{id:2},{id:3},{id:4},{id:5}];
-    self.selecting = false;
+    self.recalls = null;
+    self.searchResultsFeedback = '';
+    self.emptyResultsMessage = 'No Matches Found!';
 
-    self.toggleItemSelection = function (item) {
-        item.$selected = !item.$selected;
-        if (item.$selected) {
-            self.selecting = true;
+    /**
+     * Populates a feedback message.
+     * @param [message] {string} A message to display. When omitted, an empty string will be used.
+     */
+    self.displayFeedback = function(message) {
+        if(!message) {
+            message = '';
         }
-        else {
-            var i = 0, len = self.recalls ? self.recalls.length : 0;
-            for (i; i < len; i++) {
-                if (self.recalls[i].$selected) {
-                    self.selecting = true;
-                    return;
-                }
-            }
-            self.selecting = false;
+        self.searchResultsFeedback = message;
+    };
+
+    /**
+     * Requests recall results based on the code or search terms provided.
+     * @param barcode {string} A UPC barcode string to search for.
+     */
+    self.performSearchByBarcode = function(barcode) {
+        //No need to continue if we don't have a barcode to work with.
+        if(!barcode) {
+            return;
         }
-    };
 
-    self.selectAllItems = function () {
-        angular.forEach(self.recalls, function (item) {
-            item.$selected = true;
+        recallSearchService.getRecallsByBarcode(barcode).success(function(result) {
+            self.displayFeedback();
+            self.recalls = result.results || [];
+        }).error(function(error) {
+            self.displayFeedback(error ? error.error.message : self.emptyResultsMessage);
+            self.recalls = [];
+
+            //TODO: Part of next phase where we use the barcode to get additional product data to search on.
+            /*if(error && error.error.code === 'NOT_FOUND') {
+                self.performSearchByBarcodeData(barcode);
+            }*/
         });
-        self.selecting = true;
     };
 
-    self.unselectAllItems = function () {
-        angular.forEach(self.recalls, function (item) {
-            item.$selected = false;
+    /**
+     * Requests recall results based on a barcode's product data.
+     * @param barcode {string} A UPC barcode string to search for.
+     */
+    self.performSearchByBarcodeData = function(barcode) {
+        //No need to continue if we don't have a barcode to work with.
+        if(!barcode) {
+            return;
+        }
+
+        //TODO: Implement when barcode service is ready.
+        /*var barcodeData;
+
+        recallSearchService.getBarcodeData(barcode).success(function(result) {
+            //TODO: compile barcode data and pass to performSearchByKeyword([])
+            self.performSearchByKeyword([]);
+        }).error(function(error) {
+            //No matching results after searching based on barcode product data. Move to manual search method.
+            self.resetSearchResults();
+        });*/
+    };
+
+    /**
+     * Requests recall results based on one or more keyword strings.
+     * @param keywords {array} An array of keyword strings to match recall records against.
+     */
+    self.performSearchByKeyword = function(keywords) {
+        //No need to continue if we don't have keywords to work with.
+        if(!angular.isArray(keywords)) {
+            return;
+        }
+
+        recallSearchService.getRecallsByKeyword(keywords).success(function(result) {
+            self.displayFeedback();
+            self.recalls = result.results || [];
+        }).error(function(error) {
+            self.displayFeedback(error ? error.error.message : self.emptyResultsMessage);
+            self.recalls = [];
         });
-        self.selecting = false;
     };
 
-    //TODO: integrate with service and perform search
+    /**
+     * Resets the recalls array and clears out any feedback messaging.
+     */
+    self.resetSearchResults = function() {
+        self.displayFeedback();
+        self.recalls = [];
+    };
+
+    /**
+     * Search for recalls when this view loads based
+     * on the provided search key (barcode).
+     */
+    if(self.barcode) {
+        self.performSearchByBarcode(self.barcode);
+    } else {
+        self.resetSearchResults();
+        self.displayFeedback(self.emptyResultsMessage);
+    }
 
 });
