@@ -31,4 +31,15 @@
       margin: 0 20px 0 0;
     }
   }
+
+    .search-results-feedback {
+        height: 35px;
+        margin-top: 10px;
+    }
+
+    /*The margin-bottom value is here to address problem with
+    last item in list being cut off at bottom of page.*/
+    .recall-list {
+        margin-bottom: 45px;
+    }
 }
