@@ -80,6 +80,6 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
 
     //TODO: integrate with service and perform search
 
-    upcService.getData('042800111005');
+    //upcService.getData('042800111005');
 
 });
