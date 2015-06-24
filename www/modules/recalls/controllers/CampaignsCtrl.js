@@ -54,9 +54,13 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
 
     self.recall = null;
 
-    self.activeRecallsText = 0;
+    self.activeRecallsCount = 0;
 
-    self.pastRecallsText = 0;
+    self.pastRecallsCount = 0;
+
+    self.activeRecallsText = "";
+
+    self.pastRecallsText = "";
 
     self.getRecallData = function () {
 
@@ -81,10 +85,12 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                 var activeRecalls = $.grep(result.results, function (recall) {
                     return recall.status === "Ongoing";
                 });
+                self.activeRecallsCount = activeRecalls.length;
                 self.activeRecallsText = activeRecalls.length + " Active Recall" + (activeRecalls.length !== 1 ? "s" : "");
                 var pastRecalls = $.grep(result.results, function (recall) {
                     return recall.status !== "Ongoing";
                 });
+                self.pastRecallsCount = pastRecalls.length;
                 self.pastRecallsText = pastRecalls.length + " Past Recall" + (pastRecalls.length !== 1 ? "s" : "");
             }
         });

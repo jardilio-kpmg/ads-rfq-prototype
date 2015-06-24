@@ -61,9 +61,9 @@
                     {{campaigns.recall.classification}}
                 </p>
             </md-card-content>
-            <div class="inset" layout="row" layout-align="center">
-                <md-button flex="50" class="md-primary md-raised" ng-click="">{{campaigns.activeRecallsText}}</md-button>
-                <md-button flex="50" class="md-primary md-raised" ng-click="">{{campaigns.pastRecallsText}}</md-button>
+            <div class="inset" layout="row" layout-align="center" layout-margin>
+                <md-button flex="50" class="md-primary md-raised" ng-click="" ng-disabled="!campaigns.activeRecallsCount">{{campaigns.activeRecallsText}}</md-button>
+                <md-button flex="50" class="md-primary md-raised" ng-click="" ng-disabled="!campaigns.pastRecallsCount">{{campaigns.pastRecallsText}}</md-button>
             </div>
         </md-card>
     </md-content>
