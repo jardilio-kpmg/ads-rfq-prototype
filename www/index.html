@@ -103,6 +103,22 @@
 
 <body>
 
+<!--[if lte IE 11]>
+    <style>.unsupported-browser {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        border: 1px gray solid;
+        background: white;
+        max-width: 300px;
+    }</style>
+    <div class="unsupported-browser">
+        You are currently using an unsupported browser for this application. Please consider using
+        a modern browser from <a href="http://browsehappy.com/">http://browsehappy.com</a>.
+    </div>
+<![endif]-->
+
 <ng-view>
     <style>
         .splash {
