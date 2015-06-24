@@ -14,7 +14,7 @@
             <md-card-content>
                 <p layout="row" layout-align="start center">
                     <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
-                    <span>
+                    <span layout-margin>
                         {{campaigns.recall.classification}}
                     </span>
                 </p>
@@ -47,11 +47,11 @@
                     <input ng-model="campaigns.recall.recalling_firm" readonly/>
                 </md-input-container>
                 <md-input-container>
-                    <label>Recall Number</label>
+                    <label i18n="recalls.campaigns.recallNumberTitle"></label>
                     <input ng-model="campaigns.recall.recall_number" readonly/>
                 </md-input-container>
                 <md-input-container>
-                    <label>Code Info</label>
+                    <label i18n="recalls.campaigns.codeInfoTitle"></label>
                     <input ng-model="campaigns.recall.code_info" readonly/>
                 </md-input-container>
                 <md-input-container>

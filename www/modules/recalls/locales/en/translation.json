@@ -27,7 +27,9 @@
             "recallingFirmTitle": "Recalling Firm",
             "productDescriptionTitle": "Product Description",
             "distributionTitle": "Distribution",
-            "statusTitle": "Status"
+            "statusTitle": "Status",
+            "codeInfoTitle": "Code Info",
+            "recallNumberTitle": "Recall Number"
         }
     }
 }
