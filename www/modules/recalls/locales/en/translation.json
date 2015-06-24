@@ -2,11 +2,15 @@
     "recalls": {
         "index": {
             "title": "Let's Get Started!",
-            "scanButton": "Scan Any Barcode"
+            "scanButton": "Scan Any Barcode",
+            "enterKeywordsButton": "Enter Barcode/UPC"
         },
         "search": {
             "noResults": "No results were found...",
             "scanButton": "Try Again?",
+            "manualSearchInput": "Keywords or UPC",
+            "manualSearchScanButton": "Scan Any Barcode",
+            "manualSearchButton": "Search",
             "title": "Relevant Recalls"
         },
         "scan": {
