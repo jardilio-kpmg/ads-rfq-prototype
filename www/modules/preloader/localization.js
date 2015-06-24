@@ -27,7 +27,7 @@ module.exports = function() {
         detectLngQS: 'lang', // querystring parameter to check
         cookieName: 'lang', // cookie to check (if no querystring)
         fallbackLng: 'en', // default language (if no querystring or cookie or if translation is missing)
-        getAsync: false, // block loading the rest of the app until strings are ready
+        getAsync: true, // block loading the rest of the app until strings are ready
         useDataAttrOptions: true, // support data-i18n-options as a way to pass in variables (http://stackoverflow.com/a/25065788/518955)
 
         // Notify the error handling component of missing strings

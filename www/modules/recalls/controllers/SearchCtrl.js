@@ -63,6 +63,8 @@ main.controller('SearchCtrl', function (
             return;
         }
 
+        $location.search({keywords: null, barcode: barcode});
+
         foodEnforcementService.getRecallsByBarcode(barcode)
             .success(function(result) {
                 self.recalls = result.results || [];
@@ -77,10 +79,12 @@ main.controller('SearchCtrl', function (
      * Requests recall results based on one or more keyword strings.
      * @param {string} keywords An array of keyword strings to match recall records against.
      */
-    self.searchByKeyword = function(keywords) {
+    self.searchByKeywords = function(keywords) {
         if (!keywords) {
             return;
         }
+
+        $location.search({keywords: keywords, barcode: null});
 
         foodEnforcementService.getRecallsByKeyword(keywords)
             .success(function(result) {
@@ -91,16 +95,22 @@ main.controller('SearchCtrl', function (
             });
     };
 
-    /**
-     * Search for recalls when this view loads based
-     * on the provided search key (barcode).
-     */
-    var search = $location.search();
-    if(search.barcode) {
-        self.searchByBarcode(search.barcode);
-    }
-    else if(search.keywords) {
-        self.searchByKeyword(search.keywords);
-    }
+    $scope.$watch(
+        function () {
+            return $location.search().barcode;
+        },
+        function (barcode) {
+            self.searchByBarcode(barcode);
+        }
+    );
+
+    $scope.$watch(
+        function () {
+            return $location.search().keywords;
+        },
+        function (keywords) {
+            self.searchByKeywords(keywords);
+        }
+    );
 
 });

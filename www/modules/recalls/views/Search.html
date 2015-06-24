@@ -3,14 +3,14 @@
         <div class="search-results-feedback" layout-fill
              layout="column" layout-align="center center"
              ng-if="search.recalls.length == 0">
-            <div>No results were found...</div>
-            <md-button scan-button class="md-primary md-raised">Try Again?</md-button>
+            <div i18n="recalls.search.noResults"></div>
+            <md-button scan-button class="md-primary md-raised" i18n="recalls.search.scanButton"></md-button>
         </div>
     </div>
     <md-toolbar md-scroll-shrink="true">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
-            <h2 flex>Relevant Recalls</h2>
+            <h2 flex i18n="recalls.search.title"></h2>
             <md-button class="md-icon-button" scan-button>
                 <md-icon>search</md-icon>
             </md-button>
