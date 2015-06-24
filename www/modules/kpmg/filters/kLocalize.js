@@ -97,13 +97,12 @@ main.filter('kLocalize', function () {
 main.run(function ($injector) {
     $rootScope = $injector.get('$rootScope');
 
-    /*i18n.init(function () {
+    i18n.init(function () {
         if (hasLocalized) {
             //trigger updates to display
-            $rootScope.$broadcast('kLocalizeChanged');
-            if (!$rootScope.$$phase) {
-                $rootScope.$apply();
-            }
+            $scope.$applyAsync(function () {
+                $rootScope.$broadcast('kLocalizeChanged');
+            });
         }
-    });*/
+    });
 });
