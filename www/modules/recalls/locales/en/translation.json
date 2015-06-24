@@ -8,6 +8,7 @@
         "search": {
             "noResults": "No results were found...",
             "scanButton": "Try Again?",
+            "manualSearchInput": "Keywords or UPC",
             "manualSearchScanButton": "Scan Any Barcode",
             "manualSearchButton": "Search",
             "title": "Relevant Recalls"
