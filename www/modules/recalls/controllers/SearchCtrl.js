@@ -1,5 +1,4 @@
-var main = require('../main'),
-    angular = require('angular');
+var main = require('../main');
 
 /**
  * @class recalls.controllers.SearchCtrl
@@ -20,7 +19,10 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location) {
+main.controller('SearchCtrl', function (
+    /**ng.$rootScope.Scope*/ $scope,
+    $location,
+    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
 
     var self = this;
 
@@ -40,41 +42,64 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
         return name;
     };
 
-    self.barcode = $location.search().barcode;
-    self.recalls = [{id:1},{id:2},{id:3},{id:4},{id:5}];
-    self.selecting = false;
+    /**
+     * The list of recall results found
+     * @name recalls.controllers.SearchCtrl#barcode
+     * @propertyOf recalls.controllers.SearchCtrl
+     * @type {array}
+     */
+    self.recalls = null;
 
-    self.toggleItemSelection = function (item) {
-        item.$selected = !item.$selected;
-        if (item.$selected) {
-            self.selecting = true;
+    /**
+     * Requests recall results based on the code or search terms provided.
+     * @name recalls.controllers.SearchCtrl#searchByBarcode
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     * @param {string} barcode A UPC barcode string to search for.
+     */
+    self.searchByBarcode = function(barcode) {
+        //No need to continue if we don't have a barcode to work with.
+        if(!barcode) {
+            return;
         }
-        else {
-            var i = 0, len = self.recalls ? self.recalls.length : 0;
-            for (i; i < len; i++) {
-                if (self.recalls[i].$selected) {
-                    self.selecting = true;
-                    return;
-                }
-            }
-            self.selecting = false;
+
+        $location.search({keywords: null, barcode: barcode});
+
+        foodEnforcementService.getRecallsByBarcode(barcode)
+            .success(function(result) {
+                self.recalls = result.results || [];
+            })
+            .error(function() {
+                self.recalls = [];
+                //TODO: can we get product info from barcode and do a keyword search?
+            });
+    };
+
+    /**
+     * Requests recall results based on one or more keyword strings.
+     * @param {string} keywords An array of keyword strings to match recall records against.
+     */
+    self.searchByKeywords = function(keywords) {
+        if (!keywords) {
+            return;
         }
+
+        $location.search({keywords: keywords, barcode: null});
+
+        foodEnforcementService.getRecallsByKeyword(keywords)
+            .success(function(result) {
+                self.recalls = (result && result.results) || [];
+            })
+            .error(function() {
+                self.recalls = [];
+            });
     };
 
-    self.selectAllItems = function () {
-        angular.forEach(self.recalls, function (item) {
-            item.$selected = true;
-        });
-        self.selecting = true;
-    };
-
-    self.unselectAllItems = function () {
-        angular.forEach(self.recalls, function (item) {
-            item.$selected = false;
-        });
-        self.selecting = false;
-    };
-
-    //TODO: integrate with service and perform search
+    if ($location.search().barcode) {
+        self.searchByBarcode($location.search().barcode);
+    }
+    else if ($location.search().keywords) {
+        self.searchByKeywords($location.search().keywords);
+    }
 
 });

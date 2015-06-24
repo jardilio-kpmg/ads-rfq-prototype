@@ -3,3 +3,4 @@ document.createElement('ng-pluralize');
 document.createElement('ng-view');
 document.createElement('ng-switch');
 document.createElement('nav-back-button');
+document.createElement('classification-icon');

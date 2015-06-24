@@ -1,5 +1,20 @@
 {
     "recalls": {
-        "title": "recalls"
+        "index": {
+            "title": "Let's Get Started!",
+            "scanButton": "Scan Any Barcode"
+        },
+        "search": {
+            "noResults": "No results were found...",
+            "scanButton": "Try Again?",
+            "title": "Relevant Recalls"
+        },
+        "scan": {
+            "noBarcodeFound": {
+                "title": "Whoops!",
+                "message": "I couldn't read a UPC, lets try that again with a new image.",
+                "ok": "Close"
+            }
+        }
     }
 }

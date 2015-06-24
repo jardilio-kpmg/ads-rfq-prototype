@@ -2,6 +2,8 @@ var main = require('../main'),
     //what was the history length when we initialized the app?
     initialHistoryLength = window.history.length;
 
+require('./NavBackButton.scss');
+
 /**
  * @name ads.directives.nav-back-button
  * @propertyOf ads.directives
