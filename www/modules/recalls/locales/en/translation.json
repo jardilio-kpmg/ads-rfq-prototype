@@ -17,6 +17,15 @@
             "recallHistoryShortButton": "Recall Hist",
             "title": "Relevant Recalls"
         },
+        "classDistribution": {
+            "title": "Severity",
+            "class1Title": "Class I",
+            "class1Description": "Description",
+            "class2Title": "Class II",
+            "class2Description": "Description",
+            "class3Title": "Class III",
+            "class3Description": "Description"
+        },
         "scan": {
             "noBarcodeFound": {
                 "title": "Whoops!",

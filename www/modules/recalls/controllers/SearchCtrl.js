@@ -88,7 +88,7 @@ main.controller('SearchCtrl', function (
      * @name recalls.controllers.SearchCtrl#searchByKeywords
      * @methodOf recalls.controllers.SearchCtrl
      * @function
-     * @param {string} keywords An array of keyword strings to match recall records against.
+     * @param {string} keywords A string of terms to match recall records against.
      */
     self.searchByKeywords = function(keywords) {
         if (!keywords) {
@@ -126,6 +126,29 @@ main.controller('SearchCtrl', function (
      */
     self.doSearch = function() {
         self.searchByKeywords(self.manualSearch);
+    };
+
+    /**
+     * Handles the click action of the Class Distribution button,
+     * which takes the user to the Classification Distribution screen.
+     * @name recalls.controllers.SearchCtrl#showClassificationDistribution
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     */
+    self.showClassificationDistribution = function() {
+        $location.path('/recalls/classification-distribution');
+        $location.search({keywords: $location.search().keywords, barcode: $location.search().barcode});
+    };
+
+    /**
+     * Handles the click action of the Recall History button,
+     * which takes the user to the Recall History view.
+     * @name recalls.controllers.SearchCtrl#showRecallHistory
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     */
+    self.showRecallHistory = function() {
+        //TODO: Need to implement
     };
 
     if ($location.search().barcode) {

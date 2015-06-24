@@ -1,5 +1,4 @@
 .recalls.search {
-    background: lightgrey;
 
   md-content {
     background: transparent;
@@ -54,14 +53,11 @@
         bottom: 64px;
         left: 0;
         right: 0;
-    }
+        overflow-y: auto;
 
-    .backdrop {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        &.no-results {
+            bottom: 0;
+        }
     }
 
     .manual-search-actions {
