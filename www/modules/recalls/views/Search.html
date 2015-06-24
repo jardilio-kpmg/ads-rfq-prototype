@@ -1,38 +1,45 @@
 <div class="recalls search" layout="column" layout-fill>
-    <div class="backdrop"></div>
-    <md-toolbar  md-scroll-shrink="true">
+    <div class="backdrop" layout="column" layout-align="center center" layout-fill>
+        <div class="search-results-feedback" i18n="recalls.search.noResults"
+             ng-if="search.recalls.length == 0"></div>
+        <form name="searchForm" ng-submit="search.doSearch()"
+              layout="column" layout-align="center center"
+              ng-if="!search.recalls.length">
+            <md-input-container style="width:100%">
+                <label i18n="recalls.search.manualSearchInput"></label>
+                <input ng-model="search.manualSearch" required>
+            </md-input-container>
+            <div class="manual-search-actions"
+                  layout="row" layout-sm="column" layout-align="center center">
+                <md-button type="submit" class="md-primary md-raised"
+                           ng-disabled="searchForm.$invalid">
+                    <md-icon>search</md-icon>
+                    <span i18n="recalls.search.manualSearchButton"></span>
+                </md-button>
+                <div>or</div>
+                <md-button scan-button class="md-primary md-raised">
+                    <md-icon>photo_camera</md-icon>
+                    <span i18n="recalls.search.manualSearchScanButton"></span>
+                </md-button>
+            </div>
+        </form>
+    </div>
+    <md-toolbar>
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
-            <h2 flex>Relevant Recalls</h2>
-            <md-menu>
-                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
-                <md-menu-content>
-                    <md-menu-item>
-                        <md-button scan-button ng-click><!--menu throws exception if we don't have an ng-click-->
-                            <md-icon>photo_camera</md-icon>
-                            Scan Another Barcode
-                        </md-button>
-                    </md-menu-item>
-                </md-menu-content>
-            </md-menu>
+            <h2 flex i18n="recalls.search.title"></h2>
+            <md-button class="md-icon-button" ng-if="search.recalls.length"
+                       ng-click="search.resetSearchForm()">
+                <md-icon>search</md-icon>
+            </md-button>
         </div>
     </md-toolbar>
     <md-content>
-        <div class="search-results-feedback"
-             layout="row" layout-align="center center"
-             ng-if="search.searchResultsFeedback.length">{{search.searchResultsFeedback}}</div>
         <md-list class="recall-list">
-            <md-list-item ng-repeat="item in search.recalls"
-                          layout="row" layout-align="start center">
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}">
-                    <md-icon class="classification-1" ng-if="item.classification === 'Class I'">looks_one</md-icon>
-                    <md-icon class="classification-2" ng-if="item.classification === 'Class II'">looks_two</md-icon>
-                    <md-icon class="classification-3" ng-if="item.classification === 'Class III'">looks_3</md-icon>
-                </a>
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}" flex>{{item.recall_number}} - {{item.product_description}}</a>
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}"><md-icon>chevron_right</md-icon></a>
+            <md-list-item layout="row" ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}">
+                <classification-icon classification="{{item.classification}}"></classification-icon>
+                <span flex class="description">{{item.product_description}}</span>
+                <md-icon>chevron_right</md-icon>
             </md-list-item>
         </md-list>
     </md-content>

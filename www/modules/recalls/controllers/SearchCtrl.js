@@ -1,5 +1,4 @@
-var main = require('../main'),
-    angular = require('angular');
+var main = require('../main');
 
 /**
  * @class recalls.controllers.SearchCtrl
@@ -20,7 +19,10 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, /**openfda.services.FoodEnforcementService*/ foodEnforcementService) {
+main.controller('SearchCtrl', function (
+    /**ng.$rootScope.Scope*/ $scope,
+    $location,
+    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
 
     var self = this;
 
@@ -40,104 +42,97 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $locati
         return name;
     };
 
-    self.barcode = $location.search().barcode;
-    self.recalls = null;
-    self.searchResultsFeedback = '';
-    self.emptyResultsMessage = 'No Matches Found!';
+    /**
+     * The model for the manual search input.
+     * @name recalls.controllers.SearchCtrl#manualSearch
+     * @propertyOf recalls.controllers.SearchCtrl
+     * @type {string}
+     */
+    self.manualSearch = null;
 
     /**
-     * Populates a feedback message.
-     * @param [message] {string} A message to display. When omitted, an empty string will be used.
+     * The list of recall results found
+     * @name recalls.controllers.SearchCtrl#recalls
+     * @propertyOf recalls.controllers.SearchCtrl
+     * @type {array}
      */
-    self.displayFeedback = function(message) {
-        if(!message) {
-            message = '';
-        }
-        self.searchResultsFeedback = message;
-    };
+    self.recalls = null;
 
     /**
      * Requests recall results based on the code or search terms provided.
-     * @param barcode {string} A UPC barcode string to search for.
+     * @name recalls.controllers.SearchCtrl#searchByBarcode
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     * @param {string} barcode A UPC barcode string to search for.
      */
-    self.performSearchByBarcode = function(barcode) {
+    self.searchByBarcode = function(barcode) {
         //No need to continue if we don't have a barcode to work with.
         if(!barcode) {
             return;
         }
 
-        foodEnforcementService.getRecallsByBarcode(barcode).success(function(result) {
-            self.displayFeedback();
-            self.recalls = result.results || [];
-        }).error(function(error) {
-            self.displayFeedback(error ? error.error.message : self.emptyResultsMessage);
-            self.recalls = [];
+        $location.search({keywords: null, barcode: barcode});
 
-            //TODO: Part of next phase where we use the barcode to get additional product data to search on.
-            /*if(error && error.error.code === 'NOT_FOUND') {
-                self.performSearchByBarcodeData(barcode);
-            }*/
-        });
-    };
-
-    /**
-     * Requests recall results based on a barcode's product data.
-     * @param barcode {string} A UPC barcode string to search for.
-     */
-    self.performSearchByBarcodeData = function(barcode) {
-        //No need to continue if we don't have a barcode to work with.
-        if(!barcode) {
-            return;
-        }
-
-        //TODO: Implement when barcode product data service is ready.
-        /*var barcodeData;
-
-         someNewService.getBarcodeData(barcode).success(function(result) {
-            //TODO: parse results and pass to openfda service to query recalls.
-            self.performSearchByKeyword([]);
-        }).error(function(error) {
-            //No matching results after searching based on barcode product data. Move to manual search method.
-            self.resetSearchResults();
-        });*/
+        foodEnforcementService.getRecallsByBarcode(barcode)
+            .success(function(result) {
+                self.recalls = result.results || [];
+            })
+            .error(function() {
+                self.recalls = [];
+                //TODO: can we get product info from barcode and do a keyword search?
+            });
     };
 
     /**
      * Requests recall results based on one or more keyword strings.
-     * @param keywords {array} An array of keyword strings to match recall records against.
+     * @name recalls.controllers.SearchCtrl#searchByKeywords
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     * @param {string} keywords An array of keyword strings to match recall records against.
      */
-    self.performSearchByKeyword = function(keywords) {
-        //No need to continue if we don't have keywords to work with.
-        if(!angular.isArray(keywords)) {
+    self.searchByKeywords = function(keywords) {
+        if (!keywords) {
             return;
         }
 
-        foodEnforcementService.getRecallsByKeyword(keywords).success(function(result) {
-            self.displayFeedback();
-            self.recalls = result.results || [];
-        }).error(function(error) {
-            self.displayFeedback(error ? error.error.message : self.emptyResultsMessage);
-            self.recalls = [];
-        });
+        $location.search({keywords: keywords, barcode: null});
+
+        foodEnforcementService.getRecallsByKeyword(keywords)
+            .success(function(result) {
+                self.recalls = (result && result.results) || [];
+            })
+            .error(function() {
+                self.recalls = [];
+            });
     };
 
     /**
-     * Resets the recalls array and clears out any feedback messaging.
+     * Resets the search-related properties so the user can search
+     * for another barcode or keyword.
+     * @name recalls.controllers.SearchCtrl#resetSearchForm
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
      */
-    self.resetSearchResults = function() {
-        self.displayFeedback();
-        self.recalls = [];
+    self.resetSearchForm = function() {
+        $location.search({keywords: null, barcode: null});
+        self.recalls = null;
     };
 
     /**
-     * Search for recalls when this view loads based
-     * on the provided search key (barcode).
+     * Perform a manual search based on keywords entered by user.
+     * @name recalls.controllers.SearchCtrl#doSearch
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
      */
-    if(self.barcode) {
-        self.performSearchByBarcode(self.barcode);
-    } else {
-        self.resetSearchResults();
-        self.displayFeedback(self.emptyResultsMessage);
+    self.doSearch = function() {
+        self.searchByKeywords(self.manualSearch);
+    };
+
+    if ($location.search().barcode) {
+        self.searchByBarcode($location.search().barcode);
+    }
+    else if ($location.search().keywords) {
+        self.searchByKeywords($location.search().keywords);
     }
 
 });

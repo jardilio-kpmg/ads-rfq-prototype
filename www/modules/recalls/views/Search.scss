@@ -10,44 +10,37 @@
   md-content {
     background: transparent;
   }
+  md-list a {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-weight: inherit !important;
+    display: block;
+    height: 100%;
+    background: transparent;
+  }
   md-list-item {
     margin: 10px;
     background: lighten(lightgrey, 10%);
     border: 1px solid darken(lightgrey, 10%);
     border-radius: 6px;
     padding: 10px;
-    a {
-      color: inherit !important;
-      text-decoration: none !important;
-      font-weight: inherit !important;
-      display: block;
-      height: 100%;
-      background: transparent;
-    }
-    .status md-icon {
-      font-size: 36px;
-      height: 36px;
-      width: 36px;
-      margin: 0 20px 0 0;
-    }
+
+      &:hover {
+          cursor: pointer;
+      }
   }
-
-    .search-results-feedback {
-        height: 35px;
-        margin-top: 10px;
-    }
-
-    /*The margin-bottom value is here to address problem with
-    last item in list being cut off at bottom of page.*/
-    .recall-list {
-        margin-bottom: 45px;
-
-        .classification-1, .classification-2, .classification-3 {
-            font-size: 32px;
-            height: 26px;
-            width: 26px;
-            margin-right: 15px;
-            margin-bottom: 5px;
-        }
+  .search-results-feedback {
+      height: 35px;
+      margin-top: 10px;
+  }
+  .description {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-overflow: ellipsis;
+    max-height: 36px;
+    overflow: hidden;
+  }
+    .manual-search-actions {
+        width: 100%;
     }
 }

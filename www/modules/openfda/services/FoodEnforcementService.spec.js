@@ -34,67 +34,86 @@ describe('openfda/services/FoodEnforcementService.js', function () {
         expect(service).toBe(service2);
     });
 
-    //TODO: write your unit tests for FoodEnforcementService
-
-    /*it('should return proper name value', function () {
-        expect(service.getName()).toBe('FoodEnforcementService');
-    });
-
-    it('should properly construct getData request without optionals', function () {
+    it('should properly construct getRecallsByBarcode request without options', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
-        service.expect.getData('testParam1','testParam2');
-        service.getData('testParam1','testParam2').success(success).error(error);
+        service.getRecallsByBarcode('111111111111').success(success).error(error);
+
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=status:ongoing+AND+product_type:food+AND+code_info:111111111111&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=30&skip=0').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
         expect(success).toHaveBeenCalled();
     });
 
-    it('should properly construct getData request with optionals', function () {
+    it('should properly construct getRecallsByBarcode request with options', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
-        service.expect.getData('testParam1','testParam2', {optional1: 'testParam3'});
-        service.getData('testParam1','testParam2', {optional1: 'testParam3'}).success(success).error(error);
+        service.getRecallsByBarcode('111111111111', {
+            limit: 1,
+            skip: 2,
+            status: 4,
+            server: 5,
+            api_key: 6
+        }).success(success).error(error);
+
+        $httpBackend.expectGET('5/food/enforcement.json?search=status:4+AND+product_type:food+AND+code_info:111111111111&api_key=6&limit=1&skip=2').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
         expect(success).toHaveBeenCalled();
-    });*/
+    });
+
+    it('should properly construct getRecallsByKeyword request without options', function () {
+        var error = window.jasmine.createSpy('error');
+        var success = window.jasmine.createSpy('success');
+
+        service.getRecallsByKeyword('111 222 333').success(success).error(error);
+
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=status:ongoing+AND+product_type:food+AND+product_description:111+222+333&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=30&skip=0').respond({});
+        $httpBackend.flush();
+
+        expect(error).not.toHaveBeenCalled();
+        expect(success).toHaveBeenCalled();
+    });
+
+    it('should properly construct getRecallsByKeyword request with options', function () {
+        var error = window.jasmine.createSpy('error');
+        var success = window.jasmine.createSpy('success');
+
+        service.getRecallsByKeyword('111 222 333', {
+            limit: 1,
+            skip: 2,
+            status: 4,
+            server: 5,
+            api_key: 6
+        }).success(success).error(error);
+
+        $httpBackend.expectGET('5/food/enforcement.json?search=status:4+AND+product_type:food+AND+product_description:111+222+333&api_key=6&limit=1&skip=2').respond({});
+        $httpBackend.flush();
+
+        expect(error).not.toHaveBeenCalled();
+        expect(success).toHaveBeenCalled();
+    });
+
+    it('should properly construct getRecallById request', function () {
+        var error = window.jasmine.createSpy('error');
+        var success = window.jasmine.createSpy('success');
+
+        service.getRecallById('88888888').success(success).error(error);
+
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=recall_number:88888888&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
+        $httpBackend.flush();
+
+        expect(error).not.toHaveBeenCalled();
+        expect(success).toHaveBeenCalled();
+    });
 
     afterEach(function () {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-});
-
-angular.module('openfda').config(function ($provide) {
-
-
-
-    $provide.decorator('foodEnforcementService', function ($delegate, $httpBackend) {
-        /**
-         * This is allows us to decorate our service during unit tests with expectations
-         * that can then be shared across all spec files. Not only will we need to set expectionations
-         * on this service, but also in any dependency chains. If a controller references this service, we
-         * need to set the expectations that the service will be called. Likewise if that controller is
-         * defined in a directive and that directive in a view, we need to set these expectation there as well.
-         * @class openfda.services.foodEnforcementService.expect
-         * @extends openfda.services.foodEnforcementService
-         */
-        $delegate.expect = {
-            /*getData: function (required1, required2, optionals) {
-                var params = angular.extend({}, optionals, {
-                    required1: required1,
-                    required2: required2
-                });
-                $httpBackend.expectGET('/openfda/food-enforcement-service/data?' + $.param(params)).respond();
-            }*/
-        };
-
-        return $delegate;
-    });
 });

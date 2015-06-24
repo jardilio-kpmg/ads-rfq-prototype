@@ -1,4 +1,4 @@
-describe('ads/directives/NavBackButton.js', function () {
+describe('ads/directives/ClassificationIcon.js', function () {
 
 
 
@@ -19,38 +19,36 @@ describe('ads/directives/NavBackButton.js', function () {
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
         $scope = $rootScope.$new();
         $httpBackend = $injector.get('$httpBackend');
-        directive = angular.element('<nav-back-button></nav-back-button>');
+        directive = angular.element('<classification-icon classification="{{classification}}"></classification-icon>');
         directive = $compile(directive)($scope);
         $rootScope.$digest();
         $httpBackend.resetExpectations();
     }));
 
     it('should add custom class to element', function () {
-        expect(directive.hasClass('nav-back-button')).toBe(true);
+        expect(directive.hasClass('classification-icon')).toBe(true);
         expect(directive.hasClass('ads')).toBe(true);
     });
 
-    it('should add template children', function () {
-        expect(directive.children().length).not.toBe(0);
+    it('should add correct icon for Class I', function () {
+        $scope.$apply(function () {
+            $scope.classification = 'Class I';
+        });
+        expect(directive.find('.classification-1').length).toBe(1);
     });
 
-    it('should navigate home on click if we have not progressed', inject(function ($location) {
-        var path = spyOn($location, 'path'),
-            search = spyOn($location, 'search');
+    it('should add correct icon for Class II', function () {
+        $scope.$apply(function () {
+            $scope.classification = 'Class II';
+        });
+        expect(directive.find('.classification-2').length).toBe(1);
+    });
 
-        directive.trigger('click');
-
-        expect(path).toHaveBeenCalledWith('/');
-        expect(search).toHaveBeenCalledWith({});
-    }));
-
-    it('should navigate to previous page if we have progressed in history', function () {
-        //add a new page to the history
-        window.location.hash = '#/doesnotexist';
-
-        var back = spyOn(window.history, 'back');
-        directive.trigger('click');
-        expect(back).toHaveBeenCalled();
+    it('should add correct icon for Class III', function () {
+        $scope.$apply(function () {
+            $scope.classification = 'Class III';
+        });
+        expect(directive.find('.classification-3').length).toBe(1);
     });
 
     afterEach(function () {

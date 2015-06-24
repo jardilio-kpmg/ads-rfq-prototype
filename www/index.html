@@ -18,7 +18,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="theme-color" content="#10579b">
-    <meta name="apple-mobile-web-app-title" content="KPMG ADS">
+    <meta name="apple-mobile-web-app-title" content="KPMG SAFER">
     <link href="splash/iPad-retina-portrait.png"
           media="(device-width: 768px) and (device-height: 1024px)
                  and (-webkit-device-pixel-ratio: 2)
@@ -87,9 +87,9 @@
           sizes="57x57"
           rel="apple-touch-icon-precomposed">
     <link rel="shortcut icon" href="favicon.ico">
-    <link rel="shortcut icon" sizes="196x196" href="icon_196.png">
-    <link rel="shortcut icon" sizes="128x128" href="icon_128.png">
-    <title>KPMG ADS PoC</title>
+    <link rel="shortcut icon" sizes="196x196" href="icons/icon_196.png">
+    <link rel="shortcut icon" sizes="128x128" href="icons/icon_128.png">
+    <title>KPMG SAFER</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="cache-control" content="max-age=0" />
@@ -102,6 +102,22 @@
 </head>
 
 <body>
+
+<!--[if lte IE 11]>
+    <style>.unsupported-browser {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        border: 1px gray solid;
+        background: white;
+        max-width: 300px;
+    }</style>
+    <div class="unsupported-browser">
+        You are currently using an unsupported browser for this application. Please consider using
+        a modern browser from <a href="http://browsehappy.com/">http://browsehappy.com</a>.
+    </div>
+<![endif]-->
 
 <ng-view>
     <style>

@@ -5,29 +5,19 @@
  */
 describe('URL Route: /recalls/', function () {
 
-
-
     beforeEach(function() {
-        browser.get('/recalls/');
-        //TODO: any additional setup for each test
+        browser.get('#/recalls/');
     });
 
-    it('should route to view if authenticated', function () {
-        //TODO: add required steps to login
-        expect(browser.getLocationAbsUrl()).toMatch(/#\/recalls\/$/);
-        expect(element(by.css('.index')).isPresent()).toBe(true);
+    it('should route to view', function () {
+        expect(browser.getLocationAbsUrl()).toMatch(/\/recalls\/$/);
+        expect(element(by.css('.recalls.index')).isPresent()).toBe(true);
     });
 
-    it('should not route to view if not authenticated', function () {
-        //TODO: add required steps to logout
-        expect(browser.getLocationAbsUrl()).toMatch(/#\/login/);
-        expect(element(by.css('.index')).isPresent()).toBe(false);
-    });
-
-    //TODO: write your integration tests for Index
+    //TODO: is there a good way to force file input selection for automated testing?
 
     afterEach(function () {
-        //TODO: any additional tear down steps for each test
+
     });
 
 });
