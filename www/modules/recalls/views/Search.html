@@ -36,7 +36,7 @@
     </md-toolbar>
     <md-content>
         <md-list class="recall-list">
-            <md-list-item layout="row" ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.recall_number}}">
+            <md-list-item layout="row" ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.event_id}}">
                 <classification-icon classification="{{item.classification}}"></classification-icon>
                 <span flex class="description">{{item.product_description}}</span>
                 <md-icon>chevron_right</md-icon>

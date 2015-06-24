@@ -16,5 +16,4 @@ main.config(function (/**ng.$routeProvider*/ $routeProvider, /**kpmgAngular.serv
         controllerAs: 'search', 
         template: require('./Search.html')
     });
-
 });

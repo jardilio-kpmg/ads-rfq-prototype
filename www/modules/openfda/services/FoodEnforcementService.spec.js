@@ -104,7 +104,7 @@ describe('openfda/services/FoodEnforcementService.js', function () {
 
         service.getRecallById('88888888').success(success).error(error);
 
-        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=recall_number:88888888&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=event_id:88888888&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
