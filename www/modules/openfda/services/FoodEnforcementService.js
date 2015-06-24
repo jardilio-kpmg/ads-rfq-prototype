@@ -19,16 +19,11 @@ var main = require('../main'),
  */
 main.service('foodEnforcementService', function (
     /**kpmgAngular.services.kHttp*/ kHttp,
-    /**openfda.openFdaConfig*/ openFdaConfig,
-    $q) {
+    /**openfda.openFdaConfig*/ openFdaConfig) {
+
+    'use strict';
 
     var self = this;
-
-    /**
-     * Bug in api for getRecallById. Storing last set of recalls to search as workaround.
-     * @type {Array}
-     */
-    var lastResult = null;
 
     /**
      * Search for recall records based on a UPC code.
@@ -51,8 +46,6 @@ main.service('foodEnforcementService', function (
                 limit: openFdaConfig.defaultResultsLimit,
                 skip: recordToStartWith
             }
-        }).success(function (result){
-            lastResult = result;
         });
     };
 
@@ -103,49 +96,19 @@ main.service('foodEnforcementService', function (
      */
     self.getRecallById = function(recallId) {
 
-        // Bug in api when using recall_number.
-        // Storing last set of recalls to search as workaround.
-
-        var defer = $q.defer();
-
-        if (lastResult){
-            var recalls = $.grep(lastResult.results, function(recall){
-                return recall.recall_number === recallId;
-            });
-            defer.resolve($.extend({}, lastResult, { results: recalls }));
-        }
-        else{
-            defer.reject("Not found");
-        }
-
-        var success, error;
-        var promise = defer.promise.then(function(result){
-            if ($.isFunction(success)){
-                success(result);
-            }
-        }, function(message){
-            if ($.isFunction(error)){
-                error(message);
-            }
-        });
-
-        return $.extend(promise, {
-            success : function(handler) { success = handler; } ,
-            error : function(handler){ error = handler; } });
-
+        // Todo: Bug in api when using recall_number.
 
         /*Setup of api_key and search query parameters are intended here for two reasons:
          * 1) According to documentation, the api_key param must come before other params.
          * 2) The search param items are separated  by '+AND+' and the openFDA API is refusing
          * the requests when they are url encoded. Passing search as a param object property is causing
          * the values to get encoded so I'm hard-coding them as part of the url.*/
-        /*return kHttp.get(openFdaConfig.apiBase + '?api_key=' + openFdaConfig.apiKey + '&search=status:'  + openFdaConfig.defaultRecallStatus + '+AND+product_type:' + openFdaConfig.defaultProductType + '+AND+recall_number:' + recallId, {
+        return kHttp.get(openFdaConfig.apiBase + '?api_key=' + openFdaConfig.apiKey + '&search=status:'  + openFdaConfig.defaultRecallStatus + '+AND+product_type:' + openFdaConfig.defaultProductType + '+AND+recall_number:' + recallId, {
             params: {
                 limit: 1,
                 skip: 0
             }
         });
-        */
     };
 
     return self;

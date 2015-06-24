@@ -26,13 +26,13 @@
         <md-list class="recall-list">
             <md-list-item ng-repeat="item in search.recalls"
                           layout="row" layout-align="start center">
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}">
+                <a ng-href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}">
                     <md-icon class="classification-1" ng-if="item.classification === 'Class I'">looks_one</md-icon>
                     <md-icon class="classification-2" ng-if="item.classification === 'Class II'">looks_two</md-icon>
                     <md-icon class="classification-3" ng-if="item.classification === 'Class III'">looks_3</md-icon>
                 </a>
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}" flex>{{item.recall_number}} - {{item.product_description}}</a>
-                <a ng-href="#/recalls/campaigns/{{item.recall_number}}"><md-icon>chevron_right</md-icon></a>
+                <a ng-href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}" flex>{{item.recall_number}} - {{item.product_description}}</a>
+                <a ng-href="#/recalls/campaigns/{{item.recall_number}}?barcode={{search.barcode}}"><md-icon>chevron_right</md-icon></a>
             </md-list-item>
         </md-list>
     </md-content>

@@ -32,15 +32,15 @@
                 <p>
                     {{campaigns.recall.product_description}}
                 </p>
-                <h2 class="md-title">Reason for recall</h2>
+                <h2 class="md-title">Reason for Recall</h2>
                 <p>
                     {{campaigns.recall.reason_for_recall}}
                 </p>
-                <h2 class="md-title">Recalling firm</h2>
+                <h2 class="md-title">Recalling Firm</h2>
                 <p>
                     {{campaigns.recall.recalling_firm}}
                 </p>
-                <h2 class="md-title">Recall initiation day</h2>
+                <h2 class="md-title">Recall Initiation Day</h2>
                 <p>
                     {{campaigns.recall.recall_initiation_date}}
                 </p>
@@ -61,6 +61,10 @@
                     {{campaigns.recall.classification}}
                 </p>
             </md-card-content>
+            <div class="inset" layout="row" layout-align="center">
+                <md-button flex="50" class="md-primary md-raised" ng-click="">{{campaigns.activeRecallsText}}</md-button>
+                <md-button flex="50" class="md-primary md-raised" ng-click="">{{campaigns.pastRecallsText}}</md-button>
+            </div>
         </md-card>
     </md-content>
 </div>

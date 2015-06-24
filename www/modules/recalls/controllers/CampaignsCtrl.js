@@ -21,11 +21,12 @@ var main = require('../main');
  */
 main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
+                                           /**ng.$location,*/ $location,
                                            /**openfda.services.FoodEnforcementService*/ foodEnforcementService) {
 
     'use strict';
 
-    var self = this;
+    var self = this, search = $location.search();
 
     $scope.$on('$destroy', function () {
         //TODO: clean up work
@@ -49,17 +50,44 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
 
     self.recallId = $routeParams.recallId;
 
+    self.barcode = search.barcode;
+
     self.recall = null;
 
+    self.activeRecallsText = 0;
+
+    self.pastRecallsText = 0;
 
     self.getRecallData = function () {
 
-        foodEnforcementService.getRecallById(self.recallId)
-            .success(function (result) {
-                if (result.results && result.results.length){
-                    self.recall = result.results[0];
+        /* Bug in service
+         foodEnforcementService.getRecallById(self.recallId)
+         .success(function (result) {
+         if (result.results && result.results.length){
+         self.recall = result.results[0];
+         }
+         });
+         */
+
+        foodEnforcementService.getRecallsByBarcode(self.barcode).success(function (result) {
+
+            if (result.results && result.results.length) {
+                var recalls = $.grep(result.results, function (recall) {
+                    return recall.recall_number === self.recallId;
+                });
+                if (recalls.length) {
+                    self.recall = recalls[0];
                 }
-            });
+                var activeRecalls = $.grep(result.results, function (recall) {
+                    return recall.status === "Ongoing";
+                });
+                self.activeRecallsText = activeRecalls.length + " Active Recall" + (activeRecalls.length !== 1 ? "s" : "");
+                var pastRecalls = $.grep(result.results, function (recall) {
+                    return recall.status !== "Ongoing";
+                });
+                self.pastRecallsText = pastRecalls.length + " Past Recall" + (pastRecalls.length !== 1 ? "s" : "");
+            }
+        });
     };
 
     self.getRecallData();
