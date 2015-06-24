@@ -28,10 +28,10 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @returns {{success: Function, error: Function}}
      */
     self.getRecallsByBarcode = function (barcode, options) {
-        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+code_info::barcode', {
-            params: angular.extend(openFdaDefaults, options, {
-                barcode: barcode,
-                product_type: 'food'// jshint ignore:line
+        //Including an empty object as the first parameter for angular.extend so openFdaDefaults is not overridden.
+        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+code_info::barcode', {
+            params: angular.extend({}, openFdaDefaults, options, {
+                barcode: barcode
             })
         });
     };
@@ -43,10 +43,10 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @returns {{success: Function, error: Function}}
      */
     self.getRecallsByKeyword = function (keywords, options) {
-        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type::product_type+AND+product_description::keywords', {
-            params: angular.extend(openFdaDefaults, options, {
-                keywords: keywords.split(' ').join('+'),
-                product_type: 'food'// jshint ignore:line
+        //Including an empty object as the first parameter for angular.extend so openFdaDefaults is not overridden.
+        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_description::keywords', {
+            params: angular.extend({}, openFdaDefaults, options, {
+                keywords: keywords.split(' ').join('+')
             })
         });
     };
@@ -57,12 +57,12 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @returns {{success: Function, error: Function}}
      */
     self.getRecallById = function(recallId) {
-        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type::product_type+AND+recall_number::recall_number', {
-            params: angular.extend(openFdaDefaults, {
+        //Including an empty object as the first parameter for angular.extend so openFdaDefaults is not overridden.
+        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+recall_number::recall_number', {
+            params: angular.extend({}, openFdaDefaults, {
                 recall_number: recallId,// jshint ignore:line
                 limit: 1,
-                skip: 0,
-                product_type: 'food'// jshint ignore:line
+                skip: 0
             })
         });
     };
