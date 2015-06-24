@@ -1,4 +1,7 @@
-var main = require('../main');
+var main = require('../main'),
+    angular = require('angular'),
+    nv = require('nvd3'),
+    d3 = require('d3');
 
 /**
  * @class recalls.controllers.ClassificationDistributionCtrl
@@ -43,12 +46,12 @@ main.controller('ClassificationDistributionCtrl', function (
     };
 
     /**
-     * The list of recall results found
-     * @name recalls.controllers.ClassificationDistributionCtrl#recalls
+     * The list of recall classification count results found
+     * @name recalls.controllers.ClassificationDistributionCtrl#classificationData
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {array}
      */
-    self.recalls = null;
+    self.classificationData = null;
 
     /**
      * Requests recall results based on the code or search terms provided.
@@ -65,12 +68,13 @@ main.controller('ClassificationDistributionCtrl', function (
 
         $location.search({keywords: null, barcode: barcode});
 
-        foodEnforcementService.getRecallsByBarcode(barcode)
+        foodEnforcementService.getRecallsByBarcode(barcode, {'count': 'classification.exact'})
             .success(function(result) {
-                self.recalls = result.results || [];
+                self.classificationData = result.results || [];
+                self.addPieChart(self.classificationData);
             })
             .error(function() {
-                self.recalls = [];
+                self.classificationData = [];
             });
     };
 
@@ -88,18 +92,60 @@ main.controller('ClassificationDistributionCtrl', function (
 
         $location.search({keywords: keywords, barcode: null});
 
-        foodEnforcementService.getRecallsByKeyword(keywords)
+        foodEnforcementService.getRecallsByKeyword(keywords, {'count': 'classification.exact'})
             .success(function(result) {
-                self.recalls = (result && result.results) || [];
+                self.classificationData = (result && result.results) || [];
+                self.addPieChart(self.classificationData);
             })
             .error(function() {
-                self.recalls = [];
+                self.classificationData = [];
             });
     };
 
+    /**
+     * Builds a pie chart based on the loaded data.
+     * @name recalls.controllers.ClassificationDistributionCtrl#addPieChart
+     * @methodOf recalls.controllers.ClassificationDistributionCtrl
+     * @function
+     * @param {Object} chartData The data used to populate the pie chart.
+     */
+    self.addPieChart = function(chartData) {
+        if(nv) {
+            var targetColor, chartColors = [];
 
+            //See which classifications are included in the data and set the chart colors.
+            angular.forEach(chartData, function(chartDataItem) {
+                targetColor = '#FEF200';
+                if(chartDataItem.term === 'Class I') {
+                    targetColor = '#FE0000';
+                } else if(chartDataItem.term === 'Class II') {
+                    targetColor = '#F47429';
+                }
+                chartColors.push(targetColor);
+            });
 
+            //Set up and add the chart
+            nv.addGraph(function() {
+                var chart = nv.models.pieChart()
+                    .x(function(d) { return d.term; })
+                    .y(function(d) { return d.count; })
+                    .showLabels(false)
+                    .showLegend(true)
+                    .color(chartColors);
 
+                d3.select('#class-distribution-chart svg')
+                    .datum(chartData)
+                    .transition().duration(350)
+                    .call(chart);
+
+                //TODO: This will move the legend below the chart but we need to figure out re-positioning after clicking a legend item.
+                /*d3.select(".nv-legendWrap")
+                    .attr("transform","translate(0,240)");*/
+
+                return chart;
+            });
+        }
+    };
 
     if ($location.search().barcode) {
         self.searchByBarcode($location.search().barcode);

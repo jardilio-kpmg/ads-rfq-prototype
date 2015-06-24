@@ -14,10 +14,14 @@
                 ng-class="{'no-results': !search.recalls.length || search.recalls.length === 0}">
         <md-list class="recall-list"
                  ng-if="search.recalls.length">
-            <md-list-item layout="row" ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.recall_number}}">
-                <classification-icon classification="{{item.classification}}"></classification-icon>
-                <span flex class="description">{{item.product_description}}</span>
-                <md-icon>chevron_right</md-icon>
+            <md-list-item ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.recall_number}}">
+                <md-card flex>
+                    <md-card-content layout="row" layout-align="start center">
+                        <classification-icon classification="{{item.classification}}"></classification-icon>
+                        <span flex class="description">{{item.product_description}}</span>
+                        <md-icon>chevron_right</md-icon>
+                    </md-card-content>
+                </md-card>
             </md-list-item>
         </md-list>
 
@@ -31,7 +35,7 @@
             <form name="searchForm" ng-submit="search.doSearch()"
                   layout="column" layout-align="center center"
                   ng-if="!search.recalls.length">
-                <md-input-container style="width:100%">
+                <md-input-container>
                     <label i18n="recalls.search.manualSearchInput"></label>
                     <input ng-model="search.manualSearch" required autofocus autocomplete="off">
                 </md-input-container>
