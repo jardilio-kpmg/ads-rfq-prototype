@@ -1,5 +1,24 @@
+$classification-1-color: #FE0000;
+$classification-2-color: #F47429;
+$classification-3-color: #FEF200;
+
 .app {
     /*TODO: add application specific styles here*/
+
+    /*Recall item Classification-I*/
+    .classification-1 {
+        color: $classification-1-color;
+    }
+
+    /*Recall item Classification-II*/
+    .classification-2 {
+        color: $classification-2-color;
+    }
+
+    /*Recall item Classification-III*/
+    .classification-3 {
+        color: $classification-3-color;
+    }
 }
 
 .app.ready {
