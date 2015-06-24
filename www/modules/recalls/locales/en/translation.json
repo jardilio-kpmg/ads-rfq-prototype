@@ -19,6 +19,15 @@
                 "message": "I couldn't read a UPC, lets try that again with a new image.",
                 "ok": "Close"
             }
+        },
+        "campaigns": {
+            "title" : "Recall Details",
+            "reportDateTitle": "Report Date:",
+            "reasonRecallTitle": "Reason for Recall",
+            "recallingFirmTitle": "Recalling Firm",
+            "productDescriptionTitle": "Product Description",
+            "distributionTitle": "Distribution",
+            "statusTitle": "Status"
         }
     }
 }

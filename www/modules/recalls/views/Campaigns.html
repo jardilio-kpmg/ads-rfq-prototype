@@ -1,52 +1,61 @@
 <div class="recalls campaigns" layout="column" layout-fill>
-    <div class="backdrop"></div>
     <md-toolbar md-scroll-shrink="true">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
-            <h2 flex>Campaigns</h2>
+            <h2 flex i18n="recalls.campaigns.title"></h2>
             <md-button class="md-icon-button" href="#/recalls/search">
                 <md-icon>search</md-icon>
             </md-button>
         </div>
     </md-toolbar>
-    <md-content class="md-padding">
-        <md-card>
-            <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.recall_number}}</h2>
-            <img ng-if="campaigns.imagePath" ng-src="{{campaigns.imagePath}}" class="md-card-image" alt="{{campaigns.recall.recall_number}}">
-            <md-card-content>
-                <h2 class="md-title">Product Description</h2>
-                <p>
-                    {{campaigns.recall.product_description}}
-                </p>
-                <h2 class="md-title">Reason for Recall</h2>
-                <p>
-                    {{campaigns.recall.reason_for_recall}}
-                </p>
-                <h2 class="md-title">Recalling Firm</h2>
-                <p>
-                    {{campaigns.recall.recalling_firm}}
-                </p>
-                <h2 class="md-title">Recall Initiation Day</h2>
-                <p>
-                    {{campaigns.recall.recall_initiation_date}}
-                </p>
-                <h2 class="md-title">Status</h2>
-                <p>
-                    {{campaigns.recall.status}}
-                </p>
-                <h2 class="md-title">Distribution Pattern</h2>
-                <p>
-                    {{campaigns.recall.distribution_pattern}}
-                </p>
-                <h2 class="md-title">Code info</h2>
-                <p>
-                    {{campaigns.recall.code_info}}
-                </p>
-                <h2 class="md-title">Classification</h2>
-                <p>
-                    {{campaigns.recall.classification}}
-                </p>
-            </md-card-content>
-        </md-card>
+    <md-content flex>
+        <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.recall_number}}</h2>
+        <div class="details-item" layout="row" layout-align="start center">
+            <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
+            <span layout-margin>
+                {{campaigns.recall.classification}}
+            </span>
+        </div>
+        <div class="details-item" layout="row" layout-align="start center">
+            <span i18n="recalls.campaigns.reportDateTitle"></span>
+            <span layout-margin>
+                {{campaigns.recall.recall_initiation_date }}<!--| date: 'MM/dd/yyyy' todo : not working because of data -->
+            </span>
+        </div>
+        <div class="details-item">
+            <span layout-margin>
+                {{campaigns.recall.code_info}}
+            </span>
+        </div>
+        <div class="details-item">
+            <h2 i18n="recalls.campaigns.reasonRecallTitle"></h2>
+            <p>
+                {{campaigns.recall.reason_for_recall}}
+            </p>
+        </div>
+        <!--<div class="details-item">
+            <h2 i18n="recalls.campaigns.recallingFirmTitle">Recalling Firm</h2>
+            <p>
+                {{campaigns.recall.recalling_firm}}
+            </p>
+        </div>-->
+        <div class="details-item">
+            <h2 i18n="recalls.campaigns.productDescriptionTitle"></h2>
+            <p>
+                {{campaigns.recall.product_description}}
+            </p>
+        </div>
+        <div class="details-item">
+            <h2 i18n="recalls.campaigns.distributionTitle"></h2>
+            <p>
+                {{campaigns.recall.distribution_pattern}}
+            </p>
+        </div>
+        <!--<div class="details-item">
+            <h2 i18n="recalls.campaigns.statusTitle">Status</h2>
+            <p>
+                {{campaigns.recall.status}}
+            </p>
+        </div>-->
     </md-content>
 </div>

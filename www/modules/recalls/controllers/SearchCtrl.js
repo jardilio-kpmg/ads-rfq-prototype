@@ -58,8 +58,6 @@ main.controller('SearchCtrl', function (
      */
     self.recalls = null;
 
-    self.barcode = $location.search().barcode;
-
     /**
      * Requests recall results based on the code or search terms provided.
      * @name recalls.controllers.SearchCtrl#searchByBarcode
