@@ -7,7 +7,7 @@
               ng-if="!search.recalls.length">
             <md-input-container style="width:100%">
                 <label i18n="recalls.search.manualSearchInput"></label>
-                <input ng-model="search.manualSearch" required>
+                <input ng-model="search.manualSearch" required autofocus autocomplete="off">
             </md-input-container>
             <div class="manual-search-actions"
                   layout="row" layout-sm="column" layout-align="center center">
