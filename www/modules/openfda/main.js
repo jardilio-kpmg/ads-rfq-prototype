@@ -36,12 +36,11 @@ require('./main.scss');
  */
 var openfda = angular.module('openfda', ['ng','ngRoute','kpmgAngular','ngMaterial']);
 
-openfda.constant('openFdaConfig', {
-    apiBase: 'https://api.fda.gov/food/enforcement.json',
-    apiKey: 'CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic',
-    defaultResultsLimit: 30,
-    defaultRecallStatus: 'ongoing',
-    defaultProductType: 'food'
+openfda.constant('openFdaDefaults', {
+    server: '//api.fda.gov',
+    api_key: 'CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic',// jshint ignore:line
+    limit: 30,
+    status: 'ongoing'
 });
 
 module.exports = openfda;

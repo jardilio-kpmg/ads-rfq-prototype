@@ -1,5 +1,4 @@
-var main = require('../main'),
-    angular = require('angular');
+var main = require('../main');
 
 /**
  * @class recalls.controllers.SearchCtrl
@@ -23,7 +22,7 @@ var main = require('../main'),
 main.controller('SearchCtrl', function (
     /**ng.$rootScope.Scope*/ $scope,
     $location,
-    /**recalls/services/RecallSearchService*/ recallSearchService) {
+    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
 
     var self = this;
 
@@ -64,7 +63,7 @@ main.controller('SearchCtrl', function (
             return;
         }
 
-        recallSearchService.getRecallsByBarcode(barcode)
+        foodEnforcementService.getRecallsByBarcode(barcode)
             .success(function(result) {
                 self.recalls = result.results || [];
             })
@@ -76,18 +75,14 @@ main.controller('SearchCtrl', function (
 
     /**
      * Requests recall results based on one or more keyword strings.
-     * @param {string|array} keywords An array of keyword strings to match recall records against.
+     * @param {string} keywords An array of keyword strings to match recall records against.
      */
     self.searchByKeyword = function(keywords) {
         if (!keywords) {
             return;
         }
 
-        if(!angular.isArray(keywords)) {
-            keywords = keywords.split(' ');
-        }
-
-        recallSearchService.getRecallsByKeyword(keywords)
+        foodEnforcementService.getRecallsByKeyword(keywords)
             .success(function(result) {
                 self.recalls = (result && result.results) || [];
             })
