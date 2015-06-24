@@ -21,7 +21,7 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, $mdDialog) {
+main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, $mdDialog, kLocalizeFilter) {
 
     var self = this;
 
@@ -147,9 +147,9 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
                 else {
                     $mdDialog.show(
                         $mdDialog.alert()
-                            .title('Whoops!')
-                            .content('I couldn\'t read a UPC, lets try that again with a new image.')
-                            .ok('Close')
+                            .title(kLocalizeFilter('recalls.scan.noBarcodeFound.title'))
+                            .content(kLocalizeFilter('recalls.scan.noBarcodeFound.message'))
+                            .ok(kLocalizeFilter('recalls.scan.noBarcodeFound.ok'))
                     );
                 }
             }
