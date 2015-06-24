@@ -2,14 +2,17 @@
     <div class="backdrop" layout="column" layout-align="center center" layout-fill>
         <div class="search-results-feedback" i18n="recalls.search.noResults"
              ng-if="search.recalls.length == 0"></div>
-        <div layout="column" layout-align="center center"
-             ng-if="!search.recalls.length">
+        <form name="searchForm" ng-submit="search.doSearch()"
+              layout="column" layout-align="center center"
+              ng-if="!search.recalls.length">
             <md-input-container style="width:100%">
                 <label>Barcode/UPC</label>
-                <input ng-model="search.manualSearch">
+                <input ng-model="search.manualSearch" required>
             </md-input-container>
-            <div class="manual-search-actions" layout="row" layout-sm="column" layout-align="center center">
-                <md-button class="md-primary md-raised" ng-click="search.doSearch()">
+            <div class="manual-search-actions"
+                  layout="row" layout-sm="column" layout-align="center center">
+                <md-button type="submit" class="md-primary md-raised"
+                           ng-disabled="searchForm.$invalid">
                     <md-icon>search</md-icon>
                     <span i18n="recalls.search.manualSearchButton"></span>
                 </md-button>
@@ -19,13 +22,14 @@
                     <span i18n="recalls.search.manualSearchScanButton"></span>
                 </md-button>
             </div>
-        </div>
+        </form>
     </div>
     <md-toolbar>
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
             <h2 flex i18n="recalls.search.title"></h2>
-            <md-button class="md-icon-button" scan-button>
+            <md-button class="md-icon-button" ng-if="search.recalls.length"
+                       ng-click="search.resetSearchForm()">
                 <md-icon>search</md-icon>
             </md-button>
         </div>

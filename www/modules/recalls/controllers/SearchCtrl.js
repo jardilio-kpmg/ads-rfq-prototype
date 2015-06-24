@@ -107,6 +107,18 @@ main.controller('SearchCtrl', function (
     };
 
     /**
+     * Resets the search-related properties so the user can search
+     * for another barcode or keyword.
+     * @name recalls.controllers.SearchCtrl#resetSearchForm
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     */
+    self.resetSearchForm = function() {
+        $location.search({keywords: null, barcode: null});
+        self.recalls = null;
+    };
+
+    /**
      * Perform a manual search based on keywords entered by user.
      * @name recalls.controllers.SearchCtrl#doSearch
      * @methodOf recalls.controllers.SearchCtrl
