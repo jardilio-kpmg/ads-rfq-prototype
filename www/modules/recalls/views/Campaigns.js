@@ -1,20 +1,20 @@
 var main = require('../main');
 
-require('./Search.scss');
+require('./Campaigns.scss');
 
 /**
- * @name recalls.views.search
+ * @name recalls.views.campaigns
  * @propertyOf recalls.views
  * @ see http://docs.angularjs.org/api/ng.$routeProvider
  * @example {@lang xml}
- * <a href="#/recalls/search">Search</a>;
+ * <a href="#/recalls/campaigns">Campaigns</a>;
  */
 main.config(function (/**ng.$routeProvider*/ $routeProvider, /**kpmgAngular.services.kRedirectProvider*/ kRedirectProvider) {// jshint ignore:line
 
-    $routeProvider.when('/recalls/search', {
-        controller: 'SearchCtrl',
-        controllerAs: 'search', 
-        template: require('./Search.html'),
+    $routeProvider.when('/recalls/campaigns/:recallId', {
+        controller: 'CampaignsCtrl',
+        controllerAs: 'campaigns', 
+        template: require('./Campaigns.html'),
         reloadOnSearch: true
     });
 });

@@ -1,0 +1,66 @@
+<!--<div class="recalls campaigns">
+    <h1>Campaigns</h1>
+    <h2>Controller: {{campaigns.getName()}}</h2>
+</div>-->
+<div class="recalls search" layout="column" layout-fill>
+    <div class="backdrop"></div>
+    <md-toolbar md-scroll-shrink="true">
+        <div class="md-toolbar-tools">
+            <nav-back-button></nav-back-button>
+            <h2 flex>Campaigns</h2>
+            <md-menu>
+                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+                    <md-icon>more_vert</md-icon>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button scan-button ng-click><!--menu throws exception if we don't have an ng-click-->
+                            <md-icon>photo_camera</md-icon>
+                            Scan Another Barcode
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <md-card>
+            <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.recall_number}}</h2>
+            <img ng-if="campaigns.imagePath" ng-src="{{campaigns.imagePath}}" class="md-card-image" alt="{{campaigns.recall.recall_number}}">
+            <md-card-content>
+                <h2 class="md-title">Product Description</h2>
+                <p>
+                    {{campaigns.recall.product_description}}
+                </p>
+                <h2 class="md-title">Reason for recall</h2>
+                <p>
+                    {{campaigns.recall.reason_for_recall}}
+                </p>
+                <h2 class="md-title">Recalling firm</h2>
+                <p>
+                    {{campaigns.recall.recalling_firm}}
+                </p>
+                <h2 class="md-title">Recall initiation day</h2>
+                <p>
+                    {{campaigns.recall.recall_initiation_date}}
+                </p>
+                <h2 class="md-title">Status</h2>
+                <p>
+                    {{campaigns.recall.status}}
+                </p>
+                <h2 class="md-title">Distribution Pattern</h2>
+                <p>
+                    {{campaigns.recall.distribution_pattern}}
+                </p>
+                <h2 class="md-title">Code info</h2>
+                <p>
+                    {{campaigns.recall.code_info}}
+                </p>
+                <h2 class="md-title">Classification</h2>
+                <p>
+                    {{campaigns.recall.classification}}
+                </p>
+            </md-card-content>
+        </md-card>
+    </md-content>
+</div>
