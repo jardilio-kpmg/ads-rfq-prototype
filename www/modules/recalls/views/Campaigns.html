@@ -2,60 +2,63 @@
     <md-toolbar md-scroll-shrink="true">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
-            <h2 flex i18n="recalls.campaigns.title"></h2>
+            <h2 flex>{{campaigns.recall.event_id}}</h2>
             <md-button class="md-icon-button" href="#/recalls/search">
                 <md-icon>search</md-icon>
             </md-button>
         </div>
     </md-toolbar>
     <md-content flex>
-        <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.recall_number}}</h2>
-        <div class="details-item" layout="row" layout-align="start center">
-            <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
-            <span layout-margin>
-                {{campaigns.recall.classification}}
-            </span>
-        </div>
-        <div class="details-item" layout="row" layout-align="start center">
-            <span i18n="recalls.campaigns.reportDateTitle"></span>
-            <span layout-margin>
-                {{campaigns.recall.recall_initiation_date }}<!--| date: 'MM/dd/yyyy' todo : not working because of data -->
-            </span>
-        </div>
-        <div class="details-item">
-            <span layout-margin>
-                {{campaigns.recall.code_info}}
-            </span>
-        </div>
-        <div class="details-item">
-            <h2 i18n="recalls.campaigns.reasonRecallTitle"></h2>
-            <p>
-                {{campaigns.recall.reason_for_recall}}
-            </p>
-        </div>
-        <div class="details-item">
-            <h2 i18n="recalls.campaigns.recallingFirmTitle">Recalling Firm</h2>
-            <p>
-                {{campaigns.recall.recalling_firm}}
-            </p>
-        </div>
-        <div class="details-item">
-            <h2 i18n="recalls.campaigns.productDescriptionTitle"></h2>
-            <p>
-                {{campaigns.recall.product_description}}
-            </p>
-        </div>
-        <div class="details-item">
-            <h2 i18n="recalls.campaigns.distributionTitle"></h2>
-            <p>
-                {{campaigns.recall.distribution_pattern}}
-            </p>
-        </div>
-        <div class="details-item">
-            <h2 i18n="recalls.campaigns.statusTitle">Status</h2>
-            <p>
-                {{campaigns.recall.status}}
-            </p>
-        </div>
+        <h2 class="md-title" layout="row" layout-align="center center"></h2>
+        <md-card>
+            <md-card-content>
+                <p layout="row" layout-align="start center">
+                    <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
+                    <span>
+                        {{campaigns.recall.classification}}
+                    </span>
+                </p>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.reportDateTitle"></label>
+                    <input ng-model="campaigns.recall.recall_initiation_date" readonly/>
+                </md-input-container>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.statusTitle"></label>
+                    <input ng-model="campaigns.recall.status" readonly/>
+                </md-input-container>
+            </md-card-content>
+        </md-card>
+        <md-card>
+            <md-card-content>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.productDescriptionTitle"></label>
+                    <textarea readonly ng-model="campaigns.recall.product_description"/>
+                </md-input-container>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.reasonRecallTitle"></label>
+                    <textarea readonly ng-model="campaigns.recall.reason_for_recall"/>
+                </md-input-container>
+            </md-card-content>
+        </md-card>
+        <md-card>
+            <md-card-content>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.recallingFirmTitle"></label>
+                    <input ng-model="campaigns.recall.recalling_firm" readonly/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Recall Number</label>
+                    <input ng-model="campaigns.recall.recall_number" readonly/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Code Info</label>
+                    <input ng-model="campaigns.recall.code_info" readonly/>
+                </md-input-container>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.distributionTitle"></label>
+                    <textarea readonly ng-model="campaigns.recall.distribution_pattern"/>
+                </md-input-container>
+            </md-card-content>
+        </md-card>
     </md-content>
 </div>

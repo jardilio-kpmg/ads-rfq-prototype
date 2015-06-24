@@ -2,16 +2,4 @@
     md-content {
         background: lighten(lightgrey, 10%);
     }
-    .details-item {
-        margin: 10px;
-        background: white;
-        border: 1px solid darken(lightgrey, 10%);
-        border-radius: 6px;
-        box-shadow: none;
-        padding: 10px;
-
-        p, h2 {
-            margin: 5px;
-        }
-    }
 }
