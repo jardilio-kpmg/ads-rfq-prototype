@@ -41,6 +41,12 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
         return name;
     };
 
+    /**
+     * Initiates a new barcode scan read from an image or camera capture
+     * @name recalls.controllers.ScanButtonCtrl#startScan
+     * @methodOf recalls.controllers.ScanButtonCtrl
+     * @function
+     */
     self.startScan = function () {
         var input = angular.element('<input type="file" style="display:none;" accept="image/*;capture=camera">');
         angular.element(document.body).append(input);

@@ -3,8 +3,6 @@
 var main = require('./main'),
     initialized = false;
 
-
-
 //if *.mock.js files are included in bundle, push dependency on ngMockE2E
 main.requires.push('ngMockE2E');
 main.config(function ($provide, $httpProvider) {

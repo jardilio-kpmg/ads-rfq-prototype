@@ -95,22 +95,11 @@ main.controller('SearchCtrl', function (
             });
     };
 
-    $scope.$watch(
-        function () {
-            return $location.search().barcode;
-        },
-        function (barcode) {
-            self.searchByBarcode(barcode);
-        }
-    );
-
-    $scope.$watch(
-        function () {
-            return $location.search().keywords;
-        },
-        function (keywords) {
-            self.searchByKeywords(keywords);
-        }
-    );
+    if ($location.search().barcode) {
+        self.searchByBarcode($location.search().barcode);
+    }
+    else if ($location.search().keywords) {
+        self.searchByKeywords($location.search().keywords);
+    }
 
 });
