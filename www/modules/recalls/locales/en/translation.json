@@ -11,6 +11,10 @@
             "manualSearchInput": "Keywords or UPC",
             "manualSearchScanButton": "Scan Any Barcode",
             "manualSearchButton": "Search",
+            "classificationDistributionButton": "Class Distribution",
+            "classificationDistributionShortButton": "Class Distr",
+            "recallHistoryButton": "Recall History",
+            "recallHistoryShortButton": "Recall Hist",
             "title": "Relevant Recalls"
         },
         "scan": {
