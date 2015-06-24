@@ -43,8 +43,16 @@ main.controller('SearchCtrl', function (
     };
 
     /**
+     * The model for the manual search input.
+     * @name recalls.controllers.SearchCtrl#manualSearch
+     * @propertyOf recalls.controllers.SearchCtrl
+     * @type {string}
+     */
+    self.manualSearch = null;
+
+    /**
      * The list of recall results found
-     * @name recalls.controllers.SearchCtrl#barcode
+     * @name recalls.controllers.SearchCtrl#recalls
      * @propertyOf recalls.controllers.SearchCtrl
      * @type {array}
      */
@@ -77,6 +85,9 @@ main.controller('SearchCtrl', function (
 
     /**
      * Requests recall results based on one or more keyword strings.
+     * @name recalls.controllers.SearchCtrl#searchByKeywords
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
      * @param {string} keywords An array of keyword strings to match recall records against.
      */
     self.searchByKeywords = function(keywords) {
@@ -93,6 +104,16 @@ main.controller('SearchCtrl', function (
             .error(function() {
                 self.recalls = [];
             });
+    };
+
+    /**
+     * Perform a manual search based on keywords entered by user.
+     * @name recalls.controllers.SearchCtrl#doSearch
+     * @methodOf recalls.controllers.SearchCtrl
+     * @function
+     */
+    self.doSearch = function() {
+        self.searchByKeywords(self.manualSearch);
     };
 
     if ($location.search().barcode) {
