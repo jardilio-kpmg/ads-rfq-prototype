@@ -22,15 +22,11 @@ var main = require('../main');
 main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
                                            /**ng.$location,*/ $location,
-                                           /**openfda.services.FoodEnforcementService*/ foodEnforcementService) {
+                                           /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
 
     'use strict';
 
-    var self = this, search = $location.search();
-
-    $scope.$on('$destroy', function () {
-        //TODO: clean up work
-    });
+    var self = this;
 
     /**
      * @private
@@ -48,53 +44,27 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
         return name;
     };
 
-    self.recallId = $routeParams.recallId;
-
-    self.barcode = search.barcode;
-
     self.recall = null;
 
-    self.activeRecallsCount = 0;
+    self.getRecallData = function (recallId) {
 
-    self.pastRecallsCount = 0;
-
-    self.activeRecallsText = "";
-
-    self.pastRecallsText = "";
-
-    self.getRecallData = function () {
-
-        /* Bug in service
-         foodEnforcementService.getRecallById(self.recallId)
-         .success(function (result) {
-         if (result.results && result.results.length){
-         self.recall = result.results[0];
-         }
-         });
-         */
-
-        foodEnforcementService.getRecallsByBarcode(self.barcode).success(function (result) {
-
-            if (result.results && result.results.length) {
-                var recalls = $.grep(result.results, function (recall) {
-                    return recall.recall_number === self.recallId;
-                });
-                if (recalls.length) {
-                    self.recall = recalls[0];
+        foodEnforcementService.getRecallById(recallId)
+            .success(function (result) {
+                if (result.results && result.results.length){
+                    self.recall = result.results[0];
                 }
-                var activeRecalls = $.grep(result.results, function (recall) {
-                    return recall.status === "Ongoing";
-                });
-                self.activeRecallsCount = activeRecalls.length;
-                self.activeRecallsText = activeRecalls.length + " Active Recall" + (activeRecalls.length !== 1 ? "s" : "");
-                var pastRecalls = $.grep(result.results, function (recall) {
-                    return recall.status !== "Ongoing";
-                });
-                self.pastRecallsCount = pastRecalls.length;
-                self.pastRecallsText = pastRecalls.length + " Past Recall" + (pastRecalls.length !== 1 ? "s" : "");
-            }
-        });
+            });
+        //TODO: error state for bad input?
     };
 
-    self.getRecallData();
+    $scope.$watch(
+        function () {
+            return $routeParams.recallId;
+        },
+        function (recallId) {
+            if (recallId) {
+                self.getRecallData(recallId);
+            }
+        }
+    );
 });

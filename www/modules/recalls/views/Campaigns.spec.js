@@ -34,19 +34,12 @@ describe('URL Route: /recalls/campaigns', function () {
         $httpBackend.resetExpectations();
     }));
 
-    it('should route to view if authenticated', function () {
-        kSession.isAuthenticated(true);
-        $location.path('/recalls/campaigns');
+    it('should route to view', function () {
+        $location.path('/recalls/campaigns/88888888');
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=event_id:88888888&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
+        $httpBackend.flush();
         $scope.$apply();
-        expect($ngView[0].querySelector('.campaigns')).not.toBe(null);
-    });
-
-    //TODO: you need to determine if this view requires authentication
-    xit('should not route to view if not authenticated', function () {
-        kSession.isAuthenticated(false);
-        $location.path('/recalls/campaigns');
-        $scope.$apply();
-        expect($ngView[0].querySelector('.campaigns')).toBe(null);
+        expect($ngView[0].querySelector('.recalls.campaigns')).not.toBe(null);
     });
 
     afterEach(function () {
