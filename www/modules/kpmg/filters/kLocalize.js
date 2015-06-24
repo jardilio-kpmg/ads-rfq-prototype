@@ -2,12 +2,10 @@ var main = require('../main'),
     i18n = require('i18next'),
     angular = require('angular');
 
-var hasLocalized = false;
-
 /**
  * @type {ng.$rootScope.Scope}
  */
-var $rootScope;
+var $scope;
 
 /**
  * Uses i18next library to localize a given key using the current locale.
@@ -37,11 +35,13 @@ var $rootScope;
  *     var filtered = kLocalizeFilter('something');
  * }
  */
-main.filter('kLocalize', function () {
+main.filter('kLocalize', function ($rootScope) {
     var translate = i18n.t;
     var isObject = angular.isObject;
     var extend = angular.extend;
     var namespaces = {};
+
+    $scope = $rootScope;
 
     return function (key, replace) {
         var i;
@@ -76,8 +76,6 @@ main.filter('kLocalize', function () {
             }
         }
 
-        hasLocalized = true;
-
         if (replace) {
             if (isObject(replace)) {
                 options = extend(options, replace);
@@ -94,15 +92,11 @@ main.filter('kLocalize', function () {
 
 });
 
-main.run(function ($injector) {
-    $rootScope = $injector.get('$rootScope');
-
-    i18n.init(function () {
-        if (hasLocalized) {
-            //trigger updates to display
-            $scope.$applyAsync(function () {
-                $rootScope.$broadcast('kLocalizeChanged');
-            });
-        }
-    });
+i18n.init(function () {
+    //trigger updates to display when i18n has initialized and loaded the resources
+    if ($scope) {
+        $scope.$applyAsync(function () {
+            $scope.$broadcast('kLocalizeChanged');
+        });
+    }
 });
