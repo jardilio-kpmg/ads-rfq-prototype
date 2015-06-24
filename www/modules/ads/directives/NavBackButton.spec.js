@@ -34,6 +34,25 @@ describe('ads/directives/NavBackButton.js', function () {
         expect(directive.children().length).not.toBe(0);
     });
 
+    it('should navigate home on click if we have not progressed', inject(function ($location) {
+        var path = spyOn($location, 'path'),
+            search = spyOn($location, 'search');
+
+        directive.trigger('click');
+
+        expect(path).toHaveBeenCalledWith('/');
+        expect(search).toHaveBeenCalledWith({});
+    }));
+
+    it('should navigate to previous page if we have progressed in history', function () {
+        //add a new page to the history
+        window.location.hash = '#/doesnotexist';
+
+        var back = spyOn(window.history, 'back');
+        directive.trigger('click');
+        expect(back).toHaveBeenCalled();
+    });
+
     afterEach(function () {
         $scope.$destroy();
         $httpBackend.verifyNoOutstandingExpectation();
