@@ -2,7 +2,7 @@
     <h1>Campaigns</h1>
     <h2>Controller: {{campaigns.getName()}}</h2>
 </div>-->
-<div class="recalls search" layout="column" layout-fill>
+<div class="recalls campaigns" layout="column" layout-fill>
     <div class="backdrop"></div>
     <md-toolbar md-scroll-shrink="true">
         <div class="md-toolbar-tools">
@@ -24,8 +24,9 @@
         </div>
     </md-toolbar>
     <md-content class="md-padding">
+        <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.recall_number}}</h2>
         <md-card>
-            <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.recall_number}}</h2>
+
             <img ng-if="campaigns.imagePath" ng-src="{{campaigns.imagePath}}" class="md-card-image" alt="{{campaigns.recall.recall_number}}">
             <md-card-content>
                 <h2 class="md-title">Product Description</h2>

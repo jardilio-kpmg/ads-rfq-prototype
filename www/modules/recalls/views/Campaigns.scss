@@ -1,3 +1,13 @@
 .recalls.campaigns {
-
+  md-content {
+    background: #ebebeb;
+  }
+  md-card{
+    //margin: 10px;
+    //background: lighten(lightgrey, 10%);
+    border: 1px solid darken(lightgrey, 10%);
+    border-radius: 6px;
+    box-shadow: none;
+    //padding: 10px;
+  }
 }
