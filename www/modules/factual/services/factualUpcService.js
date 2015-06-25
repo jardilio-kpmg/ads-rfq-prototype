@@ -80,7 +80,7 @@ main.service('factualUpcService', function (
     };
 
     /**
-     * Gets profucts
+     * Gets products
      * @param result
      * @returns {Array}
      */

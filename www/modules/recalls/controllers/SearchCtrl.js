@@ -83,16 +83,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                 // get product info from barcode and do a keyword search
                 factualUpcService.getData(barcode).success(function (result) {
                     var products = factualUpcService.getProducts(result);
-                    var product;
                     if (products && products.length) {
-                        product = products[0];
-                        foodEnforcementService.getRecallsByKeyword(product.name)
-                            .success(function (result) {
-                                self.recalls = (result && result.results) || [];
-                            })
-                            .error(function () {
-                                self.recalls = [];
-                            });
+                        self.searchByKeywords(products[0].name);
                     }
                 });
             });
