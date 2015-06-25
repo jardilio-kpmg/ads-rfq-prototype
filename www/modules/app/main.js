@@ -80,3 +80,4 @@ module.exports = app;
 app.requires.push('ads');
 app.requires.push('recalls');
 app.requires.push('openfda');
+app.requires.push('factual');

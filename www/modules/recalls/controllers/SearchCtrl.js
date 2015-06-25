@@ -19,10 +19,10 @@ var main = require('../main');
  *      };
  * });
  */
-main.controller('SearchCtrl', function (
-    /**ng.$rootScope.Scope*/ $scope,
-    $location,
-    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
+main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
+                                        /**ng.$location*/ $location,
+                                        /**openfda.services.foodEnforcementService*/ foodEnforcementService,
+                                        /**factual.services.factualUpcService*/ factualUpcService) {
 
     var self = this;
 
@@ -65,21 +65,28 @@ main.controller('SearchCtrl', function (
      * @function
      * @param {string} barcode A UPC barcode string to search for.
      */
-    self.searchByBarcode = function(barcode) {
+    self.searchByBarcode = function (barcode) {
         //No need to continue if we don't have a barcode to work with.
-        if(!barcode) {
+        if (!barcode) {
             return;
         }
 
         $location.search({keywords: null, barcode: barcode});
 
         foodEnforcementService.getRecallsByBarcode(barcode)
-            .success(function(result) {
+            .success(function (result) {
                 self.recalls = result.results || [];
             })
-            .error(function() {
+            .error(function () {
                 self.recalls = [];
-                //TODO: can we get product info from barcode and do a keyword search?
+
+                // get product info from barcode and do a keyword search
+                factualUpcService.getData(barcode).success(function (result) {
+                    var products = factualUpcService.getProducts(result);
+                    if (products && products.length) {
+                        self.searchByKeywords(products[0].name);
+                    }
+                });
             });
     };
 
@@ -90,7 +97,7 @@ main.controller('SearchCtrl', function (
      * @function
      * @param {string} keywords An array of keyword strings to match recall records against.
      */
-    self.searchByKeywords = function(keywords) {
+    self.searchByKeywords = function (keywords) {
         if (!keywords) {
             return;
         }
@@ -98,10 +105,10 @@ main.controller('SearchCtrl', function (
         $location.search({keywords: keywords, barcode: null});
 
         foodEnforcementService.getRecallsByKeyword(keywords)
-            .success(function(result) {
+            .success(function (result) {
                 self.recalls = (result && result.results) || [];
             })
-            .error(function() {
+            .error(function () {
                 self.recalls = [];
             });
     };
@@ -113,7 +120,7 @@ main.controller('SearchCtrl', function (
      * @methodOf recalls.controllers.SearchCtrl
      * @function
      */
-    self.resetSearchForm = function() {
+    self.resetSearchForm = function () {
         $location.search({keywords: null, barcode: null});
         self.recalls = null;
     };
@@ -124,7 +131,7 @@ main.controller('SearchCtrl', function (
      * @methodOf recalls.controllers.SearchCtrl
      * @function
      */
-    self.doSearch = function() {
+    self.doSearch = function () {
         self.searchByKeywords(self.manualSearch);
     };
 

@@ -54,7 +54,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @param recallId {string} A string to match against a recall record's key (recall_number).
      * @returns {{success: Function, error: Function}}
      */
-    self.getRecallById = function(eventId) {
+    self.getRecallById = function (eventId) {
         return kHttp.get(':server/food/enforcement.json?search=event_id::event_id', {
             params: angular.extend({}, openFdaDefaults, {
                 event_id: eventId,// jshint ignore:line
@@ -62,6 +62,24 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
                 status: null
             })
         });
+    };
+
+    /**
+     * Extracts the upc from the recall
+     * @param recall
+     * @returns {*}
+     */
+    self.extractUpc = function (recall) {
+        // clear empty spaces
+        var code = recall.code_info.replace(/\s+|\s+/gm, ''); // jshint ignore:line
+        code = code.replace(/-+/gm, ''); // clear -
+        var match = /(?:\d{12}|\d{11}|\d{10})/.exec(code); // search upc
+        var upc = '';
+        if (match && match.length) {
+            upc = match[0];
+        }
+
+        return upc;
     };
 
     return self;
