@@ -164,8 +164,8 @@ main.controller('ClassificationDistributionCtrl', function (
                     .call(chart);
 
                 //TODO: This will move the legend below the chart but we need to figure out re-positioning after clicking a legend item.
-                d3.select(".nv-legendWrap")
-                    .attr("transform","translate(0,0)");
+                d3.select('.nv-legendWrap')
+                    .attr('transform","translate(0,0)');
 
                 return chart;
             });
