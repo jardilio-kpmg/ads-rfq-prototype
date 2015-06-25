@@ -70,7 +70,8 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @returns {*}
      */
     self.extractUpc = function (recall) {
-        var code = recall.code_info.replace(/\s+|\s+/gm, ''); // clear empty spaces // jshint ignore:line
+        // clear empty spaces
+        var code = recall.code_info.replace(/\s+|\s+/gm, ''); // jshint ignore:line
         code = code.replace(/-+/gm, ''); // clear -
         var match = /(?:\d{12}|\d{11}|\d{10})/.exec(code); // search upc
         var upc = '';
