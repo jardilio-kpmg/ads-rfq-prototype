@@ -56,7 +56,7 @@ main.service('walmartUpcService', function (
             params: angular.extend({}, walmartlabsDefaults, options, {
                 upc: upcCode,
                 format: 'json',
-                callback: "JSON_CALLBACK"
+                callback: 'JSON_CALLBACK'
             })
         });
     };
@@ -67,7 +67,7 @@ main.service('walmartUpcService', function (
      */
     self.getProducts = function(result){
         var products = [];
-        angular.forEach(result.items, function (value, key) {
+        angular.forEach(result.items, function (value) {
             var product = $.extend({}, product);
             product.name = value.name;
             product.brand = value.brandName;
