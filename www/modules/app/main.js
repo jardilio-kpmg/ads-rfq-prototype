@@ -81,3 +81,7 @@ app.requires.push('ads');
 app.requires.push('recalls');
 app.requires.push('openfda');
 app.requires.push('server');
+
+app.requires.push('walmartlabs');
+app.requires.push('factual');
+app.requires.push('server');

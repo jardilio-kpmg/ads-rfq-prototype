@@ -5,12 +5,12 @@ angular.module('ngMockE2E').run(function (/**ngMockE2E.$httpBackend*/ $httpBacke
 
 
 
-    //TODO: register expects and/or when conditions for upcService http service
+    //TODO: register expects and/or when conditions for walmartUpcService http service
 
-    $httpBackend.whenGET(new RegExp('/server/upc-service/data')).respond(
+    $httpBackend.whenGET(new RegExp('/walmartlabs/walmart-upc-service/data')).respond(
         function (method, url, data) {
             data = {
-                name: 'upcService'
+                name: 'walmartUpcService'
             };
             return [200, data];
         }

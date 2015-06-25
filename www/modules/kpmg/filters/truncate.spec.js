@@ -1,8 +1,6 @@
-var server = require('./main');
+describe('kpmg/filters/truncate.js', function () {
 
-describe('server/main.js', function () {
 
-    'use strict';
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -14,19 +12,24 @@ describe('server/main.js', function () {
      */
     var $httpBackend;
 
-    beforeEach(angular.mock.module('ngMock','server'));
+    var filter;
 
-    beforeEach(inject(function ($injector) {
+    beforeEach(angular.mock.module('ngMock','kpmg'));
+
+    beforeEach(inject(function ($filter, $injector) {
         $httpBackend = $injector.get('$httpBackend');
+        filter = $filter('truncate');
         $httpBackend.resetExpectations();
     }));
 
-    it('should return server instance', function () {
-        expect(server).toBeDefined();
+    it('should be defined in module', function () {
+        expect(filter).toBeDefined();
     });
 
-    it('should return app name', function () {
-        expect(server.name).toBe('server');
+    //TODO: write your unit tests for truncate
+
+    it('should return proper filtered value', function () {
+        expect(filter('something')).toBe('something filtered');
     });
 
     afterEach(function () {
@@ -34,5 +37,5 @@ describe('server/main.js', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 
-});
 
+});

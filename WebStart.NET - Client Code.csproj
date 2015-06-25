@@ -41,13 +41,22 @@
   </PropertyGroup>
   <!-- start:files -->
   <ItemGroup>
-    <None Include="www\modules\server\services\upcService.spec.js" />
-    <None Include="www\modules\server\services\upcService.mock.js" />
-    <None Include="www\modules\server\services\upcService.js" />
-    <None Include="www\modules\server\main.spec.js" />
-    <None Include="www\modules\server\main.js" />
-    <None Include="www\modules\server\main.scss" />
-    <None Include="www\modules\server\locales\en\translation.json" />
+    <None Include="www\modules\factual\services\factualUpcService.spec.js" />
+    <None Include="www\modules\factual\services\factualUpcService.mock.js" />
+    <None Include="www\modules\factual\services\factualUpcService.js" />
+    <None Include="www\modules\factual\main.spec.js" />
+    <None Include="www\modules\factual\main.js" />
+    <None Include="www\modules\factual\main.scss" />
+    <None Include="www\modules\factual\locales\en\translation.json" />
+    <None Include="www\modules\walmartlabs\services\walmartUpcService.spec.js" />
+    <None Include="www\modules\walmartlabs\services\walmartUpcService.mock.js" />
+    <None Include="www\modules\walmartlabs\services\walmartUpcService.js" />
+    <None Include="www\modules\walmartlabs\main.spec.js" />
+    <None Include="www\modules\walmartlabs\main.js" />
+    <None Include="www\modules\walmartlabs\main.scss" />
+    <None Include="www\modules\walmartlabs\locales\en\translation.json" />
+    <None Include="www\modules\kpmg\filters\truncate.spec.js" />
+    <None Include="www\modules\kpmg\filters\truncate.js" />
     <None Include="www\modules\ads\directives\NavBackButton.spec.js" />
     <None Include="www\modules\ads\directives\NavBackButton.js" />
     <None Include="www\modules\ads\directives\NavBackButton.html" />
