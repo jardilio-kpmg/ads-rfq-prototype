@@ -15,7 +15,10 @@
             "classificationDistributionShortButton": "Class Distr",
             "recallHistoryButton": "Recall History",
             "recallHistoryShortButton": "Recall Hist",
-            "title": "Relevant Recalls"
+            "title": "Relevant Recalls",
+            "recallsTab": "Results",
+            "classificationsTab": "Distribution",
+            "recallHistTab": "History"
         },
         "classDistribution": {
             "title": "Classification Distribution",

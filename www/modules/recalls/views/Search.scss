@@ -71,28 +71,24 @@
         right: 0;
     }
 
-    .footer-toolbar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-    }
+    .search-page-content {
+        margin-top: 64px;
 
-    .search-results-content {
-        position: fixed;
-        top: 64px;
-        bottom: 64px;
-        left: 0;
-        right: 0;
-        overflow-y: auto;
+        .search-results-feedback, .search-form {
+            padding-top: 10px;
+        }
 
-        &.no-results {
-            bottom: 0;
+        .tab-body {
+            padding: 10px;
         }
 
         md-input-container {
             width: 100%;
         }
+    }
+
+    .search-results-feedback, .search-form {
+        width: 340px;
     }
 
     .manual-search-actions {

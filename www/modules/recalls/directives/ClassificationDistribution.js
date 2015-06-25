@@ -19,10 +19,10 @@ main.directive('classificationDistribution', function () {
         //if true, will create new child scope for element, if object then will create isolated scope
         scope: false,
         //optional function or string name of registered controller to link to this directive
-        //controller: 'ClassificationDistributionCtrl',
-        //controllerAs: 'classificationDistribution', 
+        controller: 'ClassificationDistributionCtrl',
+        controllerAs: 'classificationDistribution',
         //optional string name to require another directive to exist on target element
-        require: [],
+        require: ['classificationDistribution'],
         //restrict directive declarations to elements (E), attributes (A), classes (C) and comments (M)
         restrict: 'E',
         //optional (string) template if this directive will produce some markup on element, can also use templateUrl
