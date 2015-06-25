@@ -9,12 +9,9 @@
             </md-button>
         </div>
     </md-toolbar>
-
-    <md-content class="search-results-content"
-                ng-class="{'no-results': !search.recalls.length || search.recalls.length === 0}">
-        <md-list class="recall-list"
-                 ng-if="search.recalls.length">
-            <md-list-item ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.recall_number}}">
+    <md-content>
+        <md-list class="recall-list">
+            <md-list-item ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.event_id}}">
                 <md-card flex>
                     <md-card-content layout="row" layout-align="start center">
                         <classification-icon classification="{{item.classification}}"></classification-icon>

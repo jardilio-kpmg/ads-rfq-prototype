@@ -3,8 +3,14 @@
   md-content {
     background: transparent;
   }
-  md-list-item:hover {
-      cursor: pointer;
+  md-list-item {
+    padding: 0;
+    &:not(:first-child) md-card {
+      margin-top: 0;
+    }
+    &:hover {
+        cursor: pointer;
+    }
   }
   .search-results-feedback {
       height: 35px;
@@ -14,7 +20,7 @@
     padding-left: 10px;
     padding-right: 10px;
     text-overflow: ellipsis;
-    max-height: 40px;
+    max-height: 39px;
     overflow: hidden;
   }
     .header-toolbar {
