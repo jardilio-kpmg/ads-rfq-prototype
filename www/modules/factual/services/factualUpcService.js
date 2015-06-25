@@ -1,5 +1,5 @@
 var main = require('../main'),
-    angular = require('angular');;
+    angular = require('angular');
 
 /**
  * @class factual.services.factualUpcService

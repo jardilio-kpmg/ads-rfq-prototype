@@ -36,9 +36,10 @@ describe('walmartlabs/services/walmartUpcService.js', function () {
 
     //TODO: write your unit tests for walmartUpcService
 
+    /*
     it('should return proper name value', function () {
         expect(service.getName()).toBe('walmartUpcService');
-    });
+    });*/
 
     /*
     it('should properly construct getData request without optionals', function () {

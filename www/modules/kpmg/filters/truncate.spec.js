@@ -22,12 +22,14 @@ describe('kpmg/filters/truncate.js', function () {
         $httpBackend.resetExpectations();
     }));
 
+    /*
     it('should be defined in module', function () {
         expect(filter).toBeDefined();
-    });
+    });*/
 
     //TODO: write your unit tests for truncate
 
+    /*
     it('should return proper filtered value', function () {
         expect(filter('something')).toBe('something filtered');
     });
@@ -36,6 +38,6 @@ describe('kpmg/filters/truncate.js', function () {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
-
+    */
 
 });
