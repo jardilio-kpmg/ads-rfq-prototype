@@ -11,24 +11,26 @@
     background: transparent;
   }
   md-list-item {
-    margin: 10px;
-    background: lighten(lightgrey, 10%);
-    border: 1px solid darken(lightgrey, 10%);
-    border-radius: 6px;
-    padding: 10px;
-    a {
-      color: inherit !important;
-      text-decoration: none !important;
-      font-weight: inherit !important;
-      display: block;
-      height: 100%;
-      background: transparent;
+    padding: 0;
+    &:not(:first-child) md-card {
+      margin-top: 0;
     }
-    .status md-icon {
-      font-size: 36px;
-      height: 36px;
-      width: 36px;
-      margin: 0 20px 0 0;
+    &:hover {
+        cursor: pointer;
     }
   }
+  .search-results-feedback {
+      height: 35px;
+      margin-top: 10px;
+  }
+  .description {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-overflow: ellipsis;
+    max-height: 39px;
+    overflow: hidden;
+  }
+    .manual-search-actions {
+        width: 100%;
+    }
 }
