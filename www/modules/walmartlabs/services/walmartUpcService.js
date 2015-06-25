@@ -17,9 +17,8 @@ var main = require('../main'),
  *          });
  * }
  */
-main.service('walmartUpcService', function (
-    /**kpmgAngular.services.kHttp*/ kHttp,
-    /**walmartlabs.walmartlabsDefaults*/ walmartlabsDefaults) {
+main.service('walmartUpcService', function (/**kpmgAngular.services.kHttp*/ kHttp,
+                                            /**walmartlabs.walmartlabsDefaults*/ walmartlabsDefaults) {
 
     'use strict';
 
@@ -51,6 +50,39 @@ main.service('walmartUpcService', function (
      */
     self.getData = function (upcCode, options) {
 
+        // results like:
+        /*
+         foo({
+         "items": [{
+         "itemId": 0,
+         "parentItemId": 0,
+         "name": "",
+         "salePrice": 0,
+         "upc": "",
+         "categoryPath": "",
+         "longDescription": "",
+         "brandName": "",
+         "thumbnailImage": "",
+         "mediumImage": "",
+         "largeImage": "",
+         "productTrackingUrl": "",
+         "standardShipRate": 0,
+         "marketplace": true,
+         "sellerInfo": "",
+         "productUrl": "",
+         "customerRating": "",
+         "customerRatingImage": "",
+         "categoryNode": "",
+         "bundle": false,
+         "preOrder": false,
+         "stock": "",
+         "addToCartUrl": "",
+         "affiliateAddToCartUrl": "",
+         "freeShippingOver50Dollars": false,
+         "availableOnline": false
+         }]
+         })*/
+
         return kHttp.jsonp(':server/v1/items', {
             cache: true,
             params: angular.extend({}, walmartlabsDefaults, options, {
@@ -65,10 +97,11 @@ main.service('walmartUpcService', function (
      * Get Products
      * @param result
      */
-    self.getProducts = function(result){
+    self.getProducts = function (result) {
+
         var products = [];
         angular.forEach(result.items, function (value) {
-            var product = $.extend({}, product);
+            var product = {};
             product.name = value.name;
             product.brand = value.brandName;
             product.category = value.categoryPath;

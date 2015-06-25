@@ -59,7 +59,7 @@ main.service('factualUpcService', function (
          "data": [{
          "avg_price": 4.18,
          "brand": "Gatorade",
-         "category": "Energy Drinks",
+         "category": "",
          "ean13": "0052000131512",
          "factual_id": "3e70863a-8887-437c-b329-4a54a40bd07f",
          "image_urls": ["http://c4.soap.com/images/products/p/dcs/dcs-929b_1.jpg", "http://ecx.images-amazon.com/images/I/41fzMs4eLUL._SL500_AA300_.jpg", "http://media.itemmaster.com:80///0/0/0/432/1c256e8a-e65f-4639-8c21-19a1ff84131f.jpg?originalFormat=tif&tkn=914dad50-013c-11e4-acaa-005056ab571e&resize=600x600", "http://media.itemmaster.com:80///0/0/0/432/9ddfa2a3-545a-4606-bf73-cf2bd88afdd9.jpg?originalFormat=png"],
@@ -87,7 +87,7 @@ main.service('factualUpcService', function (
     self.getProducts = function(result) {
         var products = [];
         angular.forEach(result.response.data, function (value) {
-            var product = $.extend({}, product);
+            var product = {};
             product.name = value.product_name; // jshint ignore:line
             product.brand = value.brand;
             product.category = value.category;
