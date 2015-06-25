@@ -52,7 +52,7 @@ var app = angular.module('app', [
     'ngMaterial'
 ]);
 
-app.config(function ($mdThemingProvider, $routeProvider) {
+app.config(function ($mdThemingProvider, $routeProvider, $httpProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue', {
             default: '800'
@@ -65,13 +65,13 @@ app.config(function ($mdThemingProvider, $routeProvider) {
     $routeProvider.when('/', {
         redirectTo: '/recalls'
     });
+
+    $httpProvider.interceptors.push('kHttpOptimizer');
 });
 
 app.run(function ($rootElement) {
     $rootElement.addClass('app ready');
 });
-
-//TODO: register angular module dependencies, run and config functions...
 
 module.exports = app;
 
