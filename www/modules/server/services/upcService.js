@@ -239,6 +239,7 @@ main.service('upcService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
             getData: function (upcCode, optionals) {
 
                 return kHttp.jsonp('//api.walmartlabs.com/v1/items', {
+                    cache: true,
                     params: angular.extend({
                         apiKey: apiKey,
                         upc: upcCode,
@@ -252,6 +253,7 @@ main.service('upcService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
                         product.name = value.name;
                         product.brand = value.brandName;
                         product.category = value.categoryPath;
+                        product.imageUrl = value.largeImage;
                         products.push(product);
                     });
                     result.products = products;
@@ -385,9 +387,9 @@ main.service('upcService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
 
         //return searchUpcService.getData(upcCode);
         //return searchSemanticsService.getData(upcCode);
-        //return walmartService.getData(upcCode);
+        return walmartService.getData(upcCode);
         //return upcDatabaseService.getData(upcCode);
-        return factualService.getData(upcCode);
+        //return factualService.getData(upcCode);
     };
 
     return self;

@@ -54,7 +54,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @param recallId {string} A string to match against a recall record's key (recall_number).
      * @returns {{success: Function, error: Function}}
      */
-    self.getRecallById = function(eventId) {
+    self.getRecallById = function (eventId) {
         return kHttp.get(':server/food/enforcement.json?search=event_id::event_id', {
             params: angular.extend({}, openFdaDefaults, {
                 event_id: eventId,// jshint ignore:line
@@ -62,6 +62,60 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
                 status: null
             })
         });
+    };
+
+    /**
+     * Extracts the upc from the recall
+     * @param recall
+     * @returns {*}
+     */
+    self.extractUpc = function (recall) {
+        var code = recall.code_info.replace(/\s+|\s+/gm, '');
+        var match = /(?:\d{12}|\d{11}|\d{10})/.exec(code);
+        var upc = "";
+        if (match && match.length) {
+            upc = match[0];
+        }
+
+        /*
+        var code = recall.code_info.replace(/\s\s+/g, ' '),
+            upc = "",
+            match;
+
+        // match upc
+        match = /upc/i.exec(recall.code_info);
+        if (match && match.length) {
+            code = code.substring(match.index + 3);
+
+            // match number
+            match = /[0-9]/.exec(code);
+            if (match && match.length) {
+                code = code.substring(match.index);
+
+                // match absent number
+                match = /[^0-9]/.exec(code);
+                if (match && match.length) {
+                    upc += code.substring(0, match.index);
+
+                    // remove any -
+                    while (match && match.length && (match[0] === "-" || match[0] === " ")) {
+                        code = code.substring(match.index + 1);
+                        match = /[^0-9]/.exec(code);
+                        if (match && match.length) {
+                            upc += code.substring(0, match.index);
+                        }
+                        else {
+                            upc += code.substring(0);
+                        }
+                    }
+                }
+                else {
+                    upc += code.substring(0);
+                }
+            }
+        }*/
+
+        return upc;
     };
 
     return self;

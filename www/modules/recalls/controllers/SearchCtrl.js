@@ -22,7 +22,7 @@ var main = require('../main');
 main.controller('SearchCtrl', function (
     /**ng.$rootScope.Scope*/ $scope,
     $location,
-    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
+    /**openfda.services.foodEnforcementService*/ foodEnforcementService, upcService) {
 
     var self = this;
 
@@ -80,6 +80,8 @@ main.controller('SearchCtrl', function (
             .error(function() {
                 self.recalls = [];
                 //TODO: can we get product info from barcode and do a keyword search?
+
+
             });
     };
 

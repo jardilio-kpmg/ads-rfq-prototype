@@ -22,7 +22,7 @@ var main = require('../main');
 main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
                                            /**ng.$location,*/ $location,
-                                           /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
+                                           /**openfda.services.foodEnforcementService*/ foodEnforcementService, upcService) {
 
     'use strict';
 
@@ -46,12 +46,22 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
 
     self.recall = null;
 
+    self.product = null;
+
     self.getRecallData = function (recallId) {
 
         foodEnforcementService.getRecallById(recallId)
             .success(function (result) {
                 if (result.results && result.results.length){
                     self.recall = result.results[0];
+
+                    var upc = foodEnforcementService.extractUpc(self.recall);
+
+                    upcService.getData(upc).success(function(result){
+                        if (result && result.products && result.products.length) {
+                            self.product = result.products[0];
+                        }
+                    });
                 }
             });
         //TODO: error state for bad input?
