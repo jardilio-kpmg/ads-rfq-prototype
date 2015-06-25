@@ -6,7 +6,7 @@ $classification-3-color: #FEF200;
 $screen-background-color: lightgrey;
 
 
-html, body, md-content {
+html, body, md-content, ng-view {
     background-color: $screen-background-color;
 }
 

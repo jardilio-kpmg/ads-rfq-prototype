@@ -6,27 +6,30 @@
         </div>
     </md-toolbar>
     <md-content>
-        <div layout="row" layout-align="center" flex>
-            <h2 i18n="recalls.classDistribution.chartTitle"></h2>
-        </div>
-
-        <div flex layout="column" layout-align="center center"
-            ng-if="classificationDistribution.classificationData.length">
-            <div id="class-distribution-chart">
-                <svg></svg>
-            </div>
-        </div>
+        <md-card ng-if="classificationDistribution.classificationData.length">
+            <md-card-content layout="row" layout-align="center center">
+                <div id="class-distribution-chart">
+                    <svg></svg>
+                </div>
+            </md-card-content>
+        </md-card>
 
         <md-card flex>
-            <md-card-content>
-                <h3 i18n="recalls.classDistribution.class1Title"></h3>
-                <p i18n="recalls.classDistribution.class1Description"></p>
+            <md-card-content class="classification-descriptions">
+                <md-input-container>
+                    <label i18n="recalls.classDistribution.class1Title"></label>
+                    <textarea readonly ng-model="classificationDistribution.class1Description"/>
+                </md-input-container>
 
-                <h3 i18n="recalls.classDistribution.class2Title"></h3>
-                <p i18n="recalls.classDistribution.class2Description"></p>
+                <md-input-container>
+                    <label i18n="recalls.classDistribution.class2Title"></label>
+                    <textarea readonly ng-model="classificationDistribution.class2Description"/>
+                </md-input-container>
 
-                <h3 i18n="recalls.classDistribution.class3Title"></h3>
-                <p i18n="recalls.classDistribution.class3Description"></p>
+                <md-input-container>
+                    <label i18n="recalls.classDistribution.class3Title"></label>
+                    <textarea readonly ng-model="classificationDistribution.class3Description"/>
+                </md-input-container>
             </md-card-content>
         </md-card>
     </md-content>

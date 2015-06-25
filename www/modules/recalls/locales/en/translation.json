@@ -18,8 +18,7 @@
             "title": "Relevant Recalls"
         },
         "classDistribution": {
-            "title": "Severity",
-            "chartTitle": "Classification Distribution",
+            "title": "Classification Distribution",
             "class1Title": "Class I",
             "class1Description": "Dangerous or defective products that predictably could cause serious health problems or death. Examples include: food found to contain botulinum toxin, food with undeclared allergens, a label mix-up on a lifesaving drug, or a defective artificial heart valve.",
             "class2Title": "Class II",

@@ -25,7 +25,8 @@ var main = require('../main'),
 main.controller('ClassificationDistributionCtrl', function (
     /**ng.$rootScope.Scope*/ $scope,
     $location,
-    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
+    /**openfda.services.foodEnforcementService*/ foodEnforcementService,
+    /**kpmg.filters.kLocalize*/ kLocalizeFilter) {
 
     var self = this;
 
@@ -52,6 +53,30 @@ main.controller('ClassificationDistributionCtrl', function (
      * @type {array}
      */
     self.classificationData = null;
+
+    /**
+     * The description for the Class I category.
+     * @name recalls.controllers.ClassificationDistributionCtrl#class1Description
+     * @propertyOf recalls.controllers.ClassificationDistributionCtrl
+     * @type {string}
+     */
+    self.class1Description = kLocalizeFilter('recalls.classDistribution.class1Description');
+
+    /**
+     * The description for the Class II category.
+     * @name recalls.controllers.ClassificationDistributionCtrl#class2Description
+     * @propertyOf recalls.controllers.ClassificationDistributionCtrl
+     * @type {string}
+     */
+    self.class2Description = kLocalizeFilter('recalls.classDistribution.class2Description');
+
+    /**
+     * The description for the Class III category.
+     * @name recalls.controllers.ClassificationDistributionCtrl#class3Description
+     * @propertyOf recalls.controllers.ClassificationDistributionCtrl
+     * @type {string}
+     */
+    self.class3Description = kLocalizeFilter('recalls.classDistribution.class3Description');
 
     /**
      * Requests recall results based on the code or search terms provided.
@@ -139,8 +164,8 @@ main.controller('ClassificationDistributionCtrl', function (
                     .call(chart);
 
                 //TODO: This will move the legend below the chart but we need to figure out re-positioning after clicking a legend item.
-                /*d3.select(".nv-legendWrap")
-                    .attr("transform","translate(0,240)");*/
+                d3.select(".nv-legendWrap")
+                    .attr("transform","translate(0,0)");
 
                 return chart;
             });
