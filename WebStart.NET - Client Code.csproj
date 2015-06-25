@@ -48,13 +48,6 @@
     <None Include="www\modules\factual\main.js" />
     <None Include="www\modules\factual\main.scss" />
     <None Include="www\modules\factual\locales\en\translation.json" />
-    <None Include="www\modules\walmartlabs\services\walmartUpcService.spec.js" />
-    <None Include="www\modules\walmartlabs\services\walmartUpcService.mock.js" />
-    <None Include="www\modules\walmartlabs\services\walmartUpcService.js" />
-    <None Include="www\modules\walmartlabs\main.spec.js" />
-    <None Include="www\modules\walmartlabs\main.js" />
-    <None Include="www\modules\walmartlabs\main.scss" />
-    <None Include="www\modules\walmartlabs\locales\en\translation.json" />
     <None Include="www\modules\kpmg\filters\truncate.spec.js" />
     <None Include="www\modules\kpmg\filters\truncate.js" />
     <None Include="www\modules\ads\directives\NavBackButton.spec.js" />
