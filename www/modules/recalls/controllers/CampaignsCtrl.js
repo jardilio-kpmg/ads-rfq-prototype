@@ -23,7 +23,8 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
                                            /**ng.$location,*/ $location,
                                            /**openfda.services.foodEnforcementService*/ foodEnforcementService,
-                                           /**walmartlabs.services.walmartUpcService*/ walmartUpcService) {
+                                           /**walmartlabs.services.walmartUpcService*/ walmartUpcService,
+                                            /**factual.services.factualUpcService*/ factualUpcService) {
 
     'use strict';
 
@@ -58,10 +59,12 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
 
                     var upcCode = foodEnforcementService.extractUpc(self.recall);
 
-                    walmartUpcService.getData(upcCode).success(function(result){
-                        var products = walmartUpcService.getProducts(result);
+                    var upcService = walmartUpcService;
+                    //var upcService = factualUpcService;
+                    upcService.getData(upcCode).success(function(result){
+                        var products = upcService.getProducts(result);
                         if (products && products.length) {
-                            self.product = result.products[0];
+                            self.product = products[0];
                         }
                     });
                 }

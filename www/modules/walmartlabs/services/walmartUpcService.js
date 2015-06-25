@@ -75,7 +75,7 @@ main.service('walmartUpcService', function (
             product.imageUrl = value.largeImage;
             products.push(product);
         });
-        result.products = products;
+        return products;
     };
 
     return self;
