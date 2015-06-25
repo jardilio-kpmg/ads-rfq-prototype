@@ -74,7 +74,7 @@ main.service('factualUpcService', function (
         return kHttp.get(':server/t/products-cpg', {
             cache: true,
             params: angular.extend({}, factualDefaults, options, {
-                filters: {upc: upcCode ? upcCode : "$blank"}
+                filters: {upc: upcCode ? upcCode : '$blank'}
             })
         });
     };
@@ -88,10 +88,10 @@ main.service('factualUpcService', function (
         var products = [];
         angular.forEach(result.response.data, function (value) {
             var product = $.extend({}, product);
-            product.name = value.product_name;
+            product.name = value.product_name; // jshint ignore:line
             product.brand = value.brand;
             product.category = value.category;
-            product.imageUrl = value.image_urls && value.image_urls.length ? value.image_urls[0] : "";
+            product.imageUrl = value.image_urls && value.image_urls.length ? value.image_urls[0] : ''; // jshint ignore:line
             products.push(product);
         });
         return products;
