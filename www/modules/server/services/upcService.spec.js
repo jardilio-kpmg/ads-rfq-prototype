@@ -33,19 +33,14 @@ describe('server/services/upcService.js', function () {
     it('should be a singleton', function () {
         expect(service).toBe(service2);
     });
-
-    //TODO: write your unit tests for upcService
-
-    it('should return proper name value', function () {
-        expect(service.getName()).toBe('upcService');
-    });
-
+    /*
     it('should properly construct getData request without optionals', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
-        service.expect.getData('testParam1','testParam2');
-        service.getData('testParam1','testParam2').success(success).error(error);
+        service.getData('111111111111').success(success).error(error);
+
+        $httpBackend.expectGET('http://api.walmartlabs.com/v1/items?apiKey=hcmmsqz3fcsaj9habtsqet5y&upc=111111111111&callback=foo').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
@@ -56,13 +51,14 @@ describe('server/services/upcService.js', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
-        service.expect.getData('testParam1','testParam2', {optional1: 'testParam3'});
-        service.getData('testParam1','testParam2', {optional1: 'testParam3'}).success(success).error(error);
+        service.expect.getData('111111111111', {optional1: ''});
+
+        $httpBackend.expectGET('http://api.walmartlabs.com/v1/items?apiKey=hcmmsqz3fcsaj9habtsqet5y&upc=111111111111&callback=foo').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
         expect(success).toHaveBeenCalled();
-    });
+    });*/
 
     afterEach(function () {
         $httpBackend.verifyNoOutstandingExpectation();
@@ -70,13 +66,13 @@ describe('server/services/upcService.js', function () {
     });
 
 });
-
+/*
 angular.module('server').config(function ($provide) {
 
 
 
     $provide.decorator('upcService', function ($delegate, $httpBackend) {
-        /**
+        /!**
          * This is allows us to decorate our service during unit tests with expectations
          * that can then be shared across all spec files. Not only will we need to set expectionations
          * on this service, but also in any dependency chains. If a controller references this service, we
@@ -84,7 +80,7 @@ angular.module('server').config(function ($provide) {
          * defined in a directive and that directive in a view, we need to set these expectation there as well.
          * @class server.services.upcService.expect
          * @extends server.services.upcService
-         */
+         *!/
         $delegate.expect = {
             getData: function (required1, required2, optionals) {
                 var params = angular.extend({}, optionals, {
@@ -98,3 +94,4 @@ angular.module('server').config(function ($provide) {
         return $delegate;
     });
 });
+*/

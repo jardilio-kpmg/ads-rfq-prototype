@@ -21,8 +21,8 @@ var main = require('../main');
  */
 main.controller('SearchCtrl', function (
     /**ng.$rootScope.Scope*/ $scope,
-    $location,
-    /**openfda.services.foodEnforcementService*/ foodEnforcementService, upcService) {
+    /**ng.$location*/ $location,
+    /**openfda.services.foodEnforcementService*/ foodEnforcementService) {
 
     var self = this;
 

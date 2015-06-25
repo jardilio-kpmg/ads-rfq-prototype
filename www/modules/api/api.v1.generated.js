@@ -33,6 +33,139 @@
       module = angular.module('api.v1', ['ngResource']),
       config = require('config');
   /**
+    * Management of user authorizations
+   * @class api.v1.Login
+   * @extends api.v1.ILogin
+   * @property {api.v1.Promise} $promise - The promise associated with the async operation.
+   */
+   /* istanbul ignore next */
+  module.factory('Login', function ($resource) {
+      var servicesBaseUrl = config.server;
+      return $resource(
+        servicesBaseUrl + '/api/1/login',
+        {},
+        {
+            /**
+              * Authenticate the user via username & password
+             * @function
+             * @methodOf api.v1.Login
+             * @name api.v1.Login#$create
+             * @param {object} [params] - Input parameters
+             * @param {api.v1.ISuccessCallback} [success] - Success callback function
+             * @param {api.v1.IErrorCallback} [error] - Error callback function
+             * @returns {api.v1.Login}
+             * @example
+             * function Controller(Login) {
+         *  var result = new Login();
+         *  result.$create(params);
+         * }
+             */
+          
+          'create': {
+            method: 'POST',
+              isArray: false,
+              params: {
+            }
+          },
+          
+            /**
+              * Clears current session and logs user out of the application.
+             * @function
+             * @methodOf api.v1.Login
+             * @name api.v1.Login#$remove
+             * @param {object} [params] - Input parameters
+             * @param {api.v1.ISuccessCallback} [success] - Success callback function
+             * @param {api.v1.IErrorCallback} [error] - Error callback function
+             * @returns {api.v1.Login}
+             * @example
+             * function Controller(Login) {
+         *  var result = new Login();
+         *  result.$remove(params);
+         * }
+             */
+          
+          'remove': {
+            method: 'DELETE',
+              isArray: false,
+              params: {
+            }
+          },
+          
+            /**
+              * Returns an updated token with an extended expiration.
+ * This will be invoked by the client when the user has been actively using the client but not in ways that have resulted in a other service calls.  It allows the client to prevent the user from being timed out unnecessarily.
+             * @function
+             * @methodOf api.v1.Login
+             * @name api.v1.Login#$update
+             * @param {object} [params] - Input parameters
+             * @param {api.v1.ISuccessCallback} [success] - Success callback function
+             * @param {api.v1.IErrorCallback} [error] - Error callback function
+             * @returns {api.v1.Login}
+             * @example
+             * function Controller(Login) {
+         *  var result = new Login();
+         *  result.$update(params);
+         * }
+             */
+          
+          'update': {
+            method: 'PUT',
+              isArray: false,
+              params: {
+            }
+          },
+          
+    },
+    {
+      stripTrailingSlashes: true
+    }
+  );
+});
+
+  /**
+    * When an error is encountered by a client, it will send diagnositc information to this service which will log the information for later analysis.
+   * @class api.v1.Error
+   * @extends api.v1.IError
+   * @property {api.v1.Promise} $promise - The promise associated with the async operation.
+   */
+   /* istanbul ignore next */
+  module.factory('Error', function ($resource) {
+      var servicesBaseUrl = config.server;
+      return $resource(
+        servicesBaseUrl + '/api/1/errors',
+        {},
+        {
+            /**
+              * Add a new error to the collection
+             * @function
+             * @methodOf api.v1.Error
+             * @name api.v1.Error#$create
+             * @param {object} [params] - Input parameters
+             * @param {api.v1.ISuccessCallback} [success] - Success callback function
+             * @param {api.v1.IErrorCallback} [error] - Error callback function
+             * @returns {api.v1.Error}
+             * @example
+             * function Controller(Error) {
+         *  var result = new Error();
+         *  result.$create(params);
+         * }
+             */
+          
+          'create': {
+            method: 'POST',
+              isArray: false,
+              params: {
+            }
+          },
+          
+    },
+    {
+      stripTrailingSlashes: true
+    }
+  );
+});
+
+  /**
     * Management of user resources
    * @class api.v1.User
    * @extends api.v1.IUser
@@ -179,139 +312,6 @@
             userId: '@userId',
           }
         },
-    },
-    {
-      stripTrailingSlashes: true
-    }
-  );
-});
-
-  /**
-    * When an error is encountered by a client, it will send diagnositc information to this service which will log the information for later analysis.
-   * @class api.v1.Error
-   * @extends api.v1.IError
-   * @property {api.v1.Promise} $promise - The promise associated with the async operation.
-   */
-   /* istanbul ignore next */
-  module.factory('Error', function ($resource) {
-      var servicesBaseUrl = config.server;
-      return $resource(
-        servicesBaseUrl + '/api/1/errors',
-        {},
-        {
-            /**
-              * Add a new error to the collection
-             * @function
-             * @methodOf api.v1.Error
-             * @name api.v1.Error#$create
-             * @param {object} [params] - Input parameters
-             * @param {api.v1.ISuccessCallback} [success] - Success callback function
-             * @param {api.v1.IErrorCallback} [error] - Error callback function
-             * @returns {api.v1.Error}
-             * @example
-             * function Controller(Error) {
-         *  var result = new Error();
-         *  result.$create(params);
-         * }
-             */
-          
-          'create': {
-            method: 'POST',
-              isArray: false,
-              params: {
-            }
-          },
-          
-    },
-    {
-      stripTrailingSlashes: true
-    }
-  );
-});
-
-  /**
-    * Management of user authorizations
-   * @class api.v1.Login
-   * @extends api.v1.ILogin
-   * @property {api.v1.Promise} $promise - The promise associated with the async operation.
-   */
-   /* istanbul ignore next */
-  module.factory('Login', function ($resource) {
-      var servicesBaseUrl = config.server;
-      return $resource(
-        servicesBaseUrl + '/api/1/login',
-        {},
-        {
-            /**
-              * Authenticate the user via username & password
-             * @function
-             * @methodOf api.v1.Login
-             * @name api.v1.Login#$create
-             * @param {object} [params] - Input parameters
-             * @param {api.v1.ISuccessCallback} [success] - Success callback function
-             * @param {api.v1.IErrorCallback} [error] - Error callback function
-             * @returns {api.v1.Login}
-             * @example
-             * function Controller(Login) {
-         *  var result = new Login();
-         *  result.$create(params);
-         * }
-             */
-          
-          'create': {
-            method: 'POST',
-              isArray: false,
-              params: {
-            }
-          },
-          
-            /**
-              * Clears current session and logs user out of the application.
-             * @function
-             * @methodOf api.v1.Login
-             * @name api.v1.Login#$remove
-             * @param {object} [params] - Input parameters
-             * @param {api.v1.ISuccessCallback} [success] - Success callback function
-             * @param {api.v1.IErrorCallback} [error] - Error callback function
-             * @returns {api.v1.Login}
-             * @example
-             * function Controller(Login) {
-         *  var result = new Login();
-         *  result.$remove(params);
-         * }
-             */
-          
-          'remove': {
-            method: 'DELETE',
-              isArray: false,
-              params: {
-            }
-          },
-          
-            /**
-              * Returns an updated token with an extended expiration.
- * This will be invoked by the client when the user has been actively using the client but not in ways that have resulted in a other service calls.  It allows the client to prevent the user from being timed out unnecessarily.
-             * @function
-             * @methodOf api.v1.Login
-             * @name api.v1.Login#$update
-             * @param {object} [params] - Input parameters
-             * @param {api.v1.ISuccessCallback} [success] - Success callback function
-             * @param {api.v1.IErrorCallback} [error] - Error callback function
-             * @returns {api.v1.Login}
-             * @example
-             * function Controller(Login) {
-         *  var result = new Login();
-         *  result.$update(params);
-         * }
-             */
-          
-          'update': {
-            method: 'PUT',
-              isArray: false,
-              params: {
-            }
-          },
-          
     },
     {
       stripTrailingSlashes: true

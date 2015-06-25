@@ -1,4 +1,5 @@
-var main = require('../main');
+var main = require('../main'),
+    angular = require('angular');
 
 /**
  * @class server.services.upcService
@@ -26,7 +27,7 @@ main.service('upcService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
      * @private
      * @type {string}
      */
-    var name = 'upc';
+    var name = 'upcService';
 
     /**
      * Product
@@ -332,6 +333,7 @@ main.service('upcService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
                  }*/
 
                 return kHttp.get('//api.v3.factual.com/t/products-cpg', {
+                    cache: true,
                     params: angular.extend({
                         KEY: key,
                         filters: {upc: upcCode},
@@ -387,9 +389,9 @@ main.service('upcService', function (/**kpmgAngular.services.kHttp*/ kHttp) {
 
         //return searchUpcService.getData(upcCode);
         //return searchSemanticsService.getData(upcCode);
-        return walmartService.getData(upcCode);
+        //return walmartService.getData(upcCode);
         //return upcDatabaseService.getData(upcCode);
-        //return factualService.getData(upcCode);
+        return factualService.getData(upcCode);
     };
 
     return self;
