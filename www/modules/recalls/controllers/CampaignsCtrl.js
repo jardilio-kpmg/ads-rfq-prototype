@@ -23,8 +23,8 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
                                            /**ng.$location,*/ $location,
                                            /**openfda.services.foodEnforcementService*/ foodEnforcementService,
-                                           /**walmartlabs.services.walmartUpcService*/ walmartUpcService,
-                                            /**factual.services.factualUpcService*/ factualUpcService) {
+                                           /**walmartlabs.services.walmartUpcService*/ walmartUpcService) {
+                                            ///**factual.services.factualUpcService*/ factualUpcService)
 
     'use strict';
 
