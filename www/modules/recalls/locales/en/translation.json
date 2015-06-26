@@ -3,7 +3,7 @@
         "index": {
             "title": "Let's Get Started!",
             "scanButton": "Scan Any Barcode",
-            "enterKeywordsButton": "Enter Barcode/UPC"
+            "enterKeywordsButton": "Enter Keyword/UPC"
         },
         "search": {
             "noResults": "No results were found...",
@@ -38,14 +38,15 @@
         },
         "campaigns": {
             "title" : "Recall Details",
-            "reportDateTitle": "Report Date:",
+            "reportDateTitle": "Report Date",
             "reasonRecallTitle": "Reason for Recall",
             "recallingFirmTitle": "Recalling Firm",
             "productDescriptionTitle": "Product Description",
             "distributionTitle": "Distribution",
             "statusTitle": "Status",
             "codeInfoTitle": "Code Info",
-            "recallNumberTitle": "Recall Number"
+            "recallNumberTitle": "Recall Number",
+            "initiationDateTitle": "Initiation Date"
         }
     }
 }
