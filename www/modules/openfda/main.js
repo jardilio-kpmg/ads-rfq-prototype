@@ -34,7 +34,7 @@ require('./main.scss');
  * @module openfda
  * @type {angular.Module}
  */
-var openfda = angular.module('openfda', ['ng','ngRoute','kpmgAngular','ngMaterial']);
+var openfda = angular.module('openfda', ['ng','kpmgAngular']);
 
 openfda.constant('openFdaDefaults', {
     server: '//api.fda.gov',

@@ -40,7 +40,7 @@ describe('openfda/services/FoodEnforcementService.js', function () {
 
         service.getRecallsByBarcode('111111111111').success(success).error(error);
 
-        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=status:ongoing+AND+product_type:food+AND+code_info:111111111111&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=30&skip=0').respond({});
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=status:ongoing+AND+product_type:food+AND+code_info:111111111111&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=100&skip=0').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
@@ -72,7 +72,7 @@ describe('openfda/services/FoodEnforcementService.js', function () {
 
         service.getRecallsByKeyword('111 222 333').success(success).error(error);
 
-        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=status:ongoing+AND+product_type:food+AND+product_description:111+222+333&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=30&skip=0').respond({});
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=status:ongoing+AND+product_type:food+AND+product_description:111+222+333&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=100&skip=0').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
