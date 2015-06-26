@@ -13,7 +13,7 @@
     </md-toolbar>
 
     <md-tabs class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS" flex
-             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false">
+             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false">
         <md-tab>
             <md-tab-label>
                 <label i18n="recalls.search.recallsTab"></label>
@@ -43,7 +43,31 @@
             </md-tab-label>
 
             <md-tab-body>
-                <classification-distribution></classification-distribution>
+                <md-content>
+                    <md-card class="chart">
+                        <md-card-content layout="row" layout-align="center center">
+                            <classification-distribution counts="search.classifications"></classification-distribution>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class1Title"></h3>
+                            <p i18n="openfda.classDistribution.class1Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class2Title"></h3>
+                            <p i18n="openfda.classDistribution.class2Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class3Title"></h3>
+                            <p i18n="openfda.classDistribution.class3Description"></p>
+                        </md-card-content>
+                    </md-card>
+                </md-content>
             </md-tab-body>
         </md-tab>
 

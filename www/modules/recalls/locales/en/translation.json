@@ -1,7 +1,7 @@
 {
     "recalls": {
         "index": {
-            "title": "Is My Food Safe!",
+            "title": "Is My Food Safe?",
             "subTitle": "Check Food Recalls Now...",
             "scanButton": "Scan Any Barcode",
             "enterKeywordsButton": "Enter Keyword/UPC"
@@ -18,8 +18,8 @@
             "recallHistoryShortButton": "Recall Hist",
             "title": "Relevant Recalls",
             "recallsTab": "Results",
-            "classificationsTab": "Distribution",
-            "recallHistTab": "History"
+            "classificationsTab": "Severity",
+            "recallHistTab": "Trends"
         },
         "classDistribution": {
             "title": "Classification Distribution",
