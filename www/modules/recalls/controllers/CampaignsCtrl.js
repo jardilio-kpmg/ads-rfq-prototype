@@ -49,7 +49,16 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
 
     self.product = null;
 
+    self.states = {
+        LOADING: 0,
+        RESULT: 1
+    };
+
+    self.state = self.states.RESULT;
+
     self.getRecallData = function (recallId) {
+
+        self.state = self.states.LOADING;
 
         foodEnforcementService.getRecallById(recallId)
             .success(function (result) {
@@ -57,6 +66,8 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                     self.recall = result.results[0];
 
                     var upcCode = foodEnforcementService.extractUpc(self.recall);
+
+                    self.state = self.states.RESULT;
 
                     factualUpcService.getData(upcCode).success(function (result) {
                         var products = factualUpcService.getProducts(result);

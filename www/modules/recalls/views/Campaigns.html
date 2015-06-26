@@ -1,5 +1,5 @@
 <div class="recalls campaigns" layout="column" layout-fill>
-    <md-toolbar md-scroll-shrink="true">
+    <md-toolbar>
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
             <h2 flex i18n="recalls.campaigns.title"></h2>
@@ -8,7 +8,10 @@
             </md-button>
         </div>
     </md-toolbar>
-    <md-content flex>
+    <md-content flex layout="column" layout-align="center center" ng-show="campaigns.state === campaigns.states.LOADING">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </md-content>
+    <md-content flex class="result" ng-show="campaigns.state === campaigns.states.RESULT">
         <md-card ng-if="campaigns.product.imageUrl">
             <img ng-src="{{campaigns.product.imageUrl}}" class="md-card-image" alt="">
         </md-card>
