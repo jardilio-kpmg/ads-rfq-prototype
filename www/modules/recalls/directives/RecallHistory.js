@@ -35,7 +35,6 @@ main.directive('recallHistory', function () {
         transclude: false,
         //the link function post compile
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
-            var recallHistoryCtrl = controllers[0];
 
             /**
              * Builds a stacked bar chart based on the loaded data.

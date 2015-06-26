@@ -146,7 +146,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
 
     self.state = self.states.SEARCH;
 
-    function blur() {
+    function blur() {// jshint ignore:line
         //fix issue with soft keyboard sticking
         angular.element('input').blur();
     }
