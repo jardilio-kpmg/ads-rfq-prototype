@@ -21,7 +21,7 @@
 
             <md-tab-body>
                 <md-list class="recall-list">
-                    <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recalls/campaigns/{{item.event_id}}">
+                    <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recalls/campaigns/{{item['@id']}}">
                         <md-card flex>
                             <md-card-content layout="row" layout-align="start center" md-ink-ripple>
                                 <classification-icon class="item-classificiation" classification="{{item.classification}}"></classification-icon>
@@ -43,7 +43,31 @@
             </md-tab-label>
 
             <md-tab-body>
-                <classification-distribution></classification-distribution>
+                <md-content>
+                    <md-card class="chart">
+                        <md-card-content layout="row" layout-align="center center">
+                            <classification-distribution counts="search.classifications"></classification-distribution>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class1Title"></h3>
+                            <p i18n="openfda.classDistribution.class1Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class2Title"></h3>
+                            <p i18n="openfda.classDistribution.class2Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class3Title"></h3>
+                            <p i18n="openfda.classDistribution.class3Description"></p>
+                        </md-card-content>
+                    </md-card>
+                </md-content>
             </md-tab-body>
         </md-tab>
 
