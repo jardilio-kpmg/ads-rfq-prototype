@@ -22,6 +22,7 @@ var main = require('../main');
 main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
                                            /**ng.$location,*/ $location,
+                                           /**ng.$filter*/ $filter,
                                            /**openfda.services.foodEnforcementService*/ foodEnforcementService,
                                            /**factual.services.factualUpcService*/ factualUpcService) {
 
@@ -55,6 +56,7 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
             .success(function (result) {
                 if (result.results && result.results.length) {
                     self.recall = result.results[0];
+                    //self.recall.recall_initiation_date = $filter('fdaDate')(self.recall.recall_initiation_date);
 
                     var upcCode = foodEnforcementService.extractUpc(self.recall);
 
