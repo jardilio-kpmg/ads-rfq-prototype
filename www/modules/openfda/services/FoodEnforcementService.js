@@ -54,10 +54,11 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @param recallId {string} A string to match against a recall record's key (recall_number).
      * @returns {{success: Function, error: Function}}
      */
-    self.getRecallById = function (eventId) {
-        return kHttp.get(':server/food/enforcement.json?search=event_id::event_id', {
+    self.getRecallById = function (id) {
+        // @id needs to be _id
+        return kHttp.get(':server/food/enforcement.json?search=_id::id', {
             params: angular.extend({}, openFdaDefaults, {
-                event_id: eventId,// jshint ignore:line
+                id: id,// jshint ignore:line
                 limit: 1,
                 status: null
             })

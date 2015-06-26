@@ -62,15 +62,16 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
          * @type {{LOADING: number, RESULT: number}}
          */
         self.states = {
-            LOADING: 0,
-            RESULT: 1
+            NORMAL: 0,
+            LOADING: 1,
+            RESULT: 2
         };
 
         /**
          * State
          * @type {number}
          */
-        self.state = self.states.LOADING;
+        self.state = self.states.NORMAL;
 
         /**
          * Get recall data
@@ -96,8 +97,11 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                             }
                         });
                     }
+                })
+                .error(function(){
+                    self.state = self.states.NORMAL;
+                    //TODO: error state for bad input?
                 });
-            //TODO: error state for bad input?
         };
 
         $scope.$watch(
