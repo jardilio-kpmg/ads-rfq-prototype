@@ -14,6 +14,7 @@ main.config(function (/**ng.$routeProvider*/ $routeProvider, /**kpmgAngular.serv
     $routeProvider.when('/recalls/search', {
         controller: 'SearchCtrl',
         controllerAs: 'search', 
-        template: require('./Search.html')
+        template: require('./Search.html'),
+        reloadOnSearch: false
     });
 });

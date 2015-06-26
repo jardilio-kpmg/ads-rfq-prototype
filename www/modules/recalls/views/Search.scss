@@ -1,4 +1,9 @@
 .recalls.search {
+  position: relative;
+
+  md-tabs {
+    transition: none;
+  }
 
   md-content {
     background: transparent;
@@ -9,13 +14,13 @@
       margin-top: 0;
     }
     &:hover {
-        cursor: pointer;
+      cursor: pointer;
     }
     &.ng-enter {
       $delay: 60ms;
       transition: all 500ms ease;
       opacity: 0;
-      transform: translateY(500%);
+      transform: translateY(1000%);
       transition-delay: $delay*10;
       &.ng-enter-active {
         opacity: 1;
@@ -54,8 +59,8 @@
     }
   }
   .search-results-feedback {
-      height: 35px;
-      margin-top: 10px;
+    height: 35px;
+    margin-top: 10px;
   }
   .description {
     padding-left: 10px;
@@ -64,34 +69,20 @@
     max-height: 39px;
     overflow: hidden;
   }
-    .header-toolbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+
+  .search-page-content {
+    > div > * {
+      width: 300px;
     }
-
-    .search-page-content {
-        margin-top: 64px;
-
-        .search-results-feedback, .search-form {
-            padding-top: 10px;
-        }
-
-        .tab-body {
-            padding: 10px;
-        }
-
-        md-input-container {
-            width: 100%;
-        }
+    .or {
+      text-align: center;
+      margin-bottom: 15px;
     }
-
-    .search-results-feedback, .search-form {
-        width: 340px;
+    form {
+      height: 64px;
     }
-
-    .manual-search-actions {
-        width: 100%;
+    md-input-container {
+      width: 100%;
     }
+  }
 }

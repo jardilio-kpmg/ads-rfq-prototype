@@ -1,58 +1,27 @@
 <div class="recalls search" layout="column" layout-fill>
+
     <md-toolbar class="header-toolbar">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
             <h2 flex i18n="recalls.search.title"></h2>
-            <md-button class="md-icon-button" ng-if="search.recalls.length"
+            <md-button class="md-icon-button"
+                       ng-if="search.state === search.states.RESULTS"
                        ng-click="search.resetSearchForm()">
                 <md-icon>search</md-icon>
             </md-button>
         </div>
     </md-toolbar>
 
-    <md-content class="search-page-content" layout-fill
-                layout="column" layout-align="center center"
-        ng-if="!search.recalls.length">
-        <div class="search-results-feedback"
-             ng-if="search.recalls.length == 0" layout="row" layout-align="center">
-            <label i18n="recalls.search.noResults"></label>
-        </div>
-
-        <form name="searchForm" class="search-form"
-              ng-submit="search.doSearch()"
-              layout="column" layout-align="center center"
-              ng-if="!search.recalls.length">
-            <md-input-container>
-                <label i18n="recalls.search.manualSearchInput"></label>
-                <input ng-model="search.manualSearch" required autocomplete="off">
-            </md-input-container>
-            <div class="manual-search-actions"
-                 layout="row" layout-sm="column" layout-align="center center">
-                <md-button type="submit" class="md-primary md-raised"
-                           ng-disabled="searchForm.$invalid">
-                    <md-icon>search</md-icon>
-                    <span i18n="recalls.search.manualSearchButton"></span>
-                </md-button>
-                <div>or</div>
-                <md-button scan-button class="md-primary md-raised">
-                    <md-icon>photo_camera</md-icon>
-                    <span i18n="recalls.search.manualSearchScanButton"></span>
-                </md-button>
-            </div>
-        </form>
-    </md-content>
-
-    <md-tabs class="search-page-content md-primary" ng-if="search.recalls.length" flex
-             md-stretch-tabs="auto" md-dynamic-height="true" md-swipe-content="true">
+    <md-tabs class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS" flex
+             md-stretch-tabs="auto" md-swipe-content="true">
         <md-tab>
             <md-tab-label>
                 <label i18n="recalls.search.recallsTab"></label>
             </md-tab-label>
 
             <md-tab-body>
-                <md-content class="tab-body" layout="column" layout-align="center center">
-                    <md-list class="recall-list"
-                             ng-if="search.recalls.length">
+                <md-content class="tab-body" layout="column">
+                    <md-list class="recall-list">
                         <md-list-item ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.event_id}}">
                             <md-card flex>
                                 <md-card-content layout="row" layout-align="start center">
@@ -92,4 +61,32 @@
             </md-tab-body>
         </md-tab>
     </md-tabs>
+
+    <div flex layout="column" layout-align="center center" ng-show="search.state === search.states.SEARCHING">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div class="search-page-content" flex layout-align="center center" layout="column"
+                ng-show="search.state === search.states.SEARCH">
+        <div layout="column">
+            <div class="search-results-feedback"
+                 ng-if="search.recalls.length == 0" layout="row">
+                <label i18n="recalls.search.noResults"></label>
+            </div>
+            <form name="searchForm" class="search-form"
+                  ng-submit="search.searchByKeywords(searchForm.manualSearch)"
+                  layout="column" layout-align="center center">
+                <md-input-container class="md-icon-float">
+                    <label i18n="recalls.search.manualSearchInput"></label>
+                    <md-icon>search</md-icon>
+                    <input ng-model="searchForm.manualSearch" required autocomplete="off">
+                </md-input-container>
+            </form>
+            <span class="or">or</span>
+            <md-button scan-button class="md-primary md-raised">
+                <md-icon>photo_camera</md-icon>
+                <span i18n="recalls.search.manualSearchScanButton"></span>
+            </md-button>
+        </div>
+    </div>
 </div>

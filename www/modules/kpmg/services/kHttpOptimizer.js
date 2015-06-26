@@ -27,8 +27,9 @@ main.provider('kHttpOptimizer', function ($httpProvider, $provide) {
         angular.forEach(['animate','enter','leave','setClass'], function (func) {
             var base = $delegate[func];
             $delegate[func] = function () {
+                var promise = base.apply($delegate, arguments);
                 numActiveAnimations++;
-                return base.apply($delegate, arguments).finally(function () {
+                promise.finally(function () {
                     numActiveAnimations--;
                     if (numActiveAnimations === 0) {
                         angular.forEach(pendingResponses, function (response) {
@@ -37,6 +38,7 @@ main.provider('kHttpOptimizer', function ($httpProvider, $provide) {
                         pendingResponses = [];
                     }
                 });
+                return promise;
             };
         });
         return $delegate;

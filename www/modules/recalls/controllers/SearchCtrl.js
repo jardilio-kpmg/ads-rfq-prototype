@@ -19,12 +19,13 @@ var main = require('../main');
  *      };
  * });
  */
-main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
+main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeout,
                                         /**ng.$location*/ $location,
                                         /**openfda.services.foodEnforcementService*/ foodEnforcementService,
                                         /**factual.services.factualUpcService*/ factualUpcService) {
 
-    var self = this;
+    var self = this,
+        keywords, barcode;
 
     /**
      * @private
@@ -43,14 +44,6 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
     };
 
     /**
-     * The model for the manual search input.
-     * @name recalls.controllers.SearchCtrl#manualSearch
-     * @propertyOf recalls.controllers.SearchCtrl
-     * @type {string}
-     */
-    self.manualSearch = null;
-
-    /**
      * The list of recall results found
      * @name recalls.controllers.SearchCtrl#recalls
      * @propertyOf recalls.controllers.SearchCtrl
@@ -65,28 +58,33 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
      * @function
      * @param {string} barcode A UPC barcode string to search for.
      */
-    self.searchByBarcode = function (barcode) {
+    self.searchByBarcode = function (value) {
         //No need to continue if we don't have a barcode to work with.
-        if (!barcode) {
+        if (!value) {
             return;
         }
 
-        $location.search({keywords: null, barcode: barcode});
+        barcode = value;
+        keywords = null;
+        self.state = self.states.SEARCHING;
+        $location.search({keywords: keywords, barcode: barcode});
+        $location.replace();
 
         foodEnforcementService.getRecallsByBarcode(barcode)
-            .success(function (result) {
-                self.recalls = result.results || [];
-            })
+            .success(processResults)
             .error(function () {
-                self.recalls = [];
-
                 // get product info from barcode and do a keyword search
-                factualUpcService.getData(barcode).success(function (result) {
-                    var products = factualUpcService.getProducts(result);
-                    if (products && products.length) {
-                        self.searchByKeywords(products[0].name);
-                    }
-                });
+                factualUpcService.getData(barcode)
+                    .success(function (result) {
+                        var products = factualUpcService.getProducts(result);
+                        if (products && products.length) {
+                            self.searchByKeywords(products[0].name);
+                        }
+                        else {
+                            processResults(null);
+                        }
+                    })
+                    .error(processResults);
             });
     };
 
@@ -97,20 +95,20 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
      * @function
      * @param {string} keywords A string of terms to match recall records against.
      */
-    self.searchByKeywords = function (keywords) {
-        if (!keywords) {
+    self.searchByKeywords = function (value) {
+        if (!value) {
             return;
         }
 
-        $location.search({keywords: keywords, barcode: null});
+        barcode = null;
+        keywords = value;
+        self.state = self.states.SEARCHING;
+        $location.search({keywords: keywords, barcode: barcode});
+        $location.replace();
 
         foodEnforcementService.getRecallsByKeyword(keywords)
-            .success(function (result) {
-                self.recalls = (result && result.results) || [];
-            })
-            .error(function () {
-                self.recalls = [];
-            });
+            .success(processResults)
+            .error(processResults);
     };
 
     /**
@@ -122,47 +120,54 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope,
      */
     self.resetSearchForm = function () {
         $location.search({keywords: null, barcode: null});
+        $location.replace();
         self.recalls = null;
+        self.state = self.states.SEARCH;
     };
 
-    /**
-     * Perform a manual search based on keywords entered by user.
-     * @name recalls.controllers.SearchCtrl#doSearch
-     * @methodOf recalls.controllers.SearchCtrl
-     * @function
-     */
-    self.doSearch = function () {
-        self.searchByKeywords(self.manualSearch);
+    self.states = {
+        SEARCH: 0,
+        SEARCHING: 1,
+        RESULTS: 2
     };
 
-    /**
-     * Handles the click action of the Class Distribution button,
-     * which takes the user to the Classification Distribution screen.
-     * @name recalls.controllers.SearchCtrl#showClassificationDistribution
-     * @methodOf recalls.controllers.SearchCtrl
-     * @function
-     */
-    self.showClassificationDistribution = function() {
-        $location.path('/recalls/classification-distribution');
-        $location.search({keywords: $location.search().keywords, barcode: $location.search().barcode});
-    };
+    self.state = self.states.SEARCH;
 
-    /**
-     * Handles the click action of the Recall History button,
-     * which takes the user to the Recall History view.
-     * @name recalls.controllers.SearchCtrl#showRecallHistory
-     * @methodOf recalls.controllers.SearchCtrl
-     * @function
-     */
-    self.showRecallHistory = function() {
-        //TODO: Need to implement
-    };
-
-    if ($location.search().barcode) {
-        self.searchByBarcode($location.search().barcode);
+    function processResults(results) {
+        results = (results && results.results) || [];
+        if (results.length === 1) {
+            $location.search({});
+            $location.replace();
+            $timeout(function () {
+                $location.path('/recalls/campaigns/' + results[0].event_id);// jshint ignore:line
+            });
+            return;
+        }
+        self.recalls = results;
+        self.state = self.recalls.length ? self.states.RESULTS : self.states.SEARCH;
     }
-    else if ($location.search().keywords) {
-        self.searchByKeywords($location.search().keywords);
-    }
+
+    var search = {};
+
+    $scope.$watch(
+        function () {
+            var s = $location.search();
+            search.barcode = s.barcode;
+            search.keywords = s.keywords;
+            return search;
+        },
+        function (search) {
+            if (search.barcode && search.barcode !== barcode) {
+                self.searchByBarcode(search.barcode);
+            }
+            else if (search.keywords && search.keywords !== keywords) {
+                self.searchByKeywords(search.keywords);
+            }
+            else if (!search.barcode && !search.keywords) {
+                self.resetSearchForm();
+            }
+        },
+        true
+    );
 
 });
