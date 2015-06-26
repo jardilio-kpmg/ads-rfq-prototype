@@ -65,6 +65,46 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
     };
 
     /**
+     * Request the classification count details for a group of recall records
+     * that satisfy the barcode search information.
+     * @param barcode {string} A UPC barcode string to search for. The string will be matched against code_info.
+     * @param startDate {string} A date in this format: YYYY-MM-DD
+     * @param endDate {string} A date in this format: YYYY-MM-DD
+     * @param {object} options
+     * @returns {{success: Function, error: Function}}
+     */
+    self.getRecallTrendsByBarcode = function(barcode, startDate, endDate, options) {
+        var dateRange = startDate && endDate ? '+AND+date_range:[' + startDate + '+TO+' + endDate + ']': '';
+
+        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+code_info::barcode' + dateRange, {
+            params: angular.extend({}, openFdaDefaults, options, {
+                barcode: barcode,
+                count: 'classification'
+            })
+        });
+    };
+
+    /**
+     * Request the classification count details for a group of recall records
+     * that satisfy the keywords search information.
+     * @param barcode {string} A UPC barcode string to search for. The string will be matched against code_info.
+     * @param startDate {string} A date in this format: YYYY-MM-DD
+     * @param endDate {string} A date in this format: YYYY-MM-DD
+     * @param {object} options
+     * @returns {{success: Function, error: Function}}
+     */
+    self.getRecallTrendsByKeyword = function(keywords, startDate, endDate, options) {
+        var dateRange = startDate && endDate ? '+AND+date_range:[' + startDate + '+TO+' + endDate + ']': '';
+
+        return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+product_description::keywords' + dateRange, {
+            params: angular.extend({}, openFdaDefaults, options, {
+                keywords: keywords.split(' ').join('+'),
+                count: 'classification'
+            })
+        });
+    };
+
+    /**
      * Extracts the upc from the recall
      * @param recall
      * @returns {*}
