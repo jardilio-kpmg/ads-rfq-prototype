@@ -26,7 +26,7 @@ main.filter('fdaDate', function (
             date = new Date(
                 parseInt(match[0].substring(0, 4)),
                 parseInt(match[0].substring(4, 6)) - 1,
-                parseInt(match[0].substring(6, 8)));
+                parseInt(match.substring(6, 8)));
         }
         else {
             date = input;

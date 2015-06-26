@@ -44,7 +44,7 @@ main.filter('fdaClassDesc', function (/**kpmg.filters.kLocalize*/ kLocalizeFilte
 
     return function (input) {
 
-        var desc = "";
+        var desc = '';
 
         if (input === 'Class I') {
             desc = class1Description;
