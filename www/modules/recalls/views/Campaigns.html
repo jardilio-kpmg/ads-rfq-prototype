@@ -9,8 +9,7 @@
         </div>
     </md-toolbar>
     <md-content flex>
-        <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.product_description |
-            truncate:25}}</h2>
+        <h2 class="md-title" layout="row" layout-align="center center">{{campaigns.recall.product_description | truncate:25}}</h2>
         <md-card ng-if="campaigns.product.imageUrl">
             <img ng-src="{{campaigns.product.imageUrl}}" class="md-card-image" alt="">
         </md-card>
