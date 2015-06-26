@@ -21,7 +21,7 @@ main.directive('classificationDistribution', function () {
             counts: '='
         },
         restrict: 'E',
-        template: '<svg></svg>',//require('./ClassificationDistribution.html'),
+        template: require('./ClassificationDistribution.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
                 win = angular.element(window),

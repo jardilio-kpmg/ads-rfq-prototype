@@ -22,7 +22,6 @@ var main = require('../main'),
  */
 main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeout,
                                         /**ng.$location*/ $location,
-                                        /**kmpg.angular.kLocalize*/ kLocalizeFilter,
                                         /**openfda.services.foodEnforcementService*/ foodEnforcementService,
                                         /**factual.services.factualUpcService*/ factualUpcService) {
 
@@ -146,30 +145,6 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         self.recalls = null;
         self.state = self.states.SEARCH;
     };
-
-    /**
-     * The description for the Class I category.
-     * @name recalls.controllers.SearchCtrl#class1Description
-     * @propertyOf recalls.controllers.SearchCtrl
-     * @type {string}
-     */
-    self.class1Description = kLocalizeFilter('openfda.classDistribution.class1Description');
-
-    /**
-     * The description for the Class II category.
-     * @name recalls.controllers.SearchCtrl#class2Description
-     * @propertyOf recalls.controllers.SearchCtrl
-     * @type {string}
-     */
-    self.class2Description = kLocalizeFilter('openfda.classDistribution.class2Description');
-
-    /**
-     * The description for the Class III category.
-     * @name recalls.controllers.SearchCtrl#class3Description
-     * @propertyOf recalls.controllers.SearchCtrl
-     * @type {string}
-     */
-    self.class3Description = kLocalizeFilter('openfda.classDistribution.class3Description');
 
     self.states = {
         SEARCH: 0,
