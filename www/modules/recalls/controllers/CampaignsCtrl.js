@@ -25,69 +25,91 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**openfda.services.foodEnforcementService*/ foodEnforcementService,
                                            /**factual.services.factualUpcService*/ factualUpcService) {
 
-    'use strict';
+        'use strict';
 
-    var self = this;
+        var self = this;
 
-    /**
-     * @private
-     * @type {string}
-     */
-    var name = 'CampaignsCtrl';
+        /**
+         * @private
+         * @type {string}
+         */
+        var name = 'CampaignsCtrl';
 
-    /**
-     * @name recalls.controllers.CampaignsCtrl#getName
-     * @methodOf recalls.controllers.CampaignsCtrl
-     * @function
-     * @returns {string}
-     */
-    self.getName = function () {
-        return name;
-    };
+        /**
+         * @name recalls.controllers.CampaignsCtrl#getName
+         * @methodOf recalls.controllers.CampaignsCtrl
+         * @function
+         * @returns {string}
+         */
+        self.getName = function () {
+            return name;
+        };
 
-    self.recall = null;
+        /**
+         * Recall
+         * @type {null}
+         */
+        self.recall = null;
 
-    self.product = null;
+        /**
+         * Product from upc service
+         * @type {null}
+         */
+        self.product = null;
 
-    self.states = {
-        LOADING: 0,
-        RESULT: 1
-    };
+        /**
+         * States
+         * @type {{LOADING: number, RESULT: number}}
+         */
+        self.states = {
+            LOADING: 0,
+            RESULT: 1
+        };
 
-    self.state = self.states.RESULT;
-
-    self.getRecallData = function (recallId) {
-
+        /**
+         * State
+         * @type {number}
+         */
         self.state = self.states.LOADING;
 
-        foodEnforcementService.getRecallById(recallId)
-            .success(function (result) {
-                if (result.results && result.results.length) {
-                    self.recall = result.results[0];
+        /**
+         * Get recall data
+         * @param recallId
+         */
+        self.getRecallData = function (recallId) {
 
-                    var upcCode = foodEnforcementService.extractUpc(self.recall);
+            self.state = self.states.LOADING;
 
-                    self.state = self.states.RESULT;
+            foodEnforcementService.getRecallById(recallId)
+                .success(function (result) {
+                    if (result.results && result.results.length) {
+                        self.recall = result.results[0];
 
-                    factualUpcService.getData(upcCode).success(function (result) {
-                        var products = factualUpcService.getProducts(result);
-                        if (products && products.length) {
-                            self.product = products[0];
-                        }
-                    });
+                        self.state = self.states.RESULT;
+
+                        var upcCode = foodEnforcementService.extractUpc(self.recall);
+
+                        factualUpcService.getData(upcCode).success(function (result) {
+                            var products = factualUpcService.getProducts(result);
+                            if (products && products.length) {
+                                self.product = products[0];
+                            }
+                        });
+                    }
+                });
+            //TODO: error state for bad input?
+        };
+
+        $scope.$watch(
+            function () {
+                return $routeParams.recallId;
+            },
+            function (recallId) {
+                if (recallId) {
+                    self.getRecallData(recallId);
                 }
-            });
-        //TODO: error state for bad input?
-    };
-
-    $scope.$watch(
-        function () {
-            return $routeParams.recallId;
-        },
-        function (recallId) {
-            if (recallId) {
-                self.getRecallData(recallId);
             }
-        }
-    );
-});
+        );
+    }
+)
+;

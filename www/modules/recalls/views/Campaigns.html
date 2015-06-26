@@ -33,19 +33,22 @@
         </md-card>
         <md-card>
             <md-card-content>
-                <p layout="row" layout-align="start center">
-                    <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
+                <md-input-container>
+                    <div layout="row" layout-align="start center">
+                        <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
                     <span layout-margin>
                         {{campaigns.recall.classification}}
                     </span>
-                </p>
+                    </div>
+                    <textarea ng-model="campaigns.recall.classification" format="fdaClassDesc" readonly/>
+                </md-input-container>
                 <md-input-container>
                     <label i18n="recalls.campaigns.reportDateTitle"></label>
                     <input ng-model="campaigns.recall.report_date" readonly format="fdaDate" format-options="MM/dd/yyyy"/>
                 </md-input-container>
                 <md-input-container>
                     <label i18n="recalls.campaigns.initiationDateTitle"></label>
-                    <input ng-model="campaigns.recall.recall_initiation_date" readonly format="fdaDate" format-options="MM/dd/yyyy"/>
+                    <input ng-model="campaigns.recall.recall_initiation_date" format="fdaDate" format-options="MM/dd/yyyy" readonly/>
                 </md-input-container>
                 <md-input-container>
                     <label i18n="recalls.campaigns.statusTitle"></label>
