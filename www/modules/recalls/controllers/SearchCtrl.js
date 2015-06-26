@@ -1,4 +1,5 @@
-var main = require('../main');
+var main = require('../main'),
+    angular = require('angular');
 
 /**
  * @class recalls.controllers.SearchCtrl
@@ -70,6 +71,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         $location.search({keywords: keywords, barcode: barcode});
         $location.replace();
 
+        blur();
+
         foodEnforcementService.getRecallsByBarcode(barcode)
             .success(processResults)
             .error(function () {
@@ -106,6 +109,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         $location.search({keywords: keywords, barcode: barcode});
         $location.replace();
 
+        blur();
+
         foodEnforcementService.getRecallsByKeyword(keywords)
             .success(processResults)
             .error(processResults);
@@ -132,6 +137,11 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
     };
 
     self.state = self.states.SEARCH;
+
+    function blur() {
+        //fix issue with soft keyboard sticking
+        angular.element('input').blur();
+    }
 
     function processResults(results) {
         results = (results && results.results) || [];
