@@ -35,8 +35,8 @@ describe('URL Route: /recalls/campaigns', function () {
     }));
 
     it('should route to view', function () {
-        $location.path('/recalls/campaigns/88888888');
-        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=event_id:88888888&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
+        $location.path('/recalls/campaigns/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=_id:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
         $httpBackend.flush();
         $scope.$apply();
         expect($ngView[0].querySelector('.recalls.campaigns')).not.toBe(null);

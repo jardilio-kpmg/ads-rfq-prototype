@@ -102,9 +102,9 @@ describe('openfda/services/FoodEnforcementService.js', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
-        service.getRecallById('8888888888888888888888888888888888888888888888888888888888888888').success(success).error(error);
+        service.getRecallById('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa').success(success).error(error);
 
-        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=_id:8888888888888888888888888888888888888888888888888888888888888888&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=_id:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
