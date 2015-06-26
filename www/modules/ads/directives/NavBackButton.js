@@ -1,5 +1,8 @@
 var main = require('../main'),
-    previousUrl = null;
+    //what was the history length when we initialized the app?
+    initialHistoryLength = window.history.length;
+
+require('./NavBackButton.scss');
 
 /**
  * @name ads.directives.nav-back-button
@@ -15,20 +18,20 @@ main.directive('navBackButton', function ($location) {
         template: require('./NavBackButton.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             $elem.on('click', function () {
-                $scope.$applyAsync(function () {
-                    $location.url(previousUrl || '/');
+                $scope.$apply(function () {
+                    if (window.history.length > initialHistoryLength) {
+                        //if we've added pages to history since init, go back but don't back out of initialization page
+                        window.history.back();
+                    }
+                    else {
+                        //if we try to back out of the initialization page, just go home
+                        $location.path('/');
+                        $location.search({});
+                    }
                 });
             });
             $elem.addClass('ads nav-back-button');
         }
     };
 
-});
-
-main.run(function ($rootScope) {
-    $rootScope.$on('$locationChangeSuccess', function (e, newUrl, oldUrl) {
-        if (oldUrl && oldUrl !== newUrl) {
-            previousUrl = oldUrl.substr(oldUrl.indexOf('#') + 1);
-        }
-    });
 });

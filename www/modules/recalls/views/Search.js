@@ -15,7 +15,6 @@ main.config(function (/**ng.$routeProvider*/ $routeProvider, /**kpmgAngular.serv
         controller: 'SearchCtrl',
         controllerAs: 'search', 
         template: require('./Search.html'),
-        reloadOnSearch: true
+        reloadOnSearch: false
     });
-
 });

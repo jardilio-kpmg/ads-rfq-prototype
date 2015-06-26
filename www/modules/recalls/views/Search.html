@@ -1,47 +1,112 @@
 <div class="recalls search" layout="column" layout-fill>
-    <div class="backdrop"></div>
-    <md-toolbar  md-scroll-shrink="true">
+
+    <md-toolbar class="header-toolbar">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
-            <h2 flex>Relevant Recalls</h2>
-            <md-menu>
-                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                    <md-icon>more_vert</md-icon>
-                </md-button>
-                <md-menu-content>
-                    <md-menu-item>
-                        <md-button scan-button ng-click><!--menu throws exception if we don't have an ng-click-->
-                            <md-icon>photo_camera</md-icon>
-                            Scan Another Barcode
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="search.selectAllItems()">
-                            <md-icon>check_circle</md-icon>
-                            Select All
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="search.unselectAllItems()">
-                            <md-icon>radio_button_unchecked</md-icon>
-                            Unselect All
-                        </md-button>
-                    </md-menu-item>
-                </md-menu-content>
-            </md-menu>
+            <h2 flex i18n="recalls.search.title"></h2>
+            <md-button class="md-icon-button"
+                       ng-if="search.state === search.states.RESULTS"
+                       ng-click="search.resetSearchForm()">
+                <md-icon>search</md-icon>
+            </md-button>
         </div>
     </md-toolbar>
-    <md-content>
-        <md-list>
-            <md-list-item ng-repeat="item in search.recalls" layout="row" layout-align="start center">
-                <md-button class="md-icon-button status" ng-click="search.toggleItemSelection(item)">
-                    <md-icon class="md-warn" ng-show="!search.selecting">looks_one</md-icon>
-                    <md-icon ng-show="search.selecting && item.$selected">check_circle</md-icon>
-                    <md-icon ng-show="search.selecting && !item.$selected">radio_button_unchecked</md-icon>
-                </md-button>
-                <a ng-href="#/recalls/campaigns/{{item.id}}" flex>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a>
-                <a ng-href="#/recalls/campaigns/{{item.id}}"><md-icon>chevron_right</md-icon></a>
-            </md-list-item>
-        </md-list>
-    </md-content>
+
+    <md-tabs class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS" flex
+             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false">
+        <md-tab>
+            <md-tab-label>
+                <label i18n="recalls.search.recallsTab"></label>
+            </md-tab-label>
+
+            <md-tab-body>
+                <md-list class="recall-list">
+                    <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recalls/campaigns/{{item['@id']}}">
+                        <md-card flex>
+                            <md-card-content layout="row" layout-align="start center" md-ink-ripple>
+                                <classification-icon class="item-classificiation" classification="{{item.classification}}"></classification-icon>
+                                <span flex class="item-details">
+                                    <h3 class="item-title">{{item.recalling_firm}}</h3>
+                                    <div class="item-description">{{item.product_description}}</div>
+                                </span>
+                                <md-icon>chevron_right</md-icon>
+                            </md-card-content>
+                        </md-card>
+                    </md-list-item>
+                </md-list>
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab>
+            <md-tab-label>
+                <label i18n="recalls.search.classificationsTab"></label>
+            </md-tab-label>
+
+            <md-tab-body>
+                <md-content>
+                    <md-card class="chart">
+                        <md-card-content layout="row" layout-align="center center">
+                            <classification-distribution counts="search.classifications"></classification-distribution>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class1Title"></h3>
+                            <p i18n="openfda.classDistribution.class1Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class2Title"></h3>
+                            <p i18n="openfda.classDistribution.class2Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="recalls.classDistribution.class3Title"></h3>
+                            <p i18n="openfda.classDistribution.class3Description"></p>
+                        </md-card-content>
+                    </md-card>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+
+        <md-tab ng-disabled="true">
+            <md-tab-label>
+                <label i18n="recalls.search.recallHistTab"></label>
+            </md-tab-label>
+
+            <md-tab-body>
+                Recall History
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+
+    <div flex layout="column" layout-align="center center" ng-show="search.state === search.states.SEARCHING">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div class="search-page-content" flex layout-align="center center" layout="column"
+                ng-show="search.state === search.states.SEARCH">
+        <div layout="column">
+            <div class="search-results-feedback"
+                 ng-if="search.recalls.length == 0" layout="row">
+                <label i18n="recalls.search.noResults"></label>
+            </div>
+            <form name="searchForm" class="search-form"
+                  ng-submit="search.searchByKeywords(searchForm.manualSearch)"
+                  layout="column" layout-align="center center">
+                <md-input-container class="md-icon-float">
+                    <label i18n="recalls.search.manualSearchInput"></label>
+                    <md-icon>search</md-icon>
+                    <input ng-model="searchForm.manualSearch" required autocomplete="off">
+                </md-input-container>
+            </form>
+            <span class="or">or</span>
+            <md-button scan-button class="md-primary md-raised">
+                <md-icon>photo_camera</md-icon>
+                <span i18n="recalls.search.manualSearchScanButton"></span>
+            </md-button>
+        </div>
+    </div>
 </div>

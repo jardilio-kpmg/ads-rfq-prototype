@@ -21,7 +21,7 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location) {
+main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $location, $mdDialog, kLocalizeFilter) {
 
     var self = this;
 
@@ -41,6 +41,12 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
         return name;
     };
 
+    /**
+     * Initiates a new barcode scan read from an image or camera capture
+     * @name recalls.controllers.ScanButtonCtrl#startScan
+     * @methodOf recalls.controllers.ScanButtonCtrl
+     * @function
+     */
     self.startScan = function () {
         var input = angular.element('<input type="file" style="display:none;" accept="image/*;capture=camera">');
         angular.element(document.body).append(input);
@@ -145,7 +151,12 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
                 }
                 //TODO: we could leverage a server side solution to try and scan the image as a backup
                 else {
-                    window.alert('Whoops! I couldn\'t find a UPC, lets try that again with a new image.');
+                    $mdDialog.show(
+                        $mdDialog.alert()
+                            .title(kLocalizeFilter('recalls.scan.noBarcodeFound.title'))
+                            .content(kLocalizeFilter('recalls.scan.noBarcodeFound.message'))
+                            .ok(kLocalizeFilter('recalls.scan.noBarcodeFound.ok'))
+                    );
                 }
             }
         );

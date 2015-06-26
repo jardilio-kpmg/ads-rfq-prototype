@@ -56,7 +56,6 @@ module.exports = function (grunt) {
                 keepAlive: true,
                 args: {
                     verbose: true,
-                    browser: 'chrome',
                     specs: [
                         '<%= settings.dir.temp %>/<%= settings.dir.app %>/modules/e2e.js'
                     ]
