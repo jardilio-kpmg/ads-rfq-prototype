@@ -23,7 +23,7 @@
                 <md-list class="recall-list">
                     <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recalls/campaigns/{{item.event_id}}">
                         <md-card flex>
-                            <md-card-content layout="row" layout-align="start center">
+                            <md-card-content layout="row" layout-align="start center" md-ink-ripple>
                                 <classification-icon class="item-classificiation" classification="{{item.classification}}"></classification-icon>
                                 <span flex class="item-details">
                                     <h3 class="item-title">{{item.recalling_firm}}</h3>

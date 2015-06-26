@@ -1,6 +1,4 @@
-describe('kpmg/filters/truncate.js', function () {
-
-
+describe('openfda/filters/fdaClassDesc.js', function () {
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -14,22 +12,21 @@ describe('kpmg/filters/truncate.js', function () {
 
     var filter;
 
-    beforeEach(angular.mock.module('ngMock','kpmg'));
+    beforeEach(angular.mock.module('ngMock','openfda'));
 
     beforeEach(inject(function ($filter, $injector) {
         $httpBackend = $injector.get('$httpBackend');
-        filter = $filter('truncate');
+        filter = $filter('fdaClassDesc');
         $httpBackend.resetExpectations();
     }));
 
     /*
     it('should be defined in module', function () {
         expect(filter).toBeDefined();
-    });*/
+    });
 
-    //TODO: write your unit tests for truncate
+    //TODO: write your unit tests for fdaClassDesc
 
-    /*
     it('should return proper filtered value', function () {
         expect(filter('something')).toBe('something filtered');
     });
@@ -39,5 +36,4 @@ describe('kpmg/filters/truncate.js', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
     */
-
 });

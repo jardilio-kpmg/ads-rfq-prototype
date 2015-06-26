@@ -71,9 +71,9 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      */
     self.extractUpc = function (recall) {
         // clear empty spaces
-        var code = recall.code_info.replace(/\s+|\s+/gm, ''); // jshint ignore:line
-        code = code.replace(/-+/gm, ''); // clear -
-        var match = /(?:\d{12}|\d{11}|\d{10})/.exec(code); // search upc
+        var code = recall.code_info + recall.product_description;// jshint ignore:line
+        code = code.replace(/\s+|\s+/gm, '').replace(/-+/gm, ''); // clear -
+        var match = /(?:\d{13}|\d{12}|\d{11}|\d{10}|\d{9}|\d{8})/.exec(code); // search upc
         var upc = '';
         if (match && match.length) {
             upc = match[0];

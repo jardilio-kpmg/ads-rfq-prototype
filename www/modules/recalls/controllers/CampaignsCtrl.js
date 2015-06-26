@@ -25,58 +25,68 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**openfda.services.foodEnforcementService*/ foodEnforcementService,
                                            /**factual.services.factualUpcService*/ factualUpcService) {
 
-    'use strict';
+        'use strict';
 
-    var self = this;
+        var self = this;
 
-    /**
-     * @private
-     * @type {string}
-     */
-    var name = 'CampaignsCtrl';
+        /**
+         * @private
+         * @type {string}
+         */
+        var name = 'CampaignsCtrl';
 
-    /**
-     * @name recalls.controllers.CampaignsCtrl#getName
-     * @methodOf recalls.controllers.CampaignsCtrl
-     * @function
-     * @returns {string}
-     */
-    self.getName = function () {
-        return name;
-    };
+        /**
+         * @name recalls.controllers.CampaignsCtrl#getName
+         * @methodOf recalls.controllers.CampaignsCtrl
+         * @function
+         * @returns {string}
+         */
+        self.getName = function () {
+            return name;
+        };
 
-    self.recall = null;
+        /**
+         * Recall
+         * @type {null}
+         */
+        self.recall = null;
 
-    self.product = null;
+        /**
+         * Product from upc service
+         * @type {null}
+         */
+        self.product = null;
 
-    self.getRecallData = function (recallId) {
+        self.getRecallData = function (recallId) {
 
-        foodEnforcementService.getRecallById(recallId)
-            .success(function (result) {
-                if (result.results && result.results.length) {
-                    self.recall = result.results[0];
+            foodEnforcementService.getRecallById(recallId)
+                .success(function (result) {
+                    if (result.results && result.results.length) {
+                        self.recall = result.results[0];
 
-                    var upcCode = foodEnforcementService.extractUpc(self.recall);
+                        var upcCode = foodEnforcementService.extractUpc(self.recall);
 
-                    factualUpcService.getData(upcCode).success(function (result) {
-                        var products = factualUpcService.getProducts(result);
-                        if (products && products.length) {
-                            self.product = products[0];
-                        }
-                    });
+                        factualUpcService.getData(upcCode).success(function (result) {
+                            var products = factualUpcService.getProducts(result);
+                            if (products && products.length) {
+                                self.product = products[0];
+                            }
+                        });
+                    }
+                });
+            //TODO: error state for bad input?
+        };
+
+        $scope.$watch(
+            function () {
+                return $routeParams.recallId;
+            },
+            function (recallId) {
+                if (recallId) {
+                    self.getRecallData(recallId);
                 }
-            });
-        //TODO: error state for bad input?
-    };
-
-    $scope.$watch(
-        function () {
-            return $routeParams.recallId;
-        },
-        function (recallId) {
-            if (recallId) {
-                self.getRecallData(recallId);
             }
-        }
-    );
-});
+        );
+    }
+)
+;
