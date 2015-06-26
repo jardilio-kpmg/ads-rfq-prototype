@@ -57,12 +57,36 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
          */
         self.product = null;
 
+        /**
+         * States
+         * @type {{LOADING: number, RESULT: number}}
+         */
+        self.states = {
+            NORMAL: 0,
+            LOADING: 1,
+            RESULT: 2
+        };
+
+        /**
+         * State
+         * @type {number}
+         */
+        self.state = self.states.NORMAL;
+
+        /**
+         * Get recall data
+         * @param recallId
+         */
         self.getRecallData = function (recallId) {
+
+            self.state = self.states.LOADING;
 
             foodEnforcementService.getRecallById(recallId)
                 .success(function (result) {
                     if (result.results && result.results.length) {
                         self.recall = result.results[0];
+
+                        self.state = self.states.RESULT;
 
                         var upcCode = foodEnforcementService.extractUpc(self.recall);
 
@@ -73,8 +97,11 @@ main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                             }
                         });
                     }
+                })
+                .error(function(){
+                    self.state = self.states.NORMAL;
+                    //TODO: error state for bad input?
                 });
-            //TODO: error state for bad input?
         };
 
         $scope.$watch(
