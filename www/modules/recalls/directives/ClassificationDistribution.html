@@ -1,5 +1,5 @@
 <md-content>
-    <md-card ng-if="classificationDistribution.classificationData.length">
+    <md-card class="chart">
         <md-card-content layout="row" layout-align="center center">
             <div id="class-distribution-chart">
                 <svg></svg>
@@ -8,7 +8,7 @@
     </md-card>
 
     <md-card>
-        <md-card-content class="classification-descriptions">
+        <md-card-content>
             <md-input-container>
                 <label i18n="recalls.classDistribution.class1Title"></label>
                 <textarea readonly ng-model="classificationDistribution.class1Description"/>

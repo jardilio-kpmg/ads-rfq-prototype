@@ -26,9 +26,11 @@ main.controller('ClassificationDistributionCtrl', function (
     /**ng.$rootScope.Scope*/ $scope,
     $location,
     /**openfda.services.foodEnforcementService*/ foodEnforcementService,
+    /**factual.services.factualUpcService*/ factualUpcService,
     /**kpmg.filters.kLocalize*/ kLocalizeFilter) {
 
-    var self = this;
+    var self = this,
+        barcode, keywords;
 
     /**
      * @private
@@ -85,21 +87,30 @@ main.controller('ClassificationDistributionCtrl', function (
      * @function
      * @param {string} barcode A UPC barcode string to search for.
      */
-    self.searchByBarcode = function(barcode) {
+    self.searchByBarcode = function(value) {
         //No need to continue if we don't have a barcode to work with.
-        if(!barcode) {
+        if(!value) {
             return;
         }
 
-        $location.search({keywords: null, barcode: barcode});
+        barcode = value;
+        keywords = null;
 
         foodEnforcementService.getRecallsByBarcode(barcode, {'count': 'classification.exact'})
-            .success(function(result) {
-                self.classificationData = result.results || [];
-                self.addPieChart(self.classificationData);
-            })
-            .error(function() {
-                self.classificationData = [];
+            .success(processResults)
+            .error(function () {
+                // get product info from barcode and do a keyword search
+                factualUpcService.getData(barcode)
+                    .success(function (result) {
+                        var products = factualUpcService.getProducts(result);
+                        if (products && products.length) {
+                            self.searchByKeywords(products[0].name);
+                        }
+                        else {
+                            processResults(null);
+                        }
+                    })
+                    .error(processResults);
             });
     };
 
@@ -110,22 +121,36 @@ main.controller('ClassificationDistributionCtrl', function (
      * @function
      * @param {string} keywords A string of search terms to match recall records against.
      */
-    self.searchByKeywords = function(keywords) {
-        if (!keywords) {
+    self.searchByKeywords = function(value) {
+        if (!value) {
             return;
         }
 
-        $location.search({keywords: keywords, barcode: null});
+        barcode = null;
+        keywords = value;
 
         foodEnforcementService.getRecallsByKeyword(keywords, {'count': 'classification.exact'})
-            .success(function(result) {
-                self.classificationData = (result && result.results) || [];
-                self.addPieChart(self.classificationData);
-            })
-            .error(function() {
-                self.classificationData = [];
-            });
+            .success(processResults)
+            .error(processResults);
     };
+
+    /**
+     * @private
+     * @param results {object}
+     */
+    function processResults(results) {
+        results = (results && results.results) || [{term: '', count: 1}];
+        self.classificationData = results;
+        self.addPieChart(self.classificationData);
+    }
+
+    /**
+     * Draws an empty placeholder chart.
+     * @private
+     */
+    function drawEmptyChart() {
+        self.addPieChart([{term: '', count: 1}]);
+    }
 
     /**
      * Builds a pie chart based on the loaded data.
@@ -140,11 +165,13 @@ main.controller('ClassificationDistributionCtrl', function (
 
             //See which classifications are included in the data and set the chart colors.
             angular.forEach(chartData, function(chartDataItem) {
-                targetColor = '#FEF200';
+                targetColor = '#1565C0';
                 if(chartDataItem.term === 'Class I') {
                     targetColor = '#FE0000';
                 } else if(chartDataItem.term === 'Class II') {
                     targetColor = '#F47429';
+                } else if(chartDataItem.term === 'Class III') {
+                    targetColor = '#FEF200';
                 }
                 chartColors.push(targetColor);
             });
@@ -172,11 +199,27 @@ main.controller('ClassificationDistributionCtrl', function (
         }
     };
 
-    if ($location.search().barcode) {
-        self.searchByBarcode($location.search().barcode);
-    }
-    else if ($location.search().keywords) {
-        self.searchByKeywords($location.search().keywords);
-    }
+    var search = {};
+
+    $scope.$watch(
+        function () {
+            var s = $location.search();
+            search.barcode = s.barcode;
+            search.keywords = s.keywords;
+            return search;
+        },
+        function (search) {
+            if (search.barcode && search.barcode !== barcode) {
+                self.searchByBarcode(search.barcode);
+            }
+            else if (search.keywords && search.keywords !== keywords) {
+                self.searchByKeywords(search.keywords);
+            }
+            else if (!search.barcode && !search.keywords) {
+                drawEmptyChart();
+            }
+        },
+        true
+    );
 
 });
