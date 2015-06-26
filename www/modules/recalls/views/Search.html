@@ -13,26 +13,27 @@
     </md-toolbar>
 
     <md-tabs class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS" flex
-             md-stretch-tabs="auto" md-swipe-content="true">
+             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false">
         <md-tab>
             <md-tab-label>
                 <label i18n="recalls.search.recallsTab"></label>
             </md-tab-label>
 
             <md-tab-body>
-                <md-content class="tab-body" layout="column">
-                    <md-list class="recall-list">
-                        <md-list-item ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.event_id}}">
-                            <md-card flex>
-                                <md-card-content layout="row" layout-align="start center">
-                                    <classification-icon classification="{{item.classification}}"></classification-icon>
-                                    <span flex class="description">{{item.product_description}}</span>
-                                    <md-icon>chevron_right</md-icon>
-                                </md-card-content>
-                            </md-card>
-                        </md-list-item>
-                    </md-list>
-                </md-content>
+                <md-list class="recall-list">
+                    <md-list-item class="md-3-line" ng-repeat="item in search.recalls" href="#/recalls/campaigns/{{item.event_id}}">
+                        <md-card flex>
+                            <md-card-content layout="row" layout-align="start center">
+                                <classification-icon class="item-classificiation" classification="{{item.classification}}"></classification-icon>
+                                <span flex class="item-details">
+                                    <h3 class="item-title">{{item.recalling_firm}}</h3>
+                                    <div class="item-description">{{item.product_description}}</div>
+                                </span>
+                                <md-icon>chevron_right</md-icon>
+                            </md-card-content>
+                        </md-card>
+                    </md-list-item>
+                </md-list>
             </md-tab-body>
         </md-tab>
 
@@ -42,10 +43,7 @@
             </md-tab-label>
 
             <md-tab-body>
-                <md-content class="tab-body">
-                    <classification-distribution></classification-distribution>
-                </md-content>
-
+                <classification-distribution></classification-distribution>
             </md-tab-body>
         </md-tab>
 
@@ -55,9 +53,7 @@
             </md-tab-label>
 
             <md-tab-body>
-                <md-content class="tab-body" layout="column" layout-align="center center">
-                    Recall History
-                </md-content>
+                Recall History
             </md-tab-body>
         </md-tab>
     </md-tabs>

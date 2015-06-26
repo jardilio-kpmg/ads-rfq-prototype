@@ -33,6 +33,49 @@
       module = angular.module('api.v1', ['ngResource']),
       config = require('config');
   /**
+    * When an error is encountered by a client, it will send diagnositc information to this service which will log the information for later analysis.
+   * @class api.v1.Error
+   * @extends api.v1.IError
+   * @property {api.v1.Promise} $promise - The promise associated with the async operation.
+   */
+   /* istanbul ignore next */
+  module.factory('Error', function ($resource) {
+      var servicesBaseUrl = config.server;
+      return $resource(
+        servicesBaseUrl + '/api/1/errors',
+        {},
+        {
+            /**
+              * Add a new error to the collection
+             * @function
+             * @methodOf api.v1.Error
+             * @name api.v1.Error#$create
+             * @param {object} [params] - Input parameters
+             * @param {api.v1.ISuccessCallback} [success] - Success callback function
+             * @param {api.v1.IErrorCallback} [error] - Error callback function
+             * @returns {api.v1.Error}
+             * @example
+             * function Controller(Error) {
+         *  var result = new Error();
+         *  result.$create(params);
+         * }
+             */
+          
+          'create': {
+            method: 'POST',
+              isArray: false,
+              params: {
+            }
+          },
+          
+    },
+    {
+      stripTrailingSlashes: true
+    }
+  );
+});
+
+  /**
     * Management of user authorizations
    * @class api.v1.Login
    * @extends api.v1.ILogin
@@ -269,49 +312,6 @@
             userId: '@userId',
           }
         },
-    },
-    {
-      stripTrailingSlashes: true
-    }
-  );
-});
-
-  /**
-    * When an error is encountered by a client, it will send diagnositc information to this service which will log the information for later analysis.
-   * @class api.v1.Error
-   * @extends api.v1.IError
-   * @property {api.v1.Promise} $promise - The promise associated with the async operation.
-   */
-   /* istanbul ignore next */
-  module.factory('Error', function ($resource) {
-      var servicesBaseUrl = config.server;
-      return $resource(
-        servicesBaseUrl + '/api/1/errors',
-        {},
-        {
-            /**
-              * Add a new error to the collection
-             * @function
-             * @methodOf api.v1.Error
-             * @name api.v1.Error#$create
-             * @param {object} [params] - Input parameters
-             * @param {api.v1.ISuccessCallback} [success] - Success callback function
-             * @param {api.v1.IErrorCallback} [error] - Error callback function
-             * @returns {api.v1.Error}
-             * @example
-             * function Controller(Error) {
-         *  var result = new Error();
-         *  result.$create(params);
-         * }
-             */
-          
-          'create': {
-            method: 'POST',
-              isArray: false,
-              params: {
-            }
-          },
-          
     },
     {
       stripTrailingSlashes: true

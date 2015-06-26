@@ -6,7 +6,11 @@
   }
 
   md-content {
-    background: transparent;
+    background: none;
+  }
+  md-tab-content {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   md-list-item {
     padding: 0;
@@ -62,9 +66,24 @@
     height: 35px;
     margin-top: 10px;
   }
-  .description {
+  .item-classificiation md-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  .item-details {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .item-title {
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .item-description {
     text-overflow: ellipsis;
     max-height: 39px;
     overflow: hidden;
