@@ -34,7 +34,7 @@ require('./main.scss');
  * @module factual
  * @type {angular.Module}
  */
-var factual = angular.module('factual', ['ng','ngRoute','kpmgAngular','ngMaterial']);
+var factual = angular.module('factual', ['ng','kpmgAngular']);
 
 factual.constant('factualDefaults', {
     server: '//api.v3.factual.com',

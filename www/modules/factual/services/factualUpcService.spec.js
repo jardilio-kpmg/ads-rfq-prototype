@@ -32,31 +32,18 @@ describe('factual/services/factualUpcService.js', function () {
         expect(service).toBe(service2);
     });
 
-    //TODO: write your unit tests for factualUpcService
-
     it('should return proper name value', function () {
         expect(service.getName()).toBe('factualUpcService');
     });
 
-    /*
-    it('should properly construct getData request without optionals', function () {
+    it('should properly construct getData request', function () {
         var error = window.jasmine.createSpy('error');
         var success = window.jasmine.createSpy('success');
 
-        service.expect.getData('testParam1','testParam2');
-        service.getData('testParam1','testParam2').success(success).error(error);
-        $httpBackend.flush();
-
-        expect(error).not.toHaveBeenCalled();
-        expect(success).toHaveBeenCalled();
-    });
-
-    it('should properly construct getData request with optionals', function () {
-        var error = window.jasmine.createSpy('error');
-        var success = window.jasmine.createSpy('success');
-
-        service.expect.getData('testParam1','testParam2', {optional1: 'testParam3'});
-        service.getData('testParam1','testParam2', {optional1: 'testParam3'}).success(success).error(error);
+        service.getData('88888888').success(success).error(error);
+        $httpBackend
+            .expectGET('//api.v3.factual.com/t/products-cpg?KEY=6tkrAVLSRY503qIo8SMpiPJCJkdqN4GdIJd99co2&filters=%7B%22upc%22:%2288888888%22%7D')
+            .respond('');
         $httpBackend.flush();
 
         expect(error).not.toHaveBeenCalled();
@@ -67,32 +54,6 @@ describe('factual/services/factualUpcService.js', function () {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
-    */
+
 
 });
-
-/*angular.module('factual').config(function ($provide) {
-
-    $provide.decorator('factualUpcService', function ($delegate, $httpBackend) {
-        /!**
-         * This is allows us to decorate our service during unit tests with expectations
-         * that can then be shared across all spec files. Not only will we need to set expectionations
-         * on this service, but also in any dependency chains. If a controller references this service, we
-         * need to set the expectations that the service will be called. Likewise if that controller is
-         * defined in a directive and that directive in a view, we need to set these expectation there as well.
-         * @class factual.services.factualUpcService.expect
-         * @extends factual.services.factualUpcService
-         *!/
-        $delegate.expect = {
-            getData: function (required1, required2, optionals) {
-                var params = angular.extend({}, optionals, {
-                    required1: required1,
-                    required2: required2
-                });
-                $httpBackend.expectGET('/factual/factual-upc-service/data?' + $.param(params)).respond();
-            }
-        };
-
-        return $delegate;
-    });
-});*/

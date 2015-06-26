@@ -46,34 +46,12 @@ main.service('factualUpcService', function (
      * @methodOf factual.services.factualUpcService
      * @function
      * @param {string} upcCode
-     * @param {object=} options
      * @returns  {{success: function, error: function}} HTTP Promise
      */
-    self.getData = function (upcCode, options) {
-
-        // http result in the form of:
-        /* var data = {
-         "version": 3,
-         "status": "ok",
-         "response": {
-         "data": [{
-         "avg_price": 4.18,
-         "brand": "Gatorade",
-         "category": "",
-         "ean13": "0052000131512",
-         "factual_id": "3e70863a-8887-437c-b329-4a54a40bd07f",
-         "image_urls": ["http://c4.soap.com/images/products/p/dcs/dcs-929b_1.jpg", "http://ecx.images-amazon.com/images/I/41fzMs4eLUL._SL500_AA300_.jpg", "http://media.itemmaster.com:80///0/0/0/432/1c256e8a-e65f-4639-8c21-19a1ff84131f.jpg?originalFormat=tif&tkn=914dad50-013c-11e4-acaa-005056ab571e&resize=600x600", "http://media.itemmaster.com:80///0/0/0/432/9ddfa2a3-545a-4606-bf73-cf2bd88afdd9.jpg?originalFormat=png"],
-         "manufacturer": "PepsiCo",
-         "product_name": "Sports Drink",
-         "size": ["32 fl oz"],
-         "upc": "052000131512"
-         }], "included_rows": 1
-         }
-         }*/
-
+    self.getData = function (upcCode) {
         return kHttp.get(':server/t/products-cpg', {
             cache: true,
-            params: angular.extend({}, factualDefaults, options, {
+            params: angular.extend({}, factualDefaults, {
                 filters: {upc: upcCode ? upcCode : '$blank'}
             })
         });
