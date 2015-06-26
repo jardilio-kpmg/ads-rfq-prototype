@@ -15,6 +15,22 @@
         </md-card>
         <md-card>
             <md-card-content>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.productDescriptionTitle"></label>
+                    <textarea ng-model="campaigns.recall.product_description" readonly/>
+                </md-input-container>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.reasonRecallTitle"></label>
+                    <textarea ng-model="campaigns.recall.reason_for_recall" readonly/>
+                </md-input-container>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.distributionTitle"></label>
+                    <textarea ng-model="campaigns.recall.distribution_pattern" readonly/>
+                </md-input-container>
+            </md-card-content>
+        </md-card>
+        <md-card>
+            <md-card-content>
                 <p layout="row" layout-align="start center">
                     <classification-icon classification="{{campaigns.recall.classification}}"></classification-icon>
                     <span layout-margin>
@@ -23,23 +39,15 @@
                 </p>
                 <md-input-container>
                     <label i18n="recalls.campaigns.reportDateTitle"></label>
-                    <input ng-model="campaigns.recall.recall_initiation_date" readonly/>
+                    <input ng-model="campaigns.recall.report_date" readonly format="fdaDate" format-options="MM/dd/yyyy"/>
+                </md-input-container>
+                <md-input-container>
+                    <label i18n="recalls.campaigns.initiationDateTitle"></label>
+                    <input ng-model="campaigns.recall.recall_initiation_date" readonly format="fdaDate" format-options="MM/dd/yyyy"/>
                 </md-input-container>
                 <md-input-container>
                     <label i18n="recalls.campaigns.statusTitle"></label>
                     <input ng-model="campaigns.recall.status" readonly/>
-                </md-input-container>
-            </md-card-content>
-        </md-card>
-        <md-card>
-            <md-card-content>
-                <md-input-container>
-                    <label i18n="recalls.campaigns.productDescriptionTitle"></label>
-                    <textarea readonly ng-model="campaigns.recall.product_description"/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recalls.campaigns.reasonRecallTitle"></label>
-                    <textarea readonly ng-model="campaigns.recall.reason_for_recall"/>
                 </md-input-container>
             </md-card-content>
         </md-card>
@@ -56,10 +64,6 @@
                 <md-input-container>
                     <label i18n="recalls.campaigns.codeInfoTitle"></label>
                     <textarea ng-model="campaigns.recall.code_info" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recalls.campaigns.distributionTitle"></label>
-                    <textarea readonly ng-model="campaigns.recall.distribution_pattern"/>
                 </md-input-container>
             </md-card-content>
         </md-card>
