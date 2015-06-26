@@ -64,6 +64,7 @@ main.directive('recallHistory', function () {
                      });
 
                     //Set up and add the chart
+                    //TODO: Example: http://nvd3.org/examples/multiBar.html
                     nv.addGraph(function() {
                         var chart = nv.models.pieChart()
                             .x(function(d) { return d.term; })
