@@ -14,7 +14,8 @@ var main = require('../main');
  *     var filtered = fdaDateFilter('something');
  * }
  */
-main.filter('fdaDate', function ($filter) {
+main.filter('fdaDate', function (
+    /**ns.$filter */ $filter) {
 
     'use strict';
 
