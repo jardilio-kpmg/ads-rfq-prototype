@@ -1,7 +1,8 @@
 {
     "recalls": {
         "index": {
-            "title": "Let's Get Started!",
+            "title": "Is My Food Safe!",
+            "subTitle": "Check Food Recalls Now...",
             "scanButton": "Scan Any Barcode",
             "enterKeywordsButton": "Enter Keyword/UPC"
         },
