@@ -24,7 +24,7 @@ main.filter('fdaClassDesc', function (/**kpmg.filters.kLocalize*/ kLocalizeFilte
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {string}
      */
-    var class1Description = kLocalizeFilter('recalls.classDistribution.class1Description');
+    var class1Description = kLocalizeFilter('openfda.classDistribution.class1Description');
 
     /**
      * The description for the Class II category.
@@ -32,7 +32,7 @@ main.filter('fdaClassDesc', function (/**kpmg.filters.kLocalize*/ kLocalizeFilte
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {string}
      */
-    var class2Description = kLocalizeFilter('recalls.classDistribution.class2Description');
+    var class2Description = kLocalizeFilter('openfda.classDistribution.class2Description');
 
     /**
      * The description for the Class III category.
@@ -40,7 +40,7 @@ main.filter('fdaClassDesc', function (/**kpmg.filters.kLocalize*/ kLocalizeFilte
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {string}
      */
-    var class3Description = kLocalizeFilter('recalls.classDistribution.class3Description');
+    var class3Description = kLocalizeFilter('openfda.classDistribution.class3Description');
 
     return function (input) {
 

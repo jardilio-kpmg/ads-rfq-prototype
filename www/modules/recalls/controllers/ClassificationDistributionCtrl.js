@@ -26,7 +26,7 @@ main.controller('ClassificationDistributionCtrl', function (
     /**ng.$rootScope.Scope*/ $scope,
     $location,
     /**openfda.services.foodEnforcementService*/ foodEnforcementService,
-    /**kpmg.filters.kLocalize*/ kLocalizeFilter) {
+    /**openfda.filters.fdaClassDesc*/ fdaClassDescFilter) {
 
     var self = this;
 
@@ -60,7 +60,7 @@ main.controller('ClassificationDistributionCtrl', function (
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {string}
      */
-    self.class1Description = kLocalizeFilter('recalls.classDistribution.class1Description');
+    self.class1Description = fdaClassDescFilter('Class I');
 
     /**
      * The description for the Class II category.
@@ -68,7 +68,7 @@ main.controller('ClassificationDistributionCtrl', function (
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {string}
      */
-    self.class2Description = kLocalizeFilter('recalls.classDistribution.class2Description');
+    self.class2Description = fdaClassDescFilter('Class II');
 
     /**
      * The description for the Class III category.
@@ -76,7 +76,7 @@ main.controller('ClassificationDistributionCtrl', function (
      * @propertyOf recalls.controllers.ClassificationDistributionCtrl
      * @type {string}
      */
-    self.class3Description = kLocalizeFilter('recalls.classDistribution.class3Description');
+    self.class3Description = fdaClassDescFilter('Class III');
 
     /**
      * Requests recall results based on the code or search terms provided.
