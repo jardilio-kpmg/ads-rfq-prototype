@@ -4,3 +4,5 @@ document.createElement('ng-view');
 document.createElement('ng-switch');
 document.createElement('nav-back-button');
 document.createElement('classification-icon');
+
+document.createElement('classification-distribution');

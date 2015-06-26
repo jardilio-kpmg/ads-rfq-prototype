@@ -1,14 +1,16 @@
 .recalls.search {
-  .backdrop {
-    background: lightgrey;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: relative;
+
+  md-tabs {
+    transition: none;
   }
+
   md-content {
-    background: transparent;
+    background: none;
+  }
+  md-tab-content {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   md-list-item {
     padding: 0;
@@ -16,13 +18,13 @@
       margin-top: 0;
     }
     &:hover {
-        cursor: pointer;
+      cursor: pointer;
     }
     &.ng-enter {
       $delay: 60ms;
       transition: all 500ms ease;
       opacity: 0;
-      transform: translateY(500%);
+      transform: translateY(1000%);
       transition-delay: $delay*10;
       &.ng-enter-active {
         opacity: 1;
@@ -61,17 +63,45 @@
     }
   }
   .search-results-feedback {
-      height: 35px;
-      margin-top: 10px;
+    height: 35px;
+    margin-top: 10px;
   }
-  .description {
+  .item-classificiation md-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  .item-details {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .item-title {
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .item-description {
     text-overflow: ellipsis;
     max-height: 39px;
     overflow: hidden;
   }
-    .manual-search-actions {
-        width: 100%;
+
+  .search-page-content {
+    > div > * {
+      width: 300px;
     }
+    .or {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    form {
+      height: 64px;
+    }
+    md-input-container {
+      width: 100%;
+    }
+  }
 }

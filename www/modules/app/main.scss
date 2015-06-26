@@ -1,6 +1,14 @@
+@import "../../libs/nvd3/nv.d3.css";
+
 $classification-1-color: #FE0000;
 $classification-2-color: #F47429;
 $classification-3-color: #FEF200;
+$screen-background-color: lightgrey;
+
+
+html, body, md-content, ng-view {
+    background-color: $screen-background-color;
+}
 
 .app {
     /*TODO: add application specific styles here*/
