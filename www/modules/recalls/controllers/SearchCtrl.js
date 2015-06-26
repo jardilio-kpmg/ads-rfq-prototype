@@ -52,6 +52,14 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
     self.recalls = null;
 
     /**
+     * The list of recall results counted by classification
+     * @name recalls.controllers.SearchCtrl#classifications
+     * @propertyOf recalls.controllers.SearchCtrl
+     * @type {array}
+     */
+    self.classifications = null;
+
+    /**
      * Requests recall results based on the code or search terms provided.
      * @name recalls.controllers.SearchCtrl#searchByBarcode
      * @methodOf recalls.controllers.SearchCtrl
@@ -86,6 +94,10 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                     })
                     .error(processResults);
             });
+
+        foodEnforcementService.getRecallsByKeyword(keywords, {count: 'classification.exact'})
+            .success(processClassification)
+            .error(processClassification);
     };
 
     /**
@@ -109,6 +121,10 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         foodEnforcementService.getRecallsByKeyword(keywords)
             .success(processResults)
             .error(processResults);
+
+        foodEnforcementService.getRecallsByKeyword(keywords, {count: 'classification.exact'})
+            .success(processClassification)
+            .error(processClassification);
     };
 
     /**
@@ -145,6 +161,10 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         }
         self.recalls = results;
         self.state = self.recalls.length ? self.states.RESULTS : self.states.SEARCH;
+    }
+
+    function processClassification(results) {
+        self.classifications = (results && results.results) || [];
     }
 
     var search = {};

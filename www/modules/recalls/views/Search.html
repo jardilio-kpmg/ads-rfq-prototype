@@ -43,7 +43,32 @@
             </md-tab-label>
 
             <md-tab-body>
-                <classification-distribution></classification-distribution>
+                <md-content>
+                    <md-card class="chart">
+                        <md-card-content layout="row" layout-align="center center">
+                            <classification-distribution counts="search.classifications"></classification-distribution>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-content>
+                            <md-input-container>
+                                <label i18n="recalls.classDistribution.class1Title"></label>
+                                <textarea readonly ng-model="classificationDistribution.class1Description"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label i18n="recalls.classDistribution.class2Title"></label>
+                                <textarea readonly ng-model="classificationDistribution.class2Description"/>
+                            </md-input-container>
+
+                            <md-input-container>
+                                <label i18n="recalls.classDistribution.class3Title"></label>
+                                <textarea readonly ng-model="classificationDistribution.class3Description"/>
+                            </md-input-container>
+                        </md-card-content>
+                    </md-card>
+                </md-content>
             </md-tab-body>
         </md-tab>
 

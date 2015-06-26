@@ -1,39 +1,89 @@
-var main = require('../main');
+var main = require('../main'),
+    nv = require('nvd3'),
+    d3 = require('d3'),
+    angular = require('angular');
 
+require('../../../libs/nvd3/nv.d3.css');
 require('./ClassificationDistribution.scss');
 
 /**
  * @name recalls.directives.classification-distribution
  * @propertyOf recalls.directives
  * @see http://docs.angularjs.org/guide/directive
- * @example
- * <classification-distribution></classification-distribution>
+ * @examplewidth: 300px;
+ height: 300px;
+ * <classification-distribution counts="counts"></classification-distribution>
  */
 main.directive('classificationDistribution', function () {
 
     return {
-        //priority of this directive to be processed over others on same element, higher number processed first
-        priority: 0,
-        //if true, no other directives will be processed after this priority has been completed
-        terminal: false,
-        //if true, will create new child scope for element, if object then will create isolated scope
-        scope: false,
-        //optional function or string name of registered controller to link to this directive
-        controller: 'ClassificationDistributionCtrl',
-        controllerAs: 'classificationDistribution',
-        //optional string name to require another directive to exist on target element
-        require: ['classificationDistribution'],
-        //restrict directive declarations to elements (E), attributes (A), classes (C) and comments (M)
+        scope: {
+            counts: '='
+        },
         restrict: 'E',
-        //optional (string) template if this directive will produce some markup on element, can also use templateUrl
-        template: require('./ClassificationDistribution.html'),
-        //if true, innerHTML of the target element will be transcluded and inserted into template where ng-transclude is used
-        transclude: false,
-        //the link function post compile
+        template: '<svg></svg>',//require('./ClassificationDistribution.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
+            var svg = d3.select($elem.find('svg')[0]),
+                win = angular.element(window),
+                chart;
+
+            function updateData() {
+                if (chart && $scope.counts) {
+                    var targetColor, chartColors = [];
+
+                    //See which classifications are included in the data and set the chart colors.
+                    angular.forEach($scope.counts, function(chartDataItem) {
+                        targetColor = '#1565C0';
+                        if(chartDataItem.term === 'Class I') {
+                            targetColor = '#FE0000';
+                        }
+                        else if(chartDataItem.term === 'Class II') {
+                            targetColor = '#F47429';
+                        }
+                        else if(chartDataItem.term === 'Class III') {
+                            targetColor = '#FEF200';
+                        }
+                        chartColors.push(targetColor);
+                    });
+
+                    chart.color(chartColors);
+                    svg.datum($scope.counts)
+                        .transition().duration(500)
+                        .call(chart);
+                }
+            }
+
+            function resizeChart() {
+                svg
+                    .style('width', Math.max(300, $elem.height()))
+                    .style('height', Math.max(300, $elem.height()));
+
+                console.log($elem.width(), $elem.height());
+
+                if (chart && chart.update) {
+                    chart.update();
+                }
+            }
+
+            //Set up and add the chart
+            nv.addGraph(function() {
+                chart = nv.models.pieChart()
+                    .x(function(d) { return d.term; })
+                    .y(function(d) { return d.count; })
+                    .showLabels(false)
+                    .showLegend(true);
+
+                return chart;
+            });
+
+            resizeChart();
+
+            $scope.$watch('counts', updateData);
+
             $elem.addClass('recalls classification-distribution');
+            win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
-                //TODO: clean up work
+                win.off('resize', resizeChart);
             });
         }
     };

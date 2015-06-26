@@ -1,10 +1,5 @@
 .recalls.classification-distribution {
-    md-card.chart {
-        #class-distribution-chart {
-            svg {
-                width: 270px;
-                height: 270px;
-            }
-        }
-    }
+    display: block;
+    min-height: 300px;
+    min-width: 300px;
 }
