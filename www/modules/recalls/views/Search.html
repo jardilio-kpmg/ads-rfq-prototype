@@ -13,7 +13,7 @@
     </md-toolbar>
 
     <md-tabs class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS" flex
-             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false">
+             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false">
         <md-tab>
             <md-tab-label>
                 <label i18n="recalls.search.recallsTab"></label>
@@ -47,13 +47,25 @@
             </md-tab-body>
         </md-tab>
 
-        <md-tab ng-disabled="true">
+        <md-tab>
             <md-tab-label>
                 <label i18n="recalls.search.recallHistTab"></label>
             </md-tab-label>
 
             <md-tab-body>
-                Recall History
+                <md-content>
+                    <md-card>
+                        <md-card-content layout="row" layout-align="center center">
+                            <recall-history recall-history-data="recalls.recallHistoryData"></recall-history>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-content>
+                            <label>Classification Descriptions</label>
+                        </md-card-content>
+                    </md-card>
+                </md-content>
             </md-tab-body>
         </md-tab>
     </md-tabs>

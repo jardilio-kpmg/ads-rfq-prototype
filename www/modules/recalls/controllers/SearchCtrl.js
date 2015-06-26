@@ -53,6 +53,14 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
     self.recalls = null;
 
     /**
+     * The list of recall history results found
+     * @name recalls.controllers.SearchCtrl#recallHistoryData
+     * @propertyOf recalls.controllers.SearchCtrl
+     * @type {array}
+     */
+    self.recallHistoryData = [];
+
+    /**
      * Requests recall results based on the code or search terms provided.
      * @name recalls.controllers.SearchCtrl#searchByBarcode
      * @methodOf recalls.controllers.SearchCtrl
