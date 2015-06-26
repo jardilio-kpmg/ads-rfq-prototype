@@ -34,12 +34,12 @@ require('./main.scss');
  * @module openfda
  * @type {angular.Module}
  */
-var openfda = angular.module('openfda', ['ng','ngRoute','kpmgAngular','ngMaterial']);
+var openfda = angular.module('openfda', ['ng','kpmgAngular']);
 
 openfda.constant('openFdaDefaults', {
     server: '//api.fda.gov',
     api_key: 'CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic',// jshint ignore:line
-    limit: 30,
+    limit: 100,
     skip: 0,
     status: 'ongoing'
 });
