@@ -13,7 +13,7 @@
     </md-toolbar>
 
     <md-tabs class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS" flex
-             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="true" md-no-disconnect="false">
+             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false">
         <md-tab>
             <md-tab-label>
                 <label i18n="recalls.search.recallsTab"></label>
@@ -54,17 +54,17 @@
                         <md-card-content>
                             <md-input-container>
                                 <label i18n="recalls.classDistribution.class1Title"></label>
-                                <textarea readonly ng-model="classificationDistribution.class1Description"/>
+                                <textarea readonly ng-model="search.class1Description"/>
                             </md-input-container>
 
                             <md-input-container>
                                 <label i18n="recalls.classDistribution.class2Title"></label>
-                                <textarea readonly ng-model="classificationDistribution.class2Description"/>
+                                <textarea readonly ng-model="search.class2Description"/>
                             </md-input-container>
 
                             <md-input-container>
                                 <label i18n="recalls.classDistribution.class3Title"></label>
-                                <textarea readonly ng-model="classificationDistribution.class3Description"/>
+                                <textarea readonly ng-model="search.class3Description"/>
                             </md-input-container>
                         </md-card-content>
                     </md-card>
