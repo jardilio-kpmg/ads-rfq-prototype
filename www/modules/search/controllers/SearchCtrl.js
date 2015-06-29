@@ -2,14 +2,14 @@ var main = require('../main'),
     angular = require('angular');
 
 /**
- * @class recalls.controllers.SearchCtrl
+ * @class search.controllers.SearchCtrl
  * @see http://docs.angularjs.org/guide/dev_guide.mvc.understanding_controller
  * @example {@lang xml}
  * <div ng-controller="SearchCtrl as ctrl">
  *      <h1>{{ctrl.getName()}}</h1>
  * </div>
  * @example
- * angular.module('recalls').directive('mydirective', function () {
+ * angular.module('search').directive('mydirective', function () {
  *      return {
  *          controller: 'SearchCtrl',
  *          require: ['mydirective'],
@@ -26,6 +26,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                                         /**factual.services.factualUpcService*/ factualUpcService) {
 
     var self = this,
+        path = $location.path(),
         keywords, barcode;
 
     /**
@@ -35,8 +36,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
     var name = 'SearchCtrl';
 
     /**
-     * @name recalls.controllers.SearchCtrl#getName
-     * @methodOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#getName
+     * @methodOf search.controllers.SearchCtrl
      * @function
      * @returns {string}
      */
@@ -46,24 +47,24 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
 
     /**
      * The list of recall results found
-     * @name recalls.controllers.SearchCtrl#recalls
-     * @propertyOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#recalls
+     * @propertyOf search.controllers.SearchCtrl
      * @type {array}
      */
     self.recalls = null;
 
     /**
      * The list of recall results counted by classification
-     * @name recalls.controllers.SearchCtrl#classifications
-     * @propertyOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#classifications
+     * @propertyOf search.controllers.SearchCtrl
      * @type {array}
      */
     self.classifications = null;
 
     /**
      * Requests recall results based on the code or search terms provided.
-     * @name recalls.controllers.SearchCtrl#searchByBarcode
-     * @methodOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#searchByBarcode
+     * @methodOf search.controllers.SearchCtrl
      * @function
      * @param {string} barcode A UPC barcode string to search for.
      */
@@ -98,15 +99,15 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                     .error(processResults);
             });
 
-        foodEnforcementService.getRecallsByKeyword(keywords, {count: 'classification.exact'})
+        foodEnforcementService.getRecallsByBarcode(barcode, {count: 'classification.exact'})
             .success(processClassification)
             .error(processClassification);
     };
 
     /**
      * Requests recall results based on one or more keyword strings.
-     * @name recalls.controllers.SearchCtrl#searchByKeywords
-     * @methodOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#searchByKeywords
+     * @methodOf search.controllers.SearchCtrl
      * @function
      * @param {string} keywords A string of terms to match recall records against.
      */
@@ -135,8 +136,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
     /**
      * Resets the search-related properties so the user can search
      * for another barcode or keyword.
-     * @name recalls.controllers.SearchCtrl#resetSearchForm
-     * @methodOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#resetSearchForm
+     * @methodOf search.controllers.SearchCtrl
      * @function
      */
     self.resetSearchForm = function () {
@@ -194,7 +195,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
             else if (search.keywords && search.keywords !== keywords) {
                 self.searchByKeywords(search.keywords);
             }
-            else if (!search.barcode && !search.keywords) {
+            else if (!search.barcode && !search.keywords && path === $location.path()) {
                 self.resetSearchForm();
             }
         },

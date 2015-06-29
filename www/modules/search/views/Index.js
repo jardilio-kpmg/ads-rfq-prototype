@@ -3,8 +3,8 @@ var main = require('../main');
 require('./Index.scss');
 
 /**
- * @name recalls.views.search
- * @propertyOf recalls.views
+ * @name search.views.search
+ * @propertyOf search.views
  * @ see http://docs.angularjs.org/api/ng.$routeProvider
  * @example {@lang xml}
  * <a href="#/search">Search</a>;

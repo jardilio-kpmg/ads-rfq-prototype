@@ -15,7 +15,7 @@ main.directive('scanButton', function () {
         restrict: 'A',
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             /**
-             * @type {recalls.controllers.ScanButtonCtrl}
+             * @type {scan.controllers.ScanButtonCtrl}
              */
             var scanButton = controllers[0];
             $elem.on('click', function () {
@@ -23,7 +23,7 @@ main.directive('scanButton', function () {
                     scanButton.startScan();
                 });
             });
-            $elem.addClass('ads scan-button');
+            $elem.addClass('scan scan-button');
         }
     };
 

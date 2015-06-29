@@ -3,15 +3,15 @@
  * @see http://angular.github.io/protractor/#/
  * @see http://jasmine.github.io/
  */
-describe('URL Route: /recalls/', function () {
+describe('URL Route: /scan/', function () {
 
     beforeEach(function() {
-        browser.get('#/recalls/');
+        browser.get('#/scan/');
     });
 
     it('should route to view', function () {
-        expect(browser.getLocationAbsUrl()).toMatch(/\/recalls\/$/);
-        expect(element(by.css('.recalls.index')).isPresent()).toBe(true);
+        expect(browser.getLocationAbsUrl()).toMatch(/\/scan\/$/);
+        expect(element(by.css('.scan.index')).isPresent()).toBe(true);
     });
 
     //TODO: is there a good way to force file input selection for automated testing?

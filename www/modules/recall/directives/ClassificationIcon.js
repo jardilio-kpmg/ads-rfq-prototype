@@ -18,7 +18,7 @@ main.directive('classificationIcon', function () {
         restrict: 'E',
         template: require('./ClassificationIcon.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
-            $elem.addClass('ads classification-icon');
+            $elem.addClass('recall classification-icon');
             $scope.$on('$destroy', function () {
                 //TODO: clean up work
             });
