@@ -1,11 +1,18 @@
 .scan.index {
-    md-icon {
-        margin: -10px;
-        font-size: 230px;
-        height: 230px;
-        width: 230px;
+    .safer {
+        background-color: white;
+        background-image: url(splash/splash.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
     .md-button {
         width: 200px;
+    }
+    h1 {
+        margin-bottom: 0;
+    }
+    h2 {
+        margin-top: 0;
     }
 }

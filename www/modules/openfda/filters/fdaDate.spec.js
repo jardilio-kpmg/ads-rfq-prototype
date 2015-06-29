@@ -1,6 +1,6 @@
 describe('openfda/filters/fdaDate.js', function () {
 
-
+    'use strict';
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -22,22 +22,17 @@ describe('openfda/filters/fdaDate.js', function () {
         $httpBackend.resetExpectations();
     }));
 
-    /*
     it('should be defined in module', function () {
         expect(filter).toBeDefined();
-    });*/
+    });
 
-    //TODO: write your unit tests for fdaDate
-
-    /*
     it('should return proper filtered value', function () {
-        expect(filter('something')).toBe('something filtered');
+        expect(filter('20140101', 'MM/dd/yyyy')).toBe('01/01/2014');
     });
 
     afterEach(function () {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
-    */
 
 });

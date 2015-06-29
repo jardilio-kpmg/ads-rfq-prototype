@@ -2,8 +2,8 @@
     "scan": {
         "title": "Is My Food Safe?",
         "subTitle": "Check Food Recalls Now...",
-        "scanButton": "Scan Any Barcode",
-        "enterKeywordsButton": "Enter Keyword/UPC",
+        "scanButton": "Scan Barcode",
+        "enterKeywordsButton": "Enter Keyword or UPC",
         "noBarcodeFound": {
             "title": "Whoops!",
             "message": "I couldn't read a UPC, lets try that again with a new image.",
