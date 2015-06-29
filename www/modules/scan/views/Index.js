@@ -12,6 +12,8 @@ require('./Index.scss');
 main.config(function (/**ng.$routeProvider*/ $routeProvider, /**kpmgAngular.services.kRedirectProvider*/ kRedirectProvider) {// jshint ignore:line
 
     $routeProvider.when('/scan', {
+        controller: 'ScanCtrl',
+        controllerAs: 'scan',
         template: require('./Index.html')
     });
 

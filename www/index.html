@@ -119,27 +119,41 @@
     </div>
 <![endif]-->
 
-<ng-view>
-    <style>
-        .splash {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            max-width: 691px;
-            margin: auto;
-            background: white;
-            background-image: url(splash/splash.png);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-    </style>
-    <div class="splash"></div>
-</ng-view>
+<ng-view></ng-view>
+
+<style>
+    .splash {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: white;
+    }
+    .splash:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 691px;
+        height: 33%;
+        margin: auto;
+        background-image: url(splash/splash.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .app.ready .splash {
+        display: none;
+    }
+</style>
+<div class="splash"></div>
 
 <script type="application/javascript">window.timestamp = new Date();</script>
 

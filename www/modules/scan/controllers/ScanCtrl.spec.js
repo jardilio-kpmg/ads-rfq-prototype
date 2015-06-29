@@ -1,6 +1,6 @@
-describe('openfda/filters/fdaClassDesc.js', function () {
+describe('scan/controllers/ScanCtrl.js', function () {
 
-    'use strict';
+
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -12,26 +12,36 @@ describe('openfda/filters/fdaClassDesc.js', function () {
      */
     var $httpBackend;
 
-    var filter;
+    /**
+     * @type {scan.controllers.ScanCtrl}
+     */
+    var controller;
 
-    beforeEach(angular.mock.module('ngMock','openfda'));
+    var $scope;
 
-    beforeEach(inject(function ($filter, $injector) {
+    beforeEach(angular.mock.module('ngMock','scan'));
+
+    beforeEach(inject(function ($injector, $controller, $rootScope) {
+        $scope = $rootScope.$new();
         $httpBackend = $injector.get('$httpBackend');
-        filter = $filter('fdaClassDesc');
+        controller = $controller('ScanCtrl', {'$scope': $scope});
         $httpBackend.resetExpectations();
     }));
 
     it('should be defined in module', function () {
-        expect(filter).toBeDefined();
+        expect(controller).toBeDefined();
     });
 
-    it('should return proper filtered value', function () {
-        expect(filter('Class I')).toBe('Dangerous or defective products that predictably could cause serious health problems or death. Examples include: food found to contain botulinum toxin, food with undeclared allergens, a label mix-up on a lifesaving drug, or a defective artificial heart valve.');
+    //TODO: write your unit tests for ScanCtrl
+
+    it('should return proper name value', function () {
+        expect(controller.getName()).toBe('ScanCtrl');
     });
 
     afterEach(function () {
+        $scope.$destroy();
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
+
 });
