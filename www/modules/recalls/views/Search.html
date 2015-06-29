@@ -93,16 +93,32 @@
                  ng-if="search.recalls.length == 0" layout="row">
                 <label i18n="recalls.search.noResults"></label>
             </div>
-            <form name="searchForm" class="search-form"
-                  ng-submit="search.searchByKeywords(searchForm.manualSearch)"
-                  layout="column" layout-align="center center">
-                <md-input-container class="md-icon-float">
-                    <label i18n="recalls.search.manualSearchInput"></label>
-                    <md-icon>search</md-icon>
-                    <input ng-model="searchForm.manualSearch" type="search" required autocomplete="off">
+            <form name="keywordSearch" class="search-form"
+                  ng-submit="search.searchByKeywords(searchForm.keywords)"
+                  layout="column">
+                <md-input-container>
+                    <label i18n="recalls.search.keywordSearch"></label>
+                    <input ng-model="searchForm.keywords" type="search" required autocomplete="off">
                 </md-input-container>
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="keywordSearch.$invalid">
+                    <md-icon>search</md-icon>
+                    <span i18n="recalls.search.searchKeywords"></span>
+                </md-button>
             </form>
-            <span class="or">or</span>
+            <span class="or" i18n="recalls.search.or"></span>
+            <form name="barcodeSearch" class="search-form"
+                  ng-submit="search.searchByBarcode(searchForm.barcode)"
+                  layout="column">
+                <md-input-container>
+                    <label i18n="recalls.search.barcodeSearch"></label>
+                    <input ng-model="searchForm.barcode" type="search" required autocomplete="off">
+                </md-input-container>
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="barcodeSearch.$invalid">
+                    <md-icon>search</md-icon>
+                    <span i18n="recalls.search.searchBarcode"></span>
+                </md-button>
+            </form>
+            <span class="or" i18n="recalls.search.or"></span>
             <md-button scan-button class="md-primary md-raised">
                 <md-icon>photo_camera</md-icon>
                 <span i18n="recalls.search.manualSearchScanButton"></span>
