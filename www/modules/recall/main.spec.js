@@ -1,6 +1,6 @@
-var recalls = require('./main');
+var recall = require('./main');
 
-describe('recalls/main.js', function () {
+describe('recall/main.js', function () {
 
     'use strict';
 
@@ -14,19 +14,19 @@ describe('recalls/main.js', function () {
      */
     var $httpBackend;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','recall'));
 
     beforeEach(inject(function ($injector) {
         $httpBackend = $injector.get('$httpBackend');
         $httpBackend.resetExpectations();
     }));
 
-    it('should return recalls instance', function () {
-        expect(recalls).toBeDefined();
+    it('should return recall instance', function () {
+        expect(recall).toBeDefined();
     });
 
     it('should return app name', function () {
-        expect(recalls.name).toBe('recalls');
+        expect(recall.name).toBe('recall');
     });
 
     afterEach(function () {

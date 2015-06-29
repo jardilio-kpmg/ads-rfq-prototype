@@ -1,9 +1,9 @@
-<div class="recalls search" layout="column" layout-fill>
+<div class="search index" layout="column" layout-fill>
 
     <md-toolbar class="header-toolbar">
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
-            <h2 flex i18n="recalls.search.title"></h2>
+            <h2 flex i18n="search.title"></h2>
             <md-button class="md-icon-button"
                        ng-if="search.state === search.states.RESULTS"
                        ng-click="search.resetSearchForm()">
@@ -16,12 +16,12 @@
              md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false">
         <md-tab>
             <md-tab-label>
-                <label i18n="recalls.search.recallsTab"></label>
+                <label i18n="search.recallsTab"></label>
             </md-tab-label>
 
             <md-tab-body>
                 <md-list class="recall-list">
-                    <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recalls/campaigns/{{item['@id']}}">
+                    <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recall/{{item['@id']}}">
                         <md-card flex>
                             <md-card-content layout="row" layout-align="start center">
                                 <classification-icon class="item-classificiation" classification="{{item.classification}}"></classification-icon>
@@ -39,7 +39,7 @@
 
         <md-tab>
             <md-tab-label>
-                <label i18n="recalls.search.classificationsTab"></label>
+                <label i18n="search.classificationsTab"></label>
             </md-tab-label>
 
             <md-tab-body>
@@ -51,19 +51,19 @@
                     </md-card>
                     <md-card>
                         <md-card-content>
-                            <h3 i18n="recalls.classDistribution.class1Title"></h3>
+                            <h3 i18n="search.classDistribution.class1Title"></h3>
                             <p i18n="openfda.classDistribution.class1Description"></p>
                         </md-card-content>
                     </md-card>
                     <md-card>
                         <md-card-content>
-                            <h3 i18n="recalls.classDistribution.class2Title"></h3>
+                            <h3 i18n="search.classDistribution.class2Title"></h3>
                             <p i18n="openfda.classDistribution.class2Description"></p>
                         </md-card-content>
                     </md-card>
                     <md-card>
                         <md-card-content>
-                            <h3 i18n="recalls.classDistribution.class3Title"></h3>
+                            <h3 i18n="search.classDistribution.class3Title"></h3>
                             <p i18n="openfda.classDistribution.class3Description"></p>
                         </md-card-content>
                     </md-card>
@@ -73,7 +73,7 @@
 
         <md-tab ng-disabled="true">
             <md-tab-label>
-                <label i18n="recalls.search.recallHistTab"></label>
+                <label i18n="search.recallHistTab"></label>
             </md-tab-label>
 
             <md-tab-body>
@@ -91,37 +91,37 @@
         <div layout="column">
             <div class="search-results-feedback"
                  ng-if="search.recalls.length == 0" layout="row">
-                <label i18n="recalls.search.noResults"></label>
+                <label i18n="search.noResults"></label>
             </div>
             <form name="keywordSearch" class="search-form"
                   ng-submit="search.searchByKeywords(searchForm.keywords)"
                   layout="column">
                 <md-input-container>
-                    <label i18n="recalls.search.keywordSearch"></label>
+                    <label i18n="search.keywordSearch"></label>
                     <input ng-model="searchForm.keywords" type="search" required autocomplete="off">
                 </md-input-container>
                 <md-button type="submit" class="md-raised md-primary" ng-disabled="keywordSearch.$invalid">
                     <md-icon>search</md-icon>
-                    <span i18n="recalls.search.searchKeywords"></span>
+                    <span i18n="search.searchKeywords"></span>
                 </md-button>
             </form>
-            <span class="or" i18n="recalls.search.or"></span>
+            <span class="or" i18n="search.or"></span>
             <form name="barcodeSearch" class="search-form"
                   ng-submit="search.searchByBarcode(searchForm.barcode)"
                   layout="column">
                 <md-input-container>
-                    <label i18n="recalls.search.barcodeSearch"></label>
+                    <label i18n="search.barcodeSearch"></label>
                     <input ng-model="searchForm.barcode" type="search" required autocomplete="off">
                 </md-input-container>
                 <md-button type="submit" class="md-raised md-primary" ng-disabled="barcodeSearch.$invalid">
                     <md-icon>search</md-icon>
-                    <span i18n="recalls.search.searchBarcode"></span>
+                    <span i18n="search.searchBarcode"></span>
                 </md-button>
             </form>
-            <span class="or" i18n="recalls.search.or"></span>
+            <span class="or" i18n="search.or"></span>
             <md-button scan-button class="md-primary md-raised">
                 <md-icon>photo_camera</md-icon>
-                <span i18n="recalls.search.manualSearchScanButton"></span>
+                <span i18n="search.manualSearchScanButton"></span>
             </md-button>
         </div>
     </div>

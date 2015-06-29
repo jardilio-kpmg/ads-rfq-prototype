@@ -166,7 +166,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
             $location.search({});
             $location.replace();
             $timeout(function () {
-                $location.path('/recalls/campaigns/' + results[0]['@id']);// jshint ignore:line
+                $location.path('/recall/' + results[0]['@id']);// jshint ignore:line
             });
             return;
         }
