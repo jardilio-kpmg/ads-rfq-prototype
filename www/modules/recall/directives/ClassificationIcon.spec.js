@@ -1,4 +1,4 @@
-describe('ads/directives/ClassificationIcon.js', function () {
+describe('recall/directives/ClassificationIcon.js', function () {
 
 
 
@@ -14,7 +14,7 @@ describe('ads/directives/ClassificationIcon.js', function () {
 
     var directive, $scope;
 
-    beforeEach(angular.mock.module('ngMock','ads'));
+    beforeEach(angular.mock.module('ngMock','recall'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
         $scope = $rootScope.$new();
@@ -27,7 +27,7 @@ describe('ads/directives/ClassificationIcon.js', function () {
 
     it('should add custom class to element', function () {
         expect(directive.hasClass('classification-icon')).toBe(true);
-        expect(directive.hasClass('ads')).toBe(true);
+        expect(directive.hasClass('recall')).toBe(true);
     });
 
     it('should add correct icon for Class I', function () {

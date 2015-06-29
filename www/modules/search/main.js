@@ -34,7 +34,7 @@ require('./main.scss');
  * @module search
  * @type {angular.Module}
  */
-var search = angular.module('search', ['ng','ngRoute','kpmgAngular','ngMaterial','ads']);
+var search = angular.module('search', ['ng','ngRoute','kpmgAngular','ngMaterial','ads','factual','openfda']);
 
 //TODO: register angular module dependencies, run and config functions...
 

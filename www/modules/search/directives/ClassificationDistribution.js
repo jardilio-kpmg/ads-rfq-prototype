@@ -7,8 +7,8 @@ require('../../../libs/nvd3/nv.d3.css');
 require('./ClassificationDistribution.scss');
 
 /**
- * @name recalls.directives.classification-distribution
- * @propertyOf recalls.directives
+ * @name search.directives.classification-distribution
+ * @propertyOf search.directives
  * @see http://docs.angularjs.org/guide/directive
  * @examplewidth: 300px;
  height: 300px;
@@ -80,7 +80,7 @@ main.directive('classificationDistribution', function () {
 
             $scope.$watch('counts', updateData);
 
-            $elem.addClass('recalls classification-distribution');
+            $elem.addClass('search classification-distribution');
             win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
                 win.off('resize', resizeChart);

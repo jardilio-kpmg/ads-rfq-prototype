@@ -2,7 +2,7 @@
  * Unit tests for the view at route /recalls/campaigns
  * @see http://jasmine.github.io/
  */
-describe('URL Route: /recalls/campaigns', function () {
+describe('URL Route: /recall/:id', function () {
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -21,7 +21,7 @@ describe('URL Route: /recalls/campaigns', function () {
      */
     var kSession;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','recall'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/ $rootScope, $injector) {
         $scope = $rootScope;
@@ -35,11 +35,11 @@ describe('URL Route: /recalls/campaigns', function () {
     }));
 
     it('should route to view', function () {
-        $location.path('/recalls/campaigns/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=_id:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
+        $location.path('/recall/123');
+        $httpBackend.expectGET('//api.fda.gov/food/enforcement.json?search=_id:123&api_key=CGEoOaTA5x5mmrKoA677SU7hW6tLjR94l33eDGic&limit=1&skip=0').respond({});
         $httpBackend.flush();
         $scope.$apply();
-        expect($ngView[0].querySelector('.recalls.campaigns')).not.toBe(null);
+        expect($ngView[0].querySelector('.recall.index')).not.toBe(null);
     });
 
     afterEach(function () {

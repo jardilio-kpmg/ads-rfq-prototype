@@ -34,7 +34,7 @@ require('./main.scss');
  * @module recall
  * @type {angular.Module}
  */
-var recall = angular.module('recall', ['ng','ngRoute','kpmgAngular','ngMaterial','ads']);
+var recall = angular.module('recall', ['ng','ngRoute','kpmgAngular','ngMaterial','ads','factual','openfda']);
 
 //TODO: register angular module dependencies, run and config functions...
 

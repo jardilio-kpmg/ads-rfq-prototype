@@ -3,7 +3,7 @@ var main = require('../main');
 require('./Index.scss');
 
 /**
- * @name recalls.views.campaigns
+ * @name recall.views.campaigns
  * @propertyOf recalls.views
  * @ see http://docs.angularjs.org/api/ng.$routeProvider
  * @example {@lang xml}

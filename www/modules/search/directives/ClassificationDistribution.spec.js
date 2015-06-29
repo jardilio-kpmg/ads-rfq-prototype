@@ -1,4 +1,4 @@
-describe('recalls/directives/ClassificationDistribution.js', function () {
+describe('search/directives/ClassificationDistribution.js', function () {
 
 
 
@@ -14,7 +14,7 @@ describe('recalls/directives/ClassificationDistribution.js', function () {
 
     var directive, $scope;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','search'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
         $scope = $rootScope.$new();
@@ -27,7 +27,7 @@ describe('recalls/directives/ClassificationDistribution.js', function () {
 
     it('should add custom class to element', function () {
         expect(directive.hasClass('classification-distribution')).toBe(true);
-        expect(directive.hasClass('recalls')).toBe(true);
+        expect(directive.hasClass('search')).toBe(true);
     });
 
     it('should add template children', function () {
