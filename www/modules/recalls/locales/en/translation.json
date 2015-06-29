@@ -7,11 +7,16 @@
             "enterKeywordsButton": "Enter Keyword/UPC"
         },
         "search": {
+            "or": "or",
             "noResults": "No results were found...",
             "scanButton": "Try Again?",
             "manualSearchInput": "Keywords or UPC",
             "manualSearchScanButton": "Scan Any Barcode",
             "manualSearchButton": "Search",
+            "keywordSearch": "Keywords",
+            "searchKeywords": "Search by Keywords",
+            "barcodeSearch": "Barcode",
+            "searchBarcode": "Search by Barcode",
             "classificationDistributionButton": "Class Distribution",
             "classificationDistributionShortButton": "Class Distr",
             "recallHistoryButton": "Recall History",
