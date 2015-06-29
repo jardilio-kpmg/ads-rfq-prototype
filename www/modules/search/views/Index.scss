@@ -1,4 +1,4 @@
-.recalls.search {
+.search.index {
   position: relative;
 
   md-tabs {
@@ -99,10 +99,8 @@
     }
     .or {
       text-align: center;
-      margin-bottom: 15px;
-    }
-    form {
-      height: 64px;
+      margin: 10px;
+      position: relative;
     }
     md-input-container {
       width: 100%;

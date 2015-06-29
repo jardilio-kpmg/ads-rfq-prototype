@@ -140,7 +140,7 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
             function (result) {
                 if (result && result.codeResult && result.codeResult.code) {
                     $scope.$apply(function () {
-                        $location.path('/recalls/search');
+                        $location.path('/search');
                         $location.search({barcode: result.codeResult.code});
                     });
                 }
@@ -153,9 +153,9 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
                 else {
                     $mdDialog.show(
                         $mdDialog.alert()
-                            .title(kLocalizeFilter('recalls.scan.noBarcodeFound.title'))
-                            .content(kLocalizeFilter('recalls.scan.noBarcodeFound.message'))
-                            .ok(kLocalizeFilter('recalls.scan.noBarcodeFound.ok'))
+                            .title(kLocalizeFilter('scan.noBarcodeFound.title'))
+                            .content(kLocalizeFilter('scan.noBarcodeFound.message'))
+                            .ok(kLocalizeFilter('scan.noBarcodeFound.ok'))
                     );
                 }
             }
