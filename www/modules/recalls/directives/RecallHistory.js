@@ -3,6 +3,7 @@ var main = require('../main'),
     nv = require('nvd3'),
     d3 = require('d3');
 
+require('../../../libs/nvd3/nv.d3.css');
 require('./RecallHistory.scss');
 
 /**
@@ -15,92 +16,81 @@ require('./RecallHistory.scss');
 main.directive('recallHistory', function () {
 
     return {
-        //priority of this directive to be processed over others on same element, higher number processed first
-        priority: 0,
-        //if true, no other directives will be processed after this priority has been completed
-        terminal: false,
-        //if true, will create new child scope for element, if object then will create isolated scope
         scope: {
-            recallHistoryData: '=recallHistoryData'
+            recallHistoryData: '='
         },
-        //controller: 'RecallHistoryCtrl',
-        //controllerAs: 'recallHistory',
-        //optional string name to require another directive to exist on target element
-        require: [],
-        //restrict directive declarations to elements (E), attributes (A), classes (C) and comments (M)
         restrict: 'E',
-        //optional (string) template if this directive will produce some markup on element, can also use templateUrl
         template: require('./RecallHistory.html'),
-        //if true, innerHTML of the target element will be transcluded and inserted into template where ng-transclude is used
-        transclude: false,
-        //the link function post compile
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
+            var svg = d3.select($elem.find('svg')[0]),
+                win = angular.element(window),
+                chart;
 
-            /**
-             * Builds a stacked bar chart based on the loaded data.
-             * @name addBarChart
-             * @function
-             * @param {Object} chartData The data used to populate the pie chart.
-             */
-            function addBarChart(chartData) {
-                if(nv) {
+            function updateData() {
+                if (chart && $scope.recallHistoryData) {
                     var targetColor, chartColors = [];
 
-                    if(!chartData) {
-                        chartData = [{term: '', count: 1}];
-                    }
-
                     //See which classifications are included in the data and set the chart colors.
-                    angular.forEach(chartData, function(chartDataItem) {
-                     targetColor = '#1565C0';
-                     if(chartDataItem.term === 'Class I') {
-                        targetColor = '#FE0000';
-                     } else if(chartDataItem.term === 'Class II') {
-                        targetColor = '#F47429';
-                     } else if(chartDataItem.term === 'Class III') {
-                        targetColor = '#FEF200';
-                     }
-                     chartColors.push(targetColor);
-                     });
-
-                    //Set up and add the chart
-                    //TODO: Example: http://nvd3.org/examples/multiBar.html
-                    nv.addGraph(function() {
-                        var chart = nv.models.pieChart()
-                            .x(function(d) { return d.term; })
-                            .y(function(d) { return d.count; })
-                            .showLabels(false)
-                            .showLegend(true)
-                            .color(chartColors);
-
-                        d3.select('#recall-history-chart svg')
-                            .datum(chartData)
-                            .transition().duration(350)
-                            .call(chart);
-
-                        //TODO: This will move the legend below the chart but we need to figure out re-positioning after clicking a legend item.
-                        /*d3.select('.nv-legendWrap')
-                         .attr('transform','translate(0,0)');*/
-
-                        return chart;
+                    angular.forEach($scope.recallHistoryData, function(chartDataItem) {
+                        targetColor = '#1565C0';
+                        if(chartDataItem.key === 'Class I') {
+                            targetColor = '#FE0000';
+                        }
+                        else if(chartDataItem.key === 'Class II') {
+                            targetColor = '#F47429';
+                        }
+                        else if(chartDataItem.key === 'Class III') {
+                            targetColor = '#FEF200';
+                        }
+                        chartColors.push(targetColor);
                     });
+
+                    chart.color(chartColors);
+                    svg.datum($scope.recallHistoryData)
+                        .transition().duration(500)
+                        .call(chart);
                 }
             }
 
-            /**
-             * Monitor changes in the data bound to this directive's
-             * recall-history-data attribute. We'll draw a chart based
-             * on the data.
-             */
-            $scope.$watch('recallHistoryData', function(newChartData) {
-                addBarChart(newChartData);
+            function resizeChart() {
+                /*svg
+                    .style('width', Math.max(350, $elem.height()))
+                    .style('height', Math.max(300, $elem.height()));*/
+
+                //console.log($elem.width(), $elem.height());
+
+                if (chart && chart.update) {
+                    chart.update();
+                }
+            }
+
+            //Set up and add the chart
+            nv.addGraph(function() {
+                chart = nv.models.multiBarChart()
+                        .reduceXTicks(false)
+                        .showYAxis(false)
+                        .rotateLabels(0)
+                        .stacked(true)
+                        .showControls(false)
+                        .groupSpacing(0.1)
+                        .margin({left: 0, right: 0, top: 0, button: 0})
+                    ;
+
+                chart.xAxis
+                    .tickFormat(d3.format('f'));
+
+                return chart;
             });
 
+            resizeChart();
+
+            $scope.$watch('recallHistoryData', updateData);
+
             $elem.addClass('recalls recall-history');
+            win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
-                //TODO: clean up work
+                win.off('resize', resizeChart);
             });
         }
     };
-
 });

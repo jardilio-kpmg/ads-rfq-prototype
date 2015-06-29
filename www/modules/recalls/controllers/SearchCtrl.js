@@ -186,6 +186,10 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         self.classifications = (results && results.results) || [];
     }
 
+    /*function processRecallHistory(results) {
+        self.recallHistoryData = (results && results.results) || [];
+    }*/
+
     var search = {};
 
     $scope.$watch(

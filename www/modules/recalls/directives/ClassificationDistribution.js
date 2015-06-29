@@ -58,7 +58,7 @@ main.directive('classificationDistribution', function () {
                     .style('width', Math.max(300, $elem.height()))
                     .style('height', Math.max(300, $elem.height()));
 
-                console.log($elem.width(), $elem.height());
+                //console.log($elem.width(), $elem.height());
 
                 if (chart && chart.update) {
                     chart.update();
