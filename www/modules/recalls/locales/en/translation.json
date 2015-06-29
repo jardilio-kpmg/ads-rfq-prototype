@@ -3,8 +3,8 @@
         "index": {
             "title": "Is My Food Safe?",
             "subTitle": "Check Food Recalls Now...",
-            "scanButton": "Scan Any Barcode",
-            "enterKeywordsButton": "Enter Keyword/UPC"
+            "scanButton": "Scan Barcode",
+            "enterKeywordsButton": "Enter Keyword or UPC"
         },
         "search": {
             "or": "or",

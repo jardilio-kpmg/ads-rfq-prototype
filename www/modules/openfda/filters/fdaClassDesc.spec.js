@@ -1,5 +1,7 @@
 describe('openfda/filters/fdaClassDesc.js', function () {
 
+    'use strict';
+
     /**
      * $httpBackend is used to flush http requests which may be linked thru
      * services in your controller to be performed synchronously.
@@ -20,20 +22,16 @@ describe('openfda/filters/fdaClassDesc.js', function () {
         $httpBackend.resetExpectations();
     }));
 
-    /*
     it('should be defined in module', function () {
         expect(filter).toBeDefined();
     });
 
-    //TODO: write your unit tests for fdaClassDesc
-
     it('should return proper filtered value', function () {
-        expect(filter('something')).toBe('something filtered');
+        expect(filter('Class I')).toBe('Dangerous or defective products that predictably could cause serious health problems or death. Examples include: food found to contain botulinum toxin, food with undeclared allergens, a label mix-up on a lifesaving drug, or a defective artificial heart valve.');
     });
 
     afterEach(function () {
         $httpBackend.verifyNoOutstandingExpectation();
         $httpBackend.verifyNoOutstandingRequest();
     });
-    */
 });
