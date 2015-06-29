@@ -24,13 +24,34 @@ main.directive('recallHistory', function () {
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
                 win = angular.element(window),
-                chart;
+                chart, legendSeries;
 
             function updateData() {
                 if (chart && $scope.recallHistoryData) {
                     svg.datum($scope.recallHistoryData)
                         .transition().duration(500)
                         .call(chart);
+
+                    //Draw a rectangle behind each legend item to provide additional click area.
+                    if($scope.recallHistoryData.length) {
+                        legendSeries = svg.selectAll('.nv-legendWrap .nv-series');
+                        legendSeries.each(function() {
+                            var thisSeries = d3.select(this);
+
+                            //I ran into an instance where more than one rect was drawn.
+                            // This is here to prevent multiple rect shapes.
+                            if(thisSeries && thisSeries.length && thisSeries[0].length && thisSeries[0][0].firstChild.tagName !== 'rect') {
+                                thisSeries.insert('rect', ':first-child')
+                                    .attr({
+                                        height: 30,
+                                        y: -16,
+                                        width: 70,
+                                        x: -12,
+                                        fill: 'transparent'
+                                    });
+                            }
+                        });
+                    }
                 }
             }
 
@@ -49,7 +70,7 @@ main.directive('recallHistory', function () {
                         .stacked(true)
                         .showControls(false)
                         .groupSpacing(0.1)
-                        .margin({left: 0, right: 0, top: 0, button: 0})
+                        .margin({left: 0, right: 0, top: 0, bottom: 25})
                     ;
 
                 chart.xAxis

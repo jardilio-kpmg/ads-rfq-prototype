@@ -72,8 +72,18 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
      */
     self.tempRecallHistoryData = [];
 
-    self.recallHistoryExpectedCheckInPoints = 4;
+    /**
+     * The number of api calls expected to be made to populate
+     * the Recall History chart.
+     * @type {number}
+     */
+    self.recallHistoryExpectedCheckInPoints = 5;
 
+    /**
+     * The number of api calls that have been made, of the expected
+     * number, to populate the Recall History chart.
+     * @type {number}
+     */
     self.recallHistoryCheckInPoints = 0;
 
     /**

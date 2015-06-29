@@ -25,7 +25,7 @@ main.directive('classificationDistribution', function () {
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
                 win = angular.element(window),
-                chart;
+                chart, legendSeries;
 
             function updateData() {
                 if (chart && $scope.counts) {
@@ -50,6 +50,25 @@ main.directive('classificationDistribution', function () {
                     svg.datum($scope.counts)
                         .transition().duration(500)
                         .call(chart);
+
+                    //Draw a rectangle behind each legend item to provide additional click area.
+                    if($scope.counts.length) {
+                        legendSeries = svg.selectAll('.nv-legendWrap .nv-series');
+                        legendSeries.each(function() {
+                            var thisSeries = d3.select(this);
+
+                            if(thisSeries) {
+                                thisSeries.insert('rect', ':first-child')
+                                    .attr({
+                                        height: 30,
+                                        y: -16,
+                                        width: 70,
+                                        x: -12,
+                                        fill: 'transparent'
+                                    });
+                            }
+                        });
+                    }
                 }
             }
 
@@ -57,8 +76,6 @@ main.directive('classificationDistribution', function () {
                 svg
                     .style('width', Math.max(300, $elem.height()))
                     .style('height', Math.max(300, $elem.height()));
-
-                //console.log($elem.width(), $elem.height());
 
                 if (chart && chart.update) {
                     chart.update();
