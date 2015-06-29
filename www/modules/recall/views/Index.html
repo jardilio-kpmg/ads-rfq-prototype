@@ -12,8 +12,8 @@
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </md-content>
     <md-content flex layout-gt-sm="row" layout-wrap class="result" ng-show="recall.state === recall.states.RESULT">
-        <div flex-gt-sm="50" layout-gt-sm="column">
-            <md-card flex-gt-sm ng-if="recall.product.imageUrl">
+        <div flex-gt-sm="50" layout-gt-sm="column" ng-if="recall.product.imageUrl">
+            <md-card flex-gt-sm >
                 <img ng-src="{{recall.product.imageUrl}}" class="md-card-image" alt="">
             </md-card>
         </div>
@@ -63,7 +63,7 @@
                 </md-card-content>
             </md-card>
         </div>
-        <div flex-gt-sm layout-gt-sm="column">
+        <div flex-gt-sm="50" layout-gt-sm="column">
             <md-card flex-gt-sm>
                 <md-card-content>
                     <md-input-container>
