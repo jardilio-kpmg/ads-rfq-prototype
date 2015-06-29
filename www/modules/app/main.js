@@ -62,7 +62,7 @@ app.config(function ($mdThemingProvider, $routeProvider, $httpProvider) {
         });
 
     //TODO: we could have additional functional areas in this app later, for now all we have is recalls
-    $routeProvider.when('/', {
+    $routeProvider.otherwise({
         redirectTo: '/scan'
     });
 
