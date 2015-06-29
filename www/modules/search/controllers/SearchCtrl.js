@@ -26,6 +26,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                                         /**factual.services.factualUpcService*/ factualUpcService) {
 
     var self = this,
+        path = $location.path(),
         keywords, barcode;
 
     /**
@@ -194,7 +195,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
             else if (search.keywords && search.keywords !== keywords) {
                 self.searchByKeywords(search.keywords);
             }
-            else if (!search.barcode && !search.keywords) {
+            else if (!search.barcode && !search.keywords && path === $location.path()) {
                 self.resetSearchForm();
             }
         },
