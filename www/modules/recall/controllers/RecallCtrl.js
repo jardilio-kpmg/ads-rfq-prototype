@@ -19,7 +19,7 @@ var main = require('../main');
  *      };
  * });
  */
-main.controller('CampaignsCtrl', function (/**ng.$rootScope.Scope*/ $scope,
+main.controller('RecallCtrl', function (/**ng.$rootScope.Scope*/ $scope,
                                            /**ng.$routeParams,*/ $routeParams,
                                            /**ng.$location,*/ $location,
                                            /**openfda.services.foodEnforcementService*/ foodEnforcementService,

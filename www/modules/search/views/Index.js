@@ -3,16 +3,18 @@ var main = require('../main');
 require('./Index.scss');
 
 /**
- * @name recalls.views.index
+ * @name recalls.views.search
  * @propertyOf recalls.views
  * @ see http://docs.angularjs.org/api/ng.$routeProvider
  * @example {@lang xml}
- * <a href="#/recalls/">Index</a>;
+ * <a href="#/search">Search</a>;
  */
 main.config(function (/**ng.$routeProvider*/ $routeProvider, /**kpmgAngular.services.kRedirectProvider*/ kRedirectProvider) {// jshint ignore:line
 
-    $routeProvider.when('/recalls/', {
-        template: require('./Index.html')
+    $routeProvider.when('/search', {
+        controller: 'SearchCtrl',
+        controllerAs: 'search', 
+        template: require('./Index.html'),
+        reloadOnSearch: false
     });
-
 });
