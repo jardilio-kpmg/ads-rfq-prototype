@@ -23,7 +23,9 @@ var main = require('../main'),
 main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeout,
                                         /**ng.$location*/ $location,
                                         /**openfda.services.foodEnforcementService*/ foodEnforcementService,
-                                        /**factual.services.factualUpcService*/ factualUpcService) {
+                                        /**factual.services.factualUpcService*/ factualUpcService,
+                                        $mdDialog,
+                                        kLocalizeFilter) {
 
     var self = this,
         path = $location.path(),
@@ -90,7 +92,20 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                     .success(function (result) {
                         var products = factualUpcService.getProducts(result);
                         if (products && products.length) {
-                            self.searchByKeywords(products[0].name);
+                            //self.searchByKeywords(products[0].name);
+                            $mdDialog.show(
+                                $mdDialog.confirm()
+                                    .title(kLocalizeFilter('search.fuzzyMatch.title'))
+                                    .content(kLocalizeFilter('search.fuzzyMatch.content', {
+                                        keywords: products[0].name,
+                                        upc: barcode
+                                    }))
+                                    .ok(kLocalizeFilter('search.fuzzyMatch.ok'))
+                                    .cancel(kLocalizeFilter('search.fuzzyMatch.cancel'))
+                            )
+                                .then(function () {
+                                    self.searchByKeywords(products[0].name);
+                                });
                         }
                         else {
                             processResults(null);

@@ -23,6 +23,12 @@
             "class1Title": "Class I",
             "class2Title": "Class II",
             "class3Title": "Class III"
+        },
+        "fuzzyMatch": {
+            "title": "UPC Not Found",
+            "content": "__upc__ was not found in the recall list, would you like to search on related recalls for \"__keywords__\"?",
+            "ok": "Yes, Please!",
+            "cancel": "No Thanks"
         }
     }
 }
