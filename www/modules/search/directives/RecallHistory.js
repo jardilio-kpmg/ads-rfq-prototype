@@ -28,24 +28,6 @@ main.directive('recallHistory', function () {
 
             function updateData() {
                 if (chart && $scope.recallHistoryData) {
-                    var targetColor, chartColors = [];
-
-                    //See which classifications are included in the data and set the chart colors.
-                    angular.forEach($scope.recallHistoryData, function(chartDataItem) {
-                        targetColor = '#1565C0';
-                        if(chartDataItem.key === 'Class I') {
-                            targetColor = '#FE0000';
-                        }
-                        else if(chartDataItem.key === 'Class II') {
-                            targetColor = '#F47429';
-                        }
-                        else if(chartDataItem.key === 'Class III') {
-                            targetColor = '#FEF200';
-                        }
-                        chartColors.push(targetColor);
-                    });
-
-                    chart.color(chartColors);
                     svg.datum($scope.recallHistoryData)
                         .transition().duration(500)
                         .call(chart);
@@ -53,12 +35,6 @@ main.directive('recallHistory', function () {
             }
 
             function resizeChart() {
-                /*svg
-                    .style('width', Math.max(350, $elem.height()))
-                    .style('height', Math.max(300, $elem.height()));*/
-
-                //console.log($elem.width(), $elem.height());
-
                 if (chart && chart.update) {
                     chart.update();
                 }
@@ -84,9 +60,9 @@ main.directive('recallHistory', function () {
 
             resizeChart();
 
-            $scope.$watch('recallHistoryData', updateData);
+            $scope.$watch('recallHistoryData', updateData, true);
 
-            $elem.addClass('recalls recall-history');
+            $elem.addClass('search recall-history');
             win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
                 win.off('resize', resizeChart);

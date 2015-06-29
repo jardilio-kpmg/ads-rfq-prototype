@@ -1,9 +1,9 @@
-describe('recalls/directives/RecallHistory.js', function () {
+describe('search/directives/RecallHistory.js', function () {
 
 
 
     /**
-     * $httpBackend is used to flush http requests which may be linked thru
+     * $httpBackend is used to flush http requests which may be linked through
      * services in your controller to be performed synchronously.
      *
      * @see http://docs.angularjs.org/api/ngMock.$httpBackend
@@ -14,7 +14,7 @@ describe('recalls/directives/RecallHistory.js', function () {
 
     var directive, $scope;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','search'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
         $scope = $rootScope.$new();
@@ -27,7 +27,7 @@ describe('recalls/directives/RecallHistory.js', function () {
 
     it('should add custom class to element', function () {
         expect(directive.hasClass('recall-history')).toBe(true);
-        expect(directive.hasClass('recalls')).toBe(true);
+        expect(directive.hasClass('search')).toBe(true);
     });
 
     it('should add template children', function () {

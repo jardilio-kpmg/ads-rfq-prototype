@@ -75,7 +75,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @returns {{success: Function, error: Function}}
      */
     self.getRecallTrendsByBarcode = function(barcode, startDate, endDate, options) {
-        var dateRange = startDate && endDate ? '+AND+date_range:[' + startDate + '+TO+' + endDate + ']': '';
+        var dateRange = startDate && endDate ? '+AND+report_date:[' + startDate + '+TO+' + endDate + ']': '';
 
         return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+code_info::barcode' + dateRange, {
             params: angular.extend({}, openFdaDefaults, options, {
@@ -95,7 +95,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      * @returns {{success: Function, error: Function}}
      */
     self.getRecallTrendsByKeyword = function(keywords, startDate, endDate, options) {
-        var dateRange = startDate && endDate ? '+AND+date_range:[' + startDate + '+TO+' + endDate + ']': '';
+        var dateRange = startDate && endDate ? '+AND+report_date:[' + startDate + '+TO+' + endDate + ']': '';
 
         return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+product_description::keywords' + dateRange, {
             params: angular.extend({}, openFdaDefaults, options, {

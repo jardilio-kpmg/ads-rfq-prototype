@@ -55,11 +55,26 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
 
     /**
      * The list of recall history results found
-     * @name recalls.controllers.SearchCtrl#recallHistoryData
-     * @propertyOf recalls.controllers.SearchCtrl
+     * @name search.controllers.SearchCtrl#recallHistoryData
+     * @propertyOf search.controllers.SearchCtrl
      * @type {array}
      */
     self.recallHistoryData = [];
+
+    /**
+     * A list of recall history results used to populate the final
+     * recallHistoryData array. This array will be used when
+     * making the different api calls to populate the recall history
+     * so the chart doesn't update each time a request is handled.
+     * @name search.controllers.SearchCtrl#tempRecallHistoryData
+     * @propertyOf search.controllers.SearchCtrl
+     * @type {array}
+     */
+    self.tempRecallHistoryData = [];
+
+    self.recallHistoryExpectedCheckInPoints = 4;
+
+    self.recallHistoryCheckInPoints = 0;
 
     /**
      * The list of recall results counted by classification
@@ -110,6 +125,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         foodEnforcementService.getRecallsByKeyword(keywords, {count: 'classification.exact'})
             .success(processClassification)
             .error(processClassification);
+
+        getRecallHistoryData(barcode, null);
     };
 
     /**
@@ -139,6 +156,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         foodEnforcementService.getRecallsByKeyword(keywords, {count: 'classification.exact'})
             .success(processClassification)
             .error(processClassification);
+
+        getRecallHistoryData(null, keywords);
     };
 
     /**
@@ -187,9 +206,167 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         self.classifications = (results && results.results) || [];
     }
 
-    /*function processRecallHistory(results) {
-        self.recallHistoryData = (results && results.results) || [];
-    }*/
+    /**
+     * This function will request data for the Recall History chart.
+     * The chart shows data for the past 5 years, and we've taken the approach
+     * to request the data for each year individually. Since the openFDA api
+     * returns an error when no matches are found, we didn't want to cause the
+     * request as a whole to fail if data for one year couldn't be located.
+     * Each year will be processed individually with results being pushed in to
+     * one common array for final processing and binding in the chart.
+     * @param barcode {string} A UPC barcode string to search for.
+     * @param keywords {string} A list of search strings to search by.
+     */
+    function getRecallHistoryData(barcode, keywords) {
+        var years = [],
+            thisYear = new Date().getFullYear();
+
+        //Reset the number of request that have been handled.
+        self.recallHistoryCheckInPoints = 0;
+
+        //Establish the base chart data and classification colors.
+        self.tempRecallHistoryData = [{key: 'Class I', color: '#FE0000', values: []},
+            {key: 'Class II', color: '#F47429', values: []},
+            {key: 'Class III', color: '#FEF200', values: []}];
+
+        //Get history for the last 5 years, including this year. We'll build the list of years and then make the requests.
+        for(var y = thisYear - 4; y <= thisYear; y++) {
+            years.push(y);
+        }
+
+        /* jshint -W083 */
+        angular.forEach(years, function(year) {
+            if(barcode) {
+                foodEnforcementService.getRecallTrendsByBarcode(barcode, year + '0101', year + '1231')
+                    .success(function(results) {
+                        processRecallHistorySearchSuccess(year, results);
+                    })
+                    .error(function() {
+                        processRecallHistorySearchError(year);
+                    });
+            } else if(keywords) {
+                foodEnforcementService.getRecallTrendsByKeyword(keywords, year + '0101', year + '1231')
+                    .success(function(results) {
+                        processRecallHistorySearchSuccess(year, results);
+                    })
+                    .error(function() {
+                        processRecallHistorySearchError(year);
+                    });
+            }
+        });
+        /* jshint +W083 */
+    }
+
+    /**
+     * This is a success handler for the openFDA api request for classification counts
+     * for a particular year. This handler pulls the classification counts and then
+     * inserts them in to the temporary chart data. Once all requests have been handled
+     * this temporary data will be used to update the chart's main data set.
+     * @param year {number} The year that data was requested for.
+     * @param results {object} The promise object returned from the openFDA api request.
+     */
+    function processRecallHistorySearchSuccess(year, results) {
+        var class1Count, class2Count, class3Count;
+
+        //Pull the counts for our classification groups.
+        //The result object is structured like this: {term: 'i', count: 45}
+        angular.forEach(results.results, function(result) {
+            switch(result.term) {
+                case 'i':
+                    class1Count = result.count;
+                    break;
+                case 'ii':
+                    class2Count = result.count;
+                    break;
+                case 'iii':
+                    class3Count = result.count;
+                    break;
+            }
+        });
+
+        //Apply the classification group counts.
+        angular.forEach(self.tempRecallHistoryData, function(recallClass) {
+            switch(recallClass.key) {
+                case 'Class I':
+                    recallClass.values.push({x: year, y: class1Count ? class1Count : 0});
+                    break;
+                case 'Class II':
+                    recallClass.values.push({x: year, y: class2Count ? class2Count : 0});
+                    break;
+                case 'Class III':
+                    recallClass.values.push({x: year, y: class3Count ? class3Count : 0});
+                    break;
+            }
+        });
+        recallHistorySearchCheckIn();
+    }
+
+    /**
+     * The openFDA api returns an error if no matches are found.
+     * We'll set a count of zero for a request that fails for a
+     * particular year.
+     * @param year
+     */
+    function processRecallHistorySearchError(year) {
+        angular.forEach(self.tempRecallHistoryData, function(recallClass) {
+            switch(recallClass.key) {
+                case 'Class I':
+                    recallClass.values.push({x: year, y: 0});
+                    break;
+                case 'Class II':
+                    recallClass.values.push({x: year, y: 0});
+                    break;
+                case 'Class III':
+                    recallClass.values.push({x: year, y: 0});
+                    break;
+            }
+        });
+        recallHistorySearchCheckIn();
+    }
+
+    /**
+     * Since we're requesting classification counts for each
+     * year independently, this function will be used to track
+     * how many of the expected responses have been handled.
+     * When we get a response from each call made, we'll move
+     * on to our finalize method to update the chart's data source.
+     */
+    function recallHistorySearchCheckIn() {
+        self.recallHistoryCheckInPoints++;
+
+        if(self.recallHistoryCheckInPoints === self.recallHistoryExpectedCheckInPoints) {
+            finalizeRecallHistorySearch();
+        }
+    }
+
+    /**
+     * This is responsible for sorting the data values for a
+     * classification group by year. The NVD3 multiBarChart
+     * has been set up to display years based on values in the
+     * value.x property.
+     * @param data1 {object} The first data item to sort
+     * @param data2 {object} The second data item to sort
+     * @returns {number}
+     */
+    function recallHistorySort(data1, data2) {
+        return data1.x - data2.x;
+    }
+
+    /**
+     * This is the final step run when compiling the data for
+     * the Recall History chart. We'll sort the data for each
+     * classification group and pass the temporary data to the
+     * chart's main data source so it will redraw with the new data.
+     */
+    function finalizeRecallHistorySearch() {
+        //Sort the value arrays for each classification entry so years are displayed in the correct order.
+        angular.forEach(self.tempRecallHistoryData, function(recallClass) {
+            recallClass.values.sort(recallHistorySort);
+        });
+
+        //Update the Recall History chart's main data source.
+        self.recallHistoryData = self.tempRecallHistoryData;
+    }
 
     var search = {};
 
