@@ -99,7 +99,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                     .error(processResults);
             });
 
-        foodEnforcementService.getRecallsByKeyword(keywords, {count: 'classification.exact'})
+        foodEnforcementService.getRecallsByBarcode(barcode, {count: 'classification.exact'})
             .success(processClassification)
             .error(processClassification);
     };
