@@ -1,16 +1,16 @@
 var main = require('../main');
 
 /**
- * @class recalls.controllers.CampaignsCtrl
+ * @class recall.controllers.RecallCtrl
  * @see http://docs.angularjs.org/guide/dev_guide.mvc.understanding_controller
  * @example {@lang xml}
- * <div ng-controller="CampaignsCtrl as ctrl">
+ * <div ng-controller="RecallCtrl as ctrl">
  *      <h1>{{ctrl.getName()}}</h1>
  * </div>
  * @example
- * angular.module('recalls').directive('mydirective', function () {
+ * angular.module('recall').directive('mydirective', function () {
  *      return {
- *          controller: 'CampaignsCtrl',
+ *          controller: 'RecallCtrl',
  *          require: ['mydirective'],
  *          link: function ($scope, $elem, $attr, controllers) {
  *              var campaignsCtrl = controllers[0];
@@ -33,11 +33,11 @@ main.controller('RecallCtrl', function (/**ng.$rootScope.Scope*/ $scope,
          * @private
          * @type {string}
          */
-        var name = 'CampaignsCtrl';
+        var name = 'RecallCtrl';
 
         /**
-         * @name recalls.controllers.CampaignsCtrl#getName
-         * @methodOf recalls.controllers.CampaignsCtrl
+         * @name recall.controllers.RecallCtrl#getName
+         * @methodOf recall.controllers.RecallCtrl
          * @function
          * @returns {string}
          */

@@ -1,4 +1,4 @@
-describe('ads/directives/ScanButton.js', function () {
+describe('scan/directives/ScanButton.js', function () {
 
 
 
@@ -14,7 +14,7 @@ describe('ads/directives/ScanButton.js', function () {
 
     var directive, $scope;
 
-    beforeEach(angular.mock.module('ngMock','ads'));
+    beforeEach(angular.mock.module('ngMock','scan'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
         $scope = $rootScope.$new();

@@ -3,14 +3,14 @@ var main = require('../main'),
     Quagga = require('quagga');
 
 /**
- * @class recalls.controllers.ScanButtonCtrl
+ * @class scan.controllers.ScanButtonCtrl
  * @see http://docs.angularjs.org/guide/dev_guide.mvc.understanding_controller
  * @example {@lang xml}
  * <div ng-controller="ScanButtonCtrl as ctrl">
  *      <h1>{{ctrl.getName()}}</h1>
  * </div>
  * @example
- * angular.module('recalls').directive('mydirective', function () {
+ * angular.module('scan').directive('mydirective', function () {
  *      return {
  *          controller: 'ScanButtonCtrl',
  *          require: ['mydirective'],
@@ -32,8 +32,8 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
     var name = 'ScanButtonCtrl';
 
     /**
-     * @name recalls.controllers.ScanButtonCtrl#getName
-     * @methodOf recalls.controllers.ScanButtonCtrl
+     * @name scan.controllers.ScanButtonCtrl#getName
+     * @methodOf scan.controllers.ScanButtonCtrl
      * @function
      * @returns {string}
      */
@@ -43,8 +43,8 @@ main.controller('ScanButtonCtrl', function (/**ng.$rootScope.Scope*/ $scope, $lo
 
     /**
      * Initiates a new barcode scan read from an image or camera capture
-     * @name recalls.controllers.ScanButtonCtrl#startScan
-     * @methodOf recalls.controllers.ScanButtonCtrl
+     * @name scan.controllers.ScanButtonCtrl#startScan
+     * @methodOf scan.controllers.ScanButtonCtrl
      * @function
      */
     self.startScan = function () {

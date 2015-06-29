@@ -1,4 +1,4 @@
-describe('recalls/controllers/SearchCtrl.js', function () {
+describe('search/controllers/SearchCtrl.js', function () {
 
 
 
@@ -13,13 +13,13 @@ describe('recalls/controllers/SearchCtrl.js', function () {
     var $httpBackend;
 
     /**
-     * @type {recalls.controllers.SearchCtrl}
+     * @type {search.controllers.SearchCtrl}
      */
     var controller;
 
     var $scope;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','search'));
 
     beforeEach(inject(function ($injector, $controller, $rootScope) {
         $scope = $rootScope.$new();

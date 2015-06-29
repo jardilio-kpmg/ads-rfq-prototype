@@ -1,4 +1,4 @@
-describe('recalls/controllers/CampaignsCtrl.js', function () {
+describe('recall/controllers/RecallCtrl.js', function () {
 
 
 
@@ -13,18 +13,18 @@ describe('recalls/controllers/CampaignsCtrl.js', function () {
     var $httpBackend;
 
     /**
-     * @type {recalls.controllers.CampaignsCtrl}
+     * @type {recall.controllers.RecallCtrl}
      */
     var controller;
 
     var $scope;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','recall'));
 
     beforeEach(inject(function ($injector, $controller, $rootScope) {
         $scope = $rootScope.$new();
         $httpBackend = $injector.get('$httpBackend');
-        controller = $controller('CampaignsCtrl', {'$scope': $scope});
+        controller = $controller('RecallCtrl', {'$scope': $scope});
         $httpBackend.resetExpectations();
     }));
 
@@ -32,10 +32,10 @@ describe('recalls/controllers/CampaignsCtrl.js', function () {
         expect(controller).toBeDefined();
     });
 
-    //TODO: write your unit tests for CampaignsCtrl
+    //TODO: write your unit tests for RecallCtrl
 
     it('should return proper name value', function () {
-        expect(controller.getName()).toBe('CampaignsCtrl');
+        expect(controller.getName()).toBe('RecallCtrl');
     });
 
     afterEach(function () {

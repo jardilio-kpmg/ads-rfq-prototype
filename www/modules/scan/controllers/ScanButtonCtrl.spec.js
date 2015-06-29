@@ -1,4 +1,4 @@
-describe('recalls/controllers/ScanButtonCtrl.js', function () {
+describe('scan/controllers/ScanButtonCtrl.js', function () {
 
 
 
@@ -13,13 +13,13 @@ describe('recalls/controllers/ScanButtonCtrl.js', function () {
     var $httpBackend;
 
     /**
-     * @type {recalls.controllers.ScanButtonCtrl}
+     * @type {scan.controllers.ScanButtonCtrl}
      */
     var controller;
 
     var $scope;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','scan'));
 
     beforeEach(inject(function ($injector, $controller, $rootScope) {
         $scope = $rootScope.$new();

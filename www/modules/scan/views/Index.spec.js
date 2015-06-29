@@ -2,7 +2,7 @@
  * Unit tests for the view at route /recalls/
  * @see http://jasmine.github.io/
  */
-describe('URL Route: /recalls/', function () {
+describe('URL Route: /scan/', function () {
 
     /**
      * $httpBackend is used to flush http requests which may be linked thru
@@ -21,7 +21,7 @@ describe('URL Route: /recalls/', function () {
      */
     var kSession;
 
-    beforeEach(angular.mock.module('ngMock','recalls'));
+    beforeEach(angular.mock.module('ngMock','scan'));
 
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/ $rootScope, $injector) {
         $scope = $rootScope;
@@ -34,19 +34,11 @@ describe('URL Route: /recalls/', function () {
         $httpBackend.resetExpectations();
     }));
 
-    it('should route to view if authenticated', function () {
+    it('should route to view', function () {
         kSession.isAuthenticated(true);
-        $location.path('/recalls/');
+        $location.path('/scan/');
         $scope.$apply();
-        expect($ngView[0].querySelector('.index')).not.toBe(null);
-    });
-
-    //TODO: you need to determine if this view requires authentication
-    xit('should not route to view if not authenticated', function () {
-        kSession.isAuthenticated(false);
-        $location.path('/recalls/');
-        $scope.$apply();
-        expect($ngView[0].querySelector('.index')).toBe(null);
+        expect($ngView[0].querySelector('.scan.index')).not.toBe(null);
     });
 
     afterEach(function () {
