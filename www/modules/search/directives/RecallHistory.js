@@ -23,7 +23,7 @@ main.directive('recallHistory', function () {
         template: require('./RecallHistory.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
-                win = angular.element(window),
+                //win = angular.element(window),
                 chart, legendSeries;
 
             function updateData() {
