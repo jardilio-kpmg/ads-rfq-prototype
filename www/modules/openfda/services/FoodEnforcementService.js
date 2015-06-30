@@ -29,6 +29,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      */
     self.getRecallsByBarcode = function (barcode, options) {
         return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+code_info::barcode', {
+            cache: true,
             params: angular.extend({}, openFdaDefaults, options, {
                 barcode: barcode
             })
@@ -43,6 +44,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
      */
     self.getRecallsByKeyword = function (keywords, options) {
         return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+product_description::keywords', {
+            cache: true,
             params: angular.extend({}, openFdaDefaults, options, {
                 keywords: keywords.split(' ').join('+')
             })
@@ -57,6 +59,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
     self.getRecallById = function (id) {
         // @id needs to be _id
         return kHttp.get(':server/food/enforcement.json?search=_id::id', {
+            cache: true,
             params: angular.extend({}, openFdaDefaults, {
                 id: id,// jshint ignore:line
                 limit: 1,
@@ -78,6 +81,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
         var dateRange = startDate && endDate ? '+AND+report_date:[' + startDate + '+TO+' + endDate + ']': '';
 
         return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+code_info::barcode' + dateRange, {
+            cache: true,
             params: angular.extend({}, openFdaDefaults, options, {
                 barcode: barcode,
                 count: 'classification'
@@ -98,6 +102,7 @@ main.service('foodEnforcementService', function (/**kpmgAngular.services.kHttp*/
         var dateRange = startDate && endDate ? '+AND+report_date:[' + startDate + '+TO+' + endDate + ']': '';
 
         return kHttp.get(':server/food/enforcement.json?search=status::status+AND+product_type:food+AND+product_description::keywords' + dateRange, {
+            cache: true,
             params: angular.extend({}, openFdaDefaults, options, {
                 keywords: keywords.split(' ').join('+'),
                 count: 'classification'
