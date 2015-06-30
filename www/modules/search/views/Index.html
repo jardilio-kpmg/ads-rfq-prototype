@@ -12,89 +12,84 @@
         </div>
     </md-toolbar>
 
-    <md-tabs flex class="search-page-content md-primary" ng-show="search.state === search.states.RESULTS"
-             md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false" hide-gt-sm>
-        <md-tab>
-            <md-tab-label>
-                <label i18n="search.recallsTab"></label>
-            </md-tab-label>
-            <md-tab-body>
-                <md-content>
+    <div flex layout="column" class="result" ng-show="search.state === search.states.RESULTS" layout-gt-sm="row">
+        <md-tabs flex class="search-page-content md-primary"
+                 md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false"
+                 md-selected-gt-sm="0">
+            <md-tab>
+                <md-tab-label>
+                    <label i18n="search.recallsTab"></label>
+                </md-tab-label>
+                <md-tab-body>
                     <recall-list recalls="search.recalls"></recall-list>
-                </md-content>
-            </md-tab-body>
-        </md-tab>
-        <md-tab>
-            <md-tab-label>
-                <label i18n="search.classificationsTab"></label>
-            </md-tab-label>
-            <md-tab-body>
-                <md-content layout-padding>
-                    <md-card class="chart">
-                        <md-card-content layout="row" layout-align="center center">
-                            <classification-distribution counts="search.classifications"></classification-distribution>
-                        </md-card-content>
-                    </md-card>
-                    <md-card>
-                        <md-card-content>
-                            <h3 i18n="search.classDistribution.class1Title"></h3>
-                            <p i18n="openfda.classDistribution.class1Description"></p>
-                        </md-card-content>
-                    </md-card>
-                    <md-card>
-                        <md-card-content>
-                            <h3 i18n="search.classDistribution.class2Title"></h3>
-                            <p i18n="openfda.classDistribution.class2Description"></p>
-                        </md-card-content>
-                    </md-card>
-                    <md-card>
-                        <md-card-content>
-                            <h3 i18n="search.classDistribution.class3Title"></h3>
-                            <p i18n="openfda.classDistribution.class3Description"></p>
-                        </md-card-content>
-                    </md-card>
-                </md-content>
-            </md-tab-body>
-        </md-tab>
-        <md-tab>
-            <md-tab-label>
-                <label i18n="search.recallHistTab"></label>
-            </md-tab-label>
-            <md-tab-body>
-                <md-content layout-padding>
-                    <md-card>
-                        <md-card-content layout="row" layout-align="center center">
-                            <recall-history recall-history-data="search.recallHistoryData"></recall-history>
-                        </md-card-content>
-                    </md-card>
-                    <md-card>
-                        <md-card-content>
-                            <h3 i18n="search.classDistribution.class1Title"></h3>
-                            <p i18n="openfda.classDistribution.class1Description"></p>
-                        </md-card-content>
-                    </md-card>
-                    <md-card>
-                        <md-card-content>
-                            <h3 i18n="search.classDistribution.class2Title"></h3>
-                            <p i18n="openfda.classDistribution.class2Description"></p>
-                        </md-card-content>
-                    </md-card>
-                    <md-card>
-                        <md-card-content>
-                            <h3 i18n="search.classDistribution.class3Title"></h3>
-                            <p i18n="openfda.classDistribution.class3Description"></p>
-                        </md-card-content>
-                    </md-card>
-                </md-content>
-            </md-tab-body>
-        </md-tab>
-    </md-tabs>
-
-    <div flex layout="row" class="result" ng-show="search.state === search.states.RESULTS" hide-sm>
-        <md-content flex>
-            <recall-list recalls="search.recalls"></recall-list>
-        </md-content>
-        <md-content flex>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <label i18n="search.classificationsTab"></label>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content layout-padding>
+                        <md-card class="chart">
+                            <md-card-content layout="row" layout-align="center center">
+                                <classification-distribution counts="search.classifications"></classification-distribution>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class1Title"></h3>
+                                <p i18n="openfda.classDistribution.class1Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class2Title"></h3>
+                                <p i18n="openfda.classDistribution.class2Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class3Title"></h3>
+                                <p i18n="openfda.classDistribution.class3Description"></p>
+                            </md-card-content>
+                        </md-card>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <label i18n="search.recallHistTab"></label>
+                </md-tab-label>
+                <md-tab-body>
+                    <md-content layout-padding>
+                        <md-card>
+                            <md-card-content layout="row" layout-align="center center">
+                                <recall-history recall-history-data="search.recallHistoryData"></recall-history>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class1Title"></h3>
+                                <p i18n="openfda.classDistribution.class1Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class2Title"></h3>
+                                <p i18n="openfda.classDistribution.class2Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class3Title"></h3>
+                                <p i18n="openfda.classDistribution.class3Description"></p>
+                            </md-card-content>
+                        </md-card>
+                    </md-content>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <md-content flex hide-sm>
             <div layout-padding>
                 <md-card class="chart">
                     <md-card-content layout="row" layout-align="center center">

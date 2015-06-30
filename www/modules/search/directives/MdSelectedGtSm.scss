@@ -1,0 +1,16 @@
+.search.md-selected-gt-sm {
+
+    $break-small: 600px;
+
+    md-tabs-wrapper {
+        @media screen and (min-width: $break-small) {
+            display: none;
+            width:0;
+        }
+    }
+    md-tabs-content-wrapper {
+        @media screen and (min-width: $break-small) {
+            top:0;
+        }
+    }
+}
