@@ -74,14 +74,14 @@ main.directive('classificationDistribution', function () {
                                 });
                         }
                     });
+
+                    setTimeout(function() {
+                        resizeChart();
+                    }, 100);
                 }
             }
 
             function resizeChart() {
-                svg
-                    .style('width', Math.max(300, $elem.height()))
-                    .style('height', Math.max(300, $elem.height()));
-
                 if (chart && chart.update) {
                     chart.update();
                 }
@@ -93,7 +93,8 @@ main.directive('classificationDistribution', function () {
                     .x(function(d) { return d.term; })
                     .y(function(d) { return d.count; })
                     .showLabels(false)
-                    .showLegend(true);
+                    .showLegend(true)
+                    .margin({left: 0, right: 0, top: 0, bottom: 0});
 
                 updateData();
 
