@@ -90,6 +90,8 @@ main.directive('classificationDistribution', function () {
                     .showLabels(false)
                     .showLegend(true);
 
+                updateData();
+
                 return chart;
             });
 
