@@ -20,20 +20,7 @@
             </md-tab-label>
             <md-tab-body>
                 <md-content>
-                    <md-list class="recall-list">
-                        <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recall/{{item['@id']}}">
-                            <md-card flex>
-                                <md-card-content layout="row" layout-align="start center">
-                                    <classification-icon class="item-classificiation" classification="{{item.classification}}"></classification-icon>
-                                <span flex class="item-details">
-                                    <h3 class="item-title">{{item.recalling_firm}}</h3>
-                                    <div class="item-description">{{item.product_description}}</div>
-                                </span>
-                                    <md-icon>chevron_right</md-icon>
-                                </md-card-content>
-                            </md-card>
-                        </md-list-item>
-                    </md-list>
+                    <recall-list recalls="search.recalls"></recall-list>
                 </md-content>
             </md-tab-body>
         </md-tab>
@@ -105,21 +92,7 @@
 
     <div flex layout="row" class="result" ng-show="search.state === search.states.RESULTS" hide-sm>
         <md-content flex>
-            <md-list class="recall-list">
-                <md-list-item class="md-3-line" ng-repeat="item in search.recalls | orderBy: 'classification'" href="#/recall/{{item['@id']}}">
-                    <md-card flex>
-                        <md-card-content layout="row" layout-align="start center">
-                            <classification-icon class="item-classificiation" classification="{{item.classification}}">
-                            </classification-icon>
-                            <span flex class="item-details">
-                                <h3 class="item-title">{{item.recalling_firm}}</h3>
-                                <div class="item-description">{{item.product_description}}</div>
-                            </span>
-                            <md-icon>chevron_right</md-icon>
-                        </md-card-content>
-                    </md-card>
-                </md-list-item>
-            </md-list>
+            <recall-list recalls="search.recalls"></recall-list>
         </md-content>
         <md-content flex>
             <div layout-padding>

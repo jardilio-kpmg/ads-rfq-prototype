@@ -4,7 +4,6 @@
     md-tabs {
         transition: none;
     }
-
     md-content {
         background: none;
     }
@@ -12,87 +11,10 @@
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
-    md-list-item {
-        padding: 0;
-        md-card:active {
-            transition: background-color 125ms ease;
-            background-color: darken(white, 5%);
-        }
-        &:not(:first-child) md-card {
-            margin-top: 0;
-        }
-        &:hover {
-            cursor: pointer;
-        }
-        &.ng-enter {
-            $delay: 60ms;
-            transition: all 500ms ease;
-            opacity: 0;
-            transform: translateY(1000%);
-            transition-delay: $delay*10;
-            &.ng-enter-active {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            &:nth-child(1) {
-                transition-delay: 0s;
-            }
-            &:nth-child(2) {
-                transition-delay: $delay*1;
-            }
-            &:nth-child(3) {
-                transition-delay: $delay*2;
-            }
-            &:nth-child(4) {
-                transition-delay: $delay*3;
-            }
-            &:nth-child(5) {
-                transition-delay: $delay*4;
-            }
-            &:nth-child(6) {
-                transition-delay: $delay*5;
-            }
-            &:nth-child(7) {
-                transition-delay: $delay*6;
-            }
-            &:nth-child(8) {
-                transition-delay: $delay*7;
-            }
-            &:nth-child(9) {
-                transition-delay: $delay*8;
-            }
-            &:nth-child(10) {
-                transition-delay: $delay*9;
-            }
-        }
-    }
     .search-results-feedback {
         height: 35px;
         margin-top: 10px;
     }
-    .item-classificiation md-icon {
-        font-size: 36px;
-        width: 36px;
-        height: 36px;
-    }
-    .item-details {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .item-title {
-        margin: 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        word-break: break-all;
-        word-wrap: break-word;
-    }
-    .item-description {
-        text-overflow: ellipsis;
-        max-height: 39px;
-        overflow: hidden;
-    }
-
     .search-page-content {
         > div > * {
             width: 300px;
