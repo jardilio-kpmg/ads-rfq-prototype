@@ -56,6 +56,11 @@ main.directive('recallHistory', function () {
             }
 
             function resizeChart() {
+
+                //svg
+                //    .style('width', Math.max(250, $elem.width()))
+                //    .style('height', Math.max(300, $elem.height()));
+
                 if (chart && chart.update) {
                     chart.update();
                 }
@@ -86,9 +91,9 @@ main.directive('recallHistory', function () {
             $scope.$watch('recallHistoryData', updateData, true);
 
             $elem.addClass('search recall-history');
-            win.on('resize', resizeChart);
+            //win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
-                win.off('resize', resizeChart);
+                //win.off('resize', resizeChart);
             });
         }
     };

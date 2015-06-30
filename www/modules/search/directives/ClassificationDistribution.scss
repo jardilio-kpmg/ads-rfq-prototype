@@ -1,5 +1,7 @@
 .search.classification-distribution {
-    display: block;
-    min-height: 300px;
-    min-width: 300px;
+    svg {
+        height: 250px;
+        width: 250px;
+    }
+    //display: block;
 }

@@ -78,9 +78,9 @@ main.directive('classificationDistribution', function () {
             }
 
             function resizeChart() {
-                svg
-                    .style('width', Math.max(300, $elem.height()))
-                    .style('height', Math.max(300, $elem.height()));
+                //svg
+                //    .style('width', Math.max(250, $elem.width()))
+                //    .style('height', Math.max(250, $elem.height()));
 
                 if (chart && chart.update) {
                     chart.update();
@@ -93,7 +93,8 @@ main.directive('classificationDistribution', function () {
                     .x(function(d) { return d.term; })
                     .y(function(d) { return d.count; })
                     .showLabels(false)
-                    .showLegend(true);
+                    .showLegend(true)
+                    .margin({left: 0, right: 0, top: 0, bottom: 0});
 
                 updateData();
 
@@ -105,9 +106,9 @@ main.directive('classificationDistribution', function () {
             $scope.$watch('counts', updateData);
 
             $elem.addClass('search classification-distribution');
-            win.on('resize', resizeChart);
+            //win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
-                win.off('resize', resizeChart);
+                //win.off('resize', resizeChart);
             });
         }
     };
