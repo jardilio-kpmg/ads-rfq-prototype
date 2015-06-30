@@ -1,5 +1,5 @@
 var main = require('../main'),
-    angular = require('angular'),
+    //angular = require('angular'),
     nv = require('nvd3'),
     d3 = require('d3');
 
