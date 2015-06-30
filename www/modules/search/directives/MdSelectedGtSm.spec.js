@@ -19,7 +19,7 @@ describe('search/directives/MdSelectedGtSm.js', function () {
     beforeEach(inject(function (/**function*/ $compile, /**ng.$rootScope.Scope*/$rootScope, $injector) {
         $scope = $rootScope.$new();
         $httpBackend = $injector.get('$httpBackend');
-        directive = angular.element('<div md-selected-gt-sm></div>');
+        directive = angular.element('<md-tabs md-selected-gt-sm></md-tabs>');
         directive = $compile(directive)($scope);
         $rootScope.$digest();
         $httpBackend.resetExpectations();
