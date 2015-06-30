@@ -6,3 +6,4 @@ document.createElement('nav-back-button');
 document.createElement('classification-icon');
 
 document.createElement('classification-distribution');
+document.createElement('recall-history');

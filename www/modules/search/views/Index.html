@@ -71,13 +71,37 @@
             </md-tab-body>
         </md-tab>
 
-        <md-tab ng-disabled="true">
+        <md-tab>
             <md-tab-label>
                 <label i18n="search.recallHistTab"></label>
             </md-tab-label>
 
             <md-tab-body>
-                Recall History
+                <md-content>
+                    <md-card>
+                        <md-card-content layout="row" layout-align="center center">
+                            <recall-history recall-history-data="search.recallHistoryData"></recall-history>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="search.classDistribution.class1Title"></h3>
+                            <p i18n="openfda.classDistribution.class1Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="search.classDistribution.class2Title"></h3>
+                            <p i18n="openfda.classDistribution.class2Description"></p>
+                        </md-card-content>
+                    </md-card>
+                    <md-card>
+                        <md-card-content>
+                            <h3 i18n="search.classDistribution.class3Title"></h3>
+                            <p i18n="openfda.classDistribution.class3Description"></p>
+                        </md-card-content>
+                    </md-card>
+                </md-content>
             </md-tab-body>
         </md-tab>
     </md-tabs>
