@@ -36,7 +36,7 @@ main.directive('mdSelectedGtSm', function () {
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             $elem.addClass('search md-selected-gt-sm');
             $scope.$on('$destroy', function () {
-                //TODO: clean up work
+                win.off('resize', setSelected);
             });
 
             var index,
