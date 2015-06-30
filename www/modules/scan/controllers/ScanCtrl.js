@@ -20,9 +20,11 @@ var main = require('../main'),
  *      };
  * });
  */
-main.controller('ScanCtrl', function () {
+main.controller('ScanCtrl', function ($scope, $mdToast) {
 
-    var self = this;
+    var self = this,
+        isTargetMobile = true,
+        homescreenToastPosition = 'top right';
 
     /**
      * @private
@@ -40,8 +42,43 @@ main.controller('ScanCtrl', function () {
         return name;
     };
 
+    self.clearHomescreenStorage = function() {
+        if(typeof(Storage) !== 'undefined') {
+            delete localStorage.homescreenMsgDisplayed;
+        }
+    };
+
+    function showSaveToHomeScreenToast() {
+        $mdToast.show({
+            controller: 'HomeScreenToastCtrl',
+            controllerAs: 'toast',
+            template: require('../views/HomeScreenToast.html'),
+            hideDelay: 1000000,
+            position: homescreenToastPosition
+        });
+    }
+
     setTimeout(function () {
         angular.element('.scan.index.init').removeClass('init');
     });
+
+    //Perform a basic check to detect if the browser is running on an iOS or Android device.
+    //With this approach, we won't be able to specifically determine the browser but we'll get a rough idea.
+    if(navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)){
+        isTargetMobile = true;
+    }
+
+    //Position the toast on the bottom portion of the screen when running on iPhone or iPod
+    if((navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) && navigator.platform.match(/iP/i)) {
+        homescreenToastPosition = 'bottom right';
+    }
+
+    if(typeof(Storage) !== 'undefined') {
+        if(!localStorage.homescreenMsgDisplayed && !navigator.standalone && isTargetMobile) {
+            //localStorage.homescreenMsgDisplayed = true;
+            //Show Add to Homescreen toast
+            showSaveToHomeScreenToast();
+        }
+    }
 
 });

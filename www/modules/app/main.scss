@@ -56,3 +56,23 @@ ng-view,
     }
   }
 }
+
+md-toast {
+    z-index: 1010;
+}
+
+.homescreen-toast {
+    .homescreen-icon {
+        color: #ffffff;
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+    }
+
+    .ios-share {
+        background-image: url(splash/share-create.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}

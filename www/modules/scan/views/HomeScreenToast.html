@@ -1,0 +1,12 @@
+<md-toast class="homescreen-toast">
+    <div layout="row" layout-align="left center">
+        <span>Click</span>
+        <md-icon class="homescreen-icon" ng-if="toast.isAndroid">more_vert</md-icon>
+        <div class="homescreen-icon ios"
+        <span>and select 'Add to Home screen'</span>
+    </div>
+
+    <md-button ng-click="toast.closeToast()">
+        Close
+    </md-button>
+</md-toast>
