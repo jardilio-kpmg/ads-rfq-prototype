@@ -3,6 +3,8 @@ $classification-2-color: #F47429;
 $classification-3-color: #FEF200;
 $screen-background-color: lightgrey;
 
+/* min small devices break for responsive design */
+$break-small: 600px;
 
 html, body, md-content, ng-view {
     background-color: $screen-background-color;

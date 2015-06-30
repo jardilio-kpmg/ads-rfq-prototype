@@ -415,5 +415,4 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         },
         true
     );
-
 });
