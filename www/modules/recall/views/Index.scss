@@ -1,6 +1,11 @@
 .recall.index {
     md-content {
         background: lighten(lightgrey, 10%);
+
+        > div {
+            max-width: 960px;
+            margin: auto;
+        }
     }
 
     .result {
