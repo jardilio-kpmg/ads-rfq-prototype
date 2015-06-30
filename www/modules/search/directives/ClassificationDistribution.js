@@ -29,46 +29,51 @@ main.directive('classificationDistribution', function () {
 
             function updateData() {
                 if (chart && $scope.counts) {
-                    var targetColor, chartColors = [];
+                    var class1Data, class2Data, class3Data, compiledCounts;
 
-                    //See which classifications are included in the data and set the chart colors.
+                    //Determine which classifications we've received from the openFDA api call and set colors.
                     angular.forEach($scope.counts, function(chartDataItem) {
-                        targetColor = '#1565C0';
-                        if(chartDataItem.term === 'Class I') {
-                            targetColor = '#FE0000';
+                        switch(chartDataItem.term) {
+                            case 'Class I':
+                                class1Data = chartDataItem;
+                                break;
+                            case 'Class II':
+                                class2Data = chartDataItem;
+                                break;
+                            case 'Class III':
+                                class3Data = chartDataItem;
+                                break;
                         }
-                        else if(chartDataItem.term === 'Class II') {
-                            targetColor = '#F47429';
-                        }
-                        else if(chartDataItem.term === 'Class III') {
-                            targetColor = '#FEF200';
-                        }
-                        chartColors.push(targetColor);
                     });
 
-                    chart.color(chartColors);
-                    svg.datum($scope.counts)
+                    //Compile the classification counts and use defaults if a classification wasn't included.
+                    compiledCounts = [class1Data || {term: 'Class I', count: 0},
+                        class2Data || {term: 'Class II', count: 0},
+                        class3Data || {term: 'Class III', count: 0}];
+
+                    //Set the chart's colors for Class I, Class II, Class III in this order.
+                    chart.color(['#FE0000', '#F47429', '#FEF200']);
+
+                    svg.datum(compiledCounts)
                         .transition().duration(500)
                         .call(chart);
 
                     //Draw a rectangle behind each legend item to provide additional click area.
-                    if($scope.counts.length) {
-                        legendSeries = svg.selectAll('.nv-legendWrap .nv-series');
-                        legendSeries.each(function() {
-                            var thisSeries = d3.select(this);
+                    legendSeries = svg.selectAll('.nv-legendWrap .nv-series');
+                    legendSeries.each(function() {
+                        var thisSeries = d3.select(this);
 
-                            if(thisSeries) {
-                                thisSeries.insert('rect', ':first-child')
-                                    .attr({
-                                        height: 30,
-                                        y: -16,
-                                        width: 70,
-                                        x: -12,
-                                        fill: 'transparent'
-                                    });
-                            }
-                        });
-                    }
+                        if(thisSeries) {
+                            thisSeries.insert('rect', ':first-child')
+                                .attr({
+                                    height: 30,
+                                    y: -16,
+                                    width: 70,
+                                    x: -12,
+                                    fill: 'transparent'
+                                });
+                        }
+                    });
                 }
             }
 
@@ -89,6 +94,8 @@ main.directive('classificationDistribution', function () {
                     .y(function(d) { return d.count; })
                     .showLabels(false)
                     .showLegend(true);
+
+                updateData();
 
                 return chart;
             });

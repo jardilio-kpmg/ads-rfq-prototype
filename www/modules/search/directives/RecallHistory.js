@@ -76,6 +76,8 @@ main.directive('recallHistory', function () {
                 chart.xAxis
                     .tickFormat(d3.format('f'));
 
+                updateData();
+
                 return chart;
             });
 
