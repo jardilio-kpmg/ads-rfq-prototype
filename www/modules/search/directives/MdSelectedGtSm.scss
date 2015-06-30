@@ -1,7 +1,5 @@
 .search.md-selected-gt-sm {
 
-    $break-small: 600px;
-
     md-tabs-wrapper {
         @media screen and (min-width: $break-small) {
             display: none;

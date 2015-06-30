@@ -29,7 +29,6 @@
             width: 100%;
         }
     }
-    $break-small: 600px; // todo : set this up in global vars?
     .result {
         @media screen and (min-width: $break-small) {
             margin: auto;

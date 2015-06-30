@@ -47,7 +47,7 @@ main.directive('mdSelectedGtSm', function () {
             });
 
             function setSelected() {
-                if (win.width() >= 600){
+                if (win.width() >= 600){ // todo : get from global vars?
                     if (controllers.length) {
                         var tabs = controllers[0];
                         tabs.select(index);
