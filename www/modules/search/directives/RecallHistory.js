@@ -1,5 +1,5 @@
 var main = require('../main'),
-    //angular = require('angular'),
+    angular = require('angular'),
     nv = require('nvd3'),
     d3 = require('d3');
 
@@ -23,7 +23,7 @@ main.directive('recallHistory', function () {
         template: require('./RecallHistory.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
-                //win = angular.element(window),
+                win = angular.element(window),
                 chart, legendSeries;
 
             function updateData() {
@@ -61,11 +61,6 @@ main.directive('recallHistory', function () {
             }
 
             function resizeChart() {
-
-                //svg
-                //    .style('width', Math.max(250, $elem.width()))
-                //    .style('height', Math.max(300, $elem.height()));
-
                 if (chart && chart.update) {
                     chart.update();
                 }
@@ -96,9 +91,9 @@ main.directive('recallHistory', function () {
             $scope.$watch('recallHistoryData', updateData, true);
 
             $elem.addClass('search recall-history');
-            //win.on('resize', resizeChart);
+            win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
-                //win.off('resize', resizeChart);
+                win.off('resize', resizeChart);
             });
         }
     };
