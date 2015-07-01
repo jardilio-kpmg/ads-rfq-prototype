@@ -2,7 +2,7 @@
 
 ##Summary
 
-webstart is a simple web starter kit using Grunt. All the basic tasks you need for web development are included,
+This project utilizes a simple web starter kit using Grunt. All the basic tasks you need for web development are included,
 from packaging, minification, concatenation, testing, servers, scaffolding...
 
 The build system uses [browserify](http://browserify.org/) for the packaging system. By default, you are not required to use require syntax (
@@ -23,10 +23,6 @@ imports and then follow the same steps as *.css above. This also works for *.sas
 * `require('file.html')` - This will store a text file as a string variable for reference. This also works for
 *.txt, *.tmpl and *.tpl extensions.
 
-Limited scaffolding is included in the base repo, instead, forks of this repo are made which will include the majority of scaffolding
-tasks and templates specific to a platform (ie Angular, Backbone...) as well as any additional build and development
-tasks to support the platform needs. Read more on Scaffolding later.
-
 ##Getting Started
 
 Make sure you have the following prerequisites installed:
@@ -37,32 +33,26 @@ Make sure you have the following prerequisites installed:
     * During installation, choose the option "Run Git from the Windows Command Prompt"
     * Restart your machine
 
-Once you have the prerequisites out of the way, you can start a new project from the command line:
-
-* [Fork](../?fork) this project to your personal or project page in stash
-* Clone the project using the Clone option in Stash, or:
+Once you have the prerequisites out of the way, you can clone the project from the command line:
 
 ```
     cd /path/to/projects
-    git clone [PROJECT_CLONE_URL] projectname
+    git clone https://github.com/jardilio-kpmg/ads-rfq-prototype.git
+    cd ads-rfq-prototype
 ```
 
-* Initialize the project:
+* First time setup of global dependencies on your machine:
 
 ```
-    cd projectname
     npm install grunt-cli -g
     npm install bower -g
-    npm install
-    grunt init
 ```
 
-Thats it, all dependencies will be installed for you automatically and you will be walked through a short set
-of questions via prompt to initialize your project.
+* Finally, setup your local dependencies for the project:
 
-    [?] What name do you want to give your application? webstart
-    [?] Which stylesheet format would you like to set as your default? css
-    [?] Do you require cordova for your application? (y/N)
+```
+    npm install && bower install
+```
 
 If you run into an error during `npm install`, this could be permissions based. See http://stackoverflow.com/questions/16151018/npm-throws-error-without-sudo
 for more information about how to fix npm permissions on your machine. You will need to run `npm install` again after fixing
@@ -164,7 +154,7 @@ the target and a comma delimited list:
 
     grunt scaffold:test,create,mycomponent,mymodule
 
-For more information about available scaffolding options in this project, see [scaffolds](browse/build/scaffolds).
+For more information about available scaffolding options in this project, see [scaffolds](build/scaffolds).
 
 ###Run the Cordova Application
 
