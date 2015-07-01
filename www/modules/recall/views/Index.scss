@@ -1,7 +1,13 @@
 .recall.index {
     md-content {
         background: lighten(lightgrey, 10%);
+
+        > div {
+            max-width: 960px;
+            margin: auto;
+        }
     }
+
     .result {
         height: 0px; // Setting this makes sure the content shows scroll
     }

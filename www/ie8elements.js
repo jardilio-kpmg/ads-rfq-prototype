@@ -7,3 +7,4 @@ document.createElement('classification-icon');
 
 document.createElement('classification-distribution');
 document.createElement('recall-history');
+document.createElement('recall-list');

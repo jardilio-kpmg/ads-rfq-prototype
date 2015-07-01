@@ -11,66 +11,77 @@
     <md-content flex layout="column" layout-align="center center" ng-show="recall.state === recall.states.LOADING">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </md-content>
-    <md-content flex class="result" ng-show="recall.state === recall.states.RESULT">
-        <md-card ng-if="recall.product.imageUrl">
-            <img ng-src="{{recall.product.imageUrl}}" class="md-card-image" alt="">
-        </md-card>
-        <md-card>
-            <md-card-content>
-                <md-input-container>
-                    <label i18n="recall.productDescriptionTitle"></label>
-                    <textarea ng-model="recall.recall.product_description" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.reasonRecallTitle"></label>
-                    <textarea ng-model="recall.recall.reason_for_recall" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.distributionTitle"></label>
-                    <textarea ng-model="recall.recall.distribution_pattern" readonly/>
-                </md-input-container>
-            </md-card-content>
-        </md-card>
-        <md-card>
-            <md-card-content>
-                <md-input-container>
-                    <div layout="row" layout-align="start center">
-                        <classification-icon classification="{{recall.recall.classification}}"></classification-icon>
-                    <span layout-margin>
-                        {{recall.recall.classification}}
-                    </span>
-                    </div>
-                    <textarea ng-model="recall.recall.classification" format="fdaClassDesc" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.reportDateTitle"></label>
-                    <input ng-model="recall.recall.report_date" readonly format="fdaDate" format-options="MM/dd/yyyy"/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.initiationDateTitle"></label>
-                    <input ng-model="recall.recall.recall_initiation_date" format="fdaDate" format-options="MM/dd/yyyy" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.statusTitle"></label>
-                    <input ng-model="recall.recall.status" readonly/>
-                </md-input-container>
-            </md-card-content>
-        </md-card>
-        <md-card>
-            <md-card-content>
-                <md-input-container>
-                    <label i18n="recall.recallingFirmTitle"></label>
-                    <input ng-model="recall.recall.recalling_firm" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.recallNumberTitle"></label>
-                    <input ng-model="recall.recall.recall_number" readonly/>
-                </md-input-container>
-                <md-input-container>
-                    <label i18n="recall.codeInfoTitle"></label>
-                    <textarea ng-model="recall.recall.code_info" readonly/>
-                </md-input-container>
-            </md-card-content>
-        </md-card>
+    <md-content flex class="result" ng-show="recall.state === recall.states.RESULT" >
+        <div layout-wrap layout-gt-sm="row" >
+            <div ng-if="recall.product.imageUrl" flex-gt-sm="50" layout-gt-sm="column">
+                <md-card layout-align="center center" flex-gt-sm>
+                    <img ng-src="{{recall.product.imageUrl}}" class="md-card-image" alt="">
+                </md-card>
+            </div>
+            <div flex-gt-sm="50" layout-gt-sm="column">
+                <md-card flex-gt-sm>
+                    <md-card-content>
+                        <md-input-container>
+                            <label i18n="recall.productDescriptionTitle"></label>
+                            <textarea ng-model="recall.recall.product_description" readonly/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.reasonRecallTitle"></label>
+                            <textarea ng-model="recall.recall.reason_for_recall" readonly/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.distributionTitle"></label>
+                            <textarea ng-model="recall.recall.distribution_pattern" readonly/>
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex-gt-sm="50" layout-gt-sm="column">
+                <md-card flex-gt-sm>
+                    <md-card-content>
+                        <md-input-container>
+                            <div layout="row" layout-align="start center">
+                                <classification-icon classification="{{recall.recall.classification}}">
+                                </classification-icon>
+                            <span layout-margin>
+                                {{recall.recall.classification}}
+                            </span>
+                            </div>
+                            <textarea ng-model="recall.recall.classification" format="fdaClassDesc" readonly/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.reportDateTitle"></label>
+                            <input ng-model="recall.recall.report_date" readonly format="fdaDate" format-options="MM/dd/yyyy"/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.initiationDateTitle"></label>
+                            <input ng-model="recall.recall.recall_initiation_date" format="fdaDate" format-options="MM/dd/yyyy" readonly/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.statusTitle"></label>
+                            <input ng-model="recall.recall.status" readonly/>
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex-gt-sm="50" layout-gt-sm="column">
+                <md-card flex-gt-sm>
+                    <md-card-content>
+                        <md-input-container>
+                            <label i18n="recall.recallingFirmTitle"></label>
+                            <input ng-model="recall.recall.recalling_firm" readonly/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.recallNumberTitle"></label>
+                            <input ng-model="recall.recall.recall_number" readonly/>
+                        </md-input-container>
+                        <md-input-container>
+                            <label i18n="recall.codeInfoTitle"></label>
+                            <textarea ng-model="recall.recall.code_info" readonly/>
+                        </md-input-container>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
     </md-content>
 </div>

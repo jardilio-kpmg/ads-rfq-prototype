@@ -24,12 +24,29 @@ main.directive('recallHistory', function () {
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
                 win = angular.element(window),
-                chart, legendSeries;
+                chart, legendSeries, chartUpdateDelay;
 
+            /**
+             * Change handler for the chart's data, which calls for
+             * a chart update after a short delay. The delay is in
+             * place to group multiple data updates made around the
+             * same time.
+             */
+            function chartDataChanged() {
+                clearTimeout(chartUpdateDelay);
+                chartUpdateDelay = setTimeout(function() {
+                    chartUpdateDelay = null;
+                    updateData();
+                }, 250);
+            }
+
+            /**
+             * Update the chart based on the current set of data.
+             */
             function updateData() {
                 if (chart && $scope.recallHistoryData) {
                     svg.datum($scope.recallHistoryData)
-                        .transition().duration(500)
+                        .transition().duration(400)
                         .call(chart);
 
                     //Draw a rectangle behind each legend item to provide additional click area.
@@ -52,9 +69,17 @@ main.directive('recallHistory', function () {
                             }
                         });
                     }
+
+                    setTimeout(function() {
+                        resizeChart();
+                    }, 100);
+
                 }
             }
 
+            /**
+             * Requests a chart redraw.
+             */
             function resizeChart() {
                 if (chart && chart.update) {
                     chart.update();
@@ -70,20 +95,17 @@ main.directive('recallHistory', function () {
                         .stacked(true)
                         .showControls(false)
                         .groupSpacing(0.1)
-                        .margin({left: 0, right: 0, top: 0, bottom: 25})
-                    ;
+                        .margin({left: 0, right: 0, top: 0, bottom: 30});
 
                 chart.xAxis
                     .tickFormat(d3.format('f'));
-
-                updateData();
 
                 return chart;
             });
 
             resizeChart();
 
-            $scope.$watch('recallHistoryData', updateData, true);
+            $scope.$watch('recallHistoryData', chartDataChanged);
 
             $elem.addClass('search recall-history');
             win.on('resize', resizeChart);
