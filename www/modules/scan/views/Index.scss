@@ -19,7 +19,6 @@
         right: 0;
         width: 100%;
         height: 100%;
-        z-index: 100;
         background: white;
         &:after {
             content: "";
@@ -41,7 +40,6 @@
     md-toolbar {
         transform: translateY(33%);
         transition: transform 0.5s ease 0.5s;
-        z-index: 1000;
         position: absolute;
         top: 0;
         bottom: 0;
