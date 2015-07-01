@@ -20,9 +20,13 @@
         "recallHistTab": "Trends",
         "classDistribution": {
             "title": "Classification Distribution",
+            "chartDescription": "This pie chart displays active recalls returned in the search results by class.",
             "class1Title": "Class I",
             "class2Title": "Class II",
             "class3Title": "Class III"
+        },
+        "recallHistory": {
+            "chartDescription": "This stacked bar chart displays all recalls for the past 4 years by class."
         },
         "fuzzyMatch": {
             "title": "UPC Not Found",
