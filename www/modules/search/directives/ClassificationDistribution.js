@@ -25,8 +25,25 @@ main.directive('classificationDistribution', function () {
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
                 win = angular.element(window),
-                chart, legendSeries;
+                chart, legendSeries, chartUpdateDelay;
 
+            /**
+             * Change handler for the chart's data, which calls for
+             * a chart update after a short delay. The delay is in
+             * place to group multiple data updates made around the
+             * same time.
+             */
+            function chartDataChanged() {
+                clearTimeout(chartUpdateDelay);
+                chartUpdateDelay = setTimeout(function() {
+                    chartUpdateDelay = null;
+                    updateData();
+                }, 250);
+            }
+
+            /**
+             * Update the chart based on the current set of data.
+             */
             function updateData() {
                 if (chart && $scope.counts) {
                     var class1Data, class2Data, class3Data, compiledCounts;
@@ -55,7 +72,7 @@ main.directive('classificationDistribution', function () {
                     chart.color(['#FE0000', '#F47429', '#FEF200']);
 
                     svg.datum(compiledCounts)
-                        .transition().duration(500)
+                        .transition().duration(400)
                         .call(chart);
 
                     //Draw a rectangle behind each legend item to provide additional click area.
@@ -81,6 +98,9 @@ main.directive('classificationDistribution', function () {
                 }
             }
 
+            /**
+             * Requests a chart redraw.
+             */
             function resizeChart() {
                 if (chart && chart.update) {
                     chart.update();
@@ -96,14 +116,12 @@ main.directive('classificationDistribution', function () {
                     .showLegend(true)
                     .margin({left: 0, right: 0, top: 0, bottom: 0});
 
-                updateData();
-
                 return chart;
             });
 
             resizeChart();
 
-            $scope.$watch('counts', updateData);
+            $scope.$watch('counts', chartDataChanged);
 
             $elem.addClass('search classification-distribution');
             win.on('resize', resizeChart);
