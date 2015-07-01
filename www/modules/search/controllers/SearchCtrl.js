@@ -368,6 +368,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         });
 
         //Update the Recall History chart's main data source.
+        self.recallHistoryData = null;
         self.recallHistoryData = tempRecallHistoryData;
     }
 
