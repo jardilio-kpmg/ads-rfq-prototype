@@ -52,6 +52,11 @@ main.directive('recallHistory', function () {
                             }
                         });
                     }
+
+                    setTimeout(function() {
+                        resizeChart();
+                    }, 100);
+
                 }
             }
 
@@ -75,7 +80,7 @@ main.directive('recallHistory', function () {
                         .stacked(true)
                         .showControls(false)
                         .groupSpacing(0.1)
-                        .margin({left: 0, right: 0, top: 0, bottom: 25})
+                        .margin({left: 0, right: 0, top: 0, bottom: 30})
                     ;
 
                 chart.xAxis

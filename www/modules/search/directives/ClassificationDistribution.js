@@ -24,7 +24,7 @@ main.directive('classificationDistribution', function () {
         template: require('./ClassificationDistribution.html'),
         link: function ($scope, $elem, $attr, controllers) {// jshint ignore:line
             var svg = d3.select($elem.find('svg')[0]),
-                //win = angular.element(window),
+                win = angular.element(window),
                 chart, legendSeries;
 
             function updateData() {
@@ -74,14 +74,14 @@ main.directive('classificationDistribution', function () {
                                 });
                         }
                     });
+
+                    setTimeout(function() {
+                        resizeChart();
+                    }, 100);
                 }
             }
 
             function resizeChart() {
-                //svg
-                //    .style('width', Math.max(250, $elem.width()))
-                //    .style('height', Math.max(250, $elem.height()));
-
                 if (chart && chart.update) {
                     chart.update();
                 }
@@ -106,9 +106,9 @@ main.directive('classificationDistribution', function () {
             $scope.$watch('counts', updateData);
 
             $elem.addClass('search classification-distribution');
-            //win.on('resize', resizeChart);
+            win.on('resize', resizeChart);
             $scope.$on('$destroy', function () {
-                //win.off('resize', resizeChart);
+                win.off('resize', resizeChart);
             });
         }
     };
