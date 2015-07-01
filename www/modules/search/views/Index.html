@@ -14,7 +14,7 @@
 
     <div flex layout="column" class="result" ng-show="search.state === search.states.RESULTS" layout-gt-sm="row">
         <md-tabs flex class="search-page-content md-primary"
-                 md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="false"
+                 md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="true"
                  md-selected-gt-sm="0">
             <md-tab>
                 <md-tab-label>
@@ -142,7 +142,6 @@
                     <input ng-model="searchForm.keywords" type="search" required autocomplete="off">
                 </md-input-container>
                 <md-button type="submit" class="md-raised md-primary" ng-disabled="keywordSearch.$invalid">
-                    <md-icon>search</md-icon>
                     <span i18n="search.searchKeywords"></span>
                 </md-button>
             </form>
@@ -155,12 +154,11 @@
                     <input ng-model="searchForm.barcode" type="search" required autocomplete="off">
                 </md-input-container>
                 <md-button type="submit" class="md-raised md-primary" ng-disabled="barcodeSearch.$invalid">
-                    <md-icon>search</md-icon>
                     <span i18n="search.searchBarcode"></span>
                 </md-button>
             </form>
             <span class="or" i18n="search.or"></span>
-            <md-button scan-button class="md-primary md-raised">
+            <md-button scan-button class="md-primary md-raised scan-barcode-button">
                 <md-icon>photo_camera</md-icon>
                 <span i18n="search.manualSearchScanButton"></span>
             </md-button>

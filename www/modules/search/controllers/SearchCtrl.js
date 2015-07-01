@@ -29,7 +29,10 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
 
     var self = this,
         path = $location.path(),
-        keywords, barcode;
+        keywords, barcode,
+        tempRecallHistoryData = [],
+        recallHistoryExpectedCheckInPoints = 4,
+        recallHistoryCheckInPoints = 0;
 
     /**
      * @private
@@ -62,31 +65,6 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
      * @type {array}
      */
     self.recallHistoryData = [];
-
-    /**
-     * A list of recall history results used to populate the final
-     * recallHistoryData array. This array will be used when
-     * making the different api calls to populate the recall history
-     * so the chart doesn't update each time a request is handled.
-     * @name search.controllers.SearchCtrl#tempRecallHistoryData
-     * @propertyOf search.controllers.SearchCtrl
-     * @type {array}
-     */
-    self.tempRecallHistoryData = [];
-
-    /**
-     * The number of api calls expected to be made to populate
-     * the Recall History chart.
-     * @type {number}
-     */
-    self.recallHistoryExpectedCheckInPoints = 5;
-
-    /**
-     * The number of api calls that have been made, of the expected
-     * number, to populate the Recall History chart.
-     * @type {number}
-     */
-    self.recallHistoryCheckInPoints = 0;
 
     /**
      * The list of recall results counted by classification
@@ -137,7 +115,12 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                                     .cancel(kLocalizeFilter('search.fuzzyMatch.cancel'))
                             )
                                 .then(function () {
+                                    //Yes button click handler
                                     self.searchByKeywords(products[0].name);
+                                },
+                                function() {
+                                    //No button click handler
+                                    self.state = self.states.SEARCH;
                                 });
                         }
                         else {
@@ -215,8 +198,8 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
 
     function processResults(results) {
         results = (results && results.results) || [];
+        self.state = results.length ? self.states.RESULTS : self.states.SEARCH;
         self.recalls = results;
-        self.state = self.recalls.length ? self.states.RESULTS : self.states.SEARCH;
     }
 
     function processClassification(results) {
@@ -239,15 +222,15 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
             thisYear = new Date().getFullYear();
 
         //Reset the number of request that have been handled.
-        self.recallHistoryCheckInPoints = 0;
+        recallHistoryCheckInPoints = 0;
 
         //Establish the base chart data and classification colors.
-        self.tempRecallHistoryData = [{key: 'Class I', color: '#FE0000', values: []},
+        tempRecallHistoryData = [{key: 'Class I', color: '#FE0000', values: []},
             {key: 'Class II', color: '#F47429', values: []},
             {key: 'Class III', color: '#FEF200', values: []}];
 
         //Get history for the last 5 years, including this year. We'll build the list of years and then make the requests.
-        for(var y = thisYear - 4; y <= thisYear; y++) {
+        for(var y = thisYear - 3; y <= thisYear; y++) {
             years.push(y);
         }
 
@@ -302,7 +285,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
         });
 
         //Apply the classification group counts.
-        angular.forEach(self.tempRecallHistoryData, function(recallClass) {
+        angular.forEach(tempRecallHistoryData, function(recallClass) {
             switch(recallClass.key) {
                 case 'Class I':
                     recallClass.values.push({x: year, y: class1Count ? class1Count : 0});
@@ -325,7 +308,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
      * @param year
      */
     function processRecallHistorySearchError(year) {
-        angular.forEach(self.tempRecallHistoryData, function(recallClass) {
+        angular.forEach(tempRecallHistoryData, function(recallClass) {
             switch(recallClass.key) {
                 case 'Class I':
                     recallClass.values.push({x: year, y: 0});
@@ -349,9 +332,9 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
      * on to our finalize method to update the chart's data source.
      */
     function recallHistorySearchCheckIn() {
-        self.recallHistoryCheckInPoints++;
+        recallHistoryCheckInPoints++;
 
-        if(self.recallHistoryCheckInPoints === self.recallHistoryExpectedCheckInPoints) {
+        if(recallHistoryCheckInPoints === recallHistoryExpectedCheckInPoints) {
             finalizeRecallHistorySearch();
         }
     }
@@ -377,12 +360,13 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
      */
     function finalizeRecallHistorySearch() {
         //Sort the value arrays for each classification entry so years are displayed in the correct order.
-        angular.forEach(self.tempRecallHistoryData, function(recallClass) {
+        angular.forEach(tempRecallHistoryData, function(recallClass) {
             recallClass.values.sort(recallHistorySort);
         });
 
         //Update the Recall History chart's main data source.
-        self.recallHistoryData = self.tempRecallHistoryData;
+        self.recallHistoryData = null;
+        self.recallHistoryData = tempRecallHistoryData;
     }
 
     var search = {};

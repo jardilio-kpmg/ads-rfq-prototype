@@ -28,6 +28,11 @@ $break-small: 600px;
             margin: 10px;
             position: relative;
         }
+
+        .scan-barcode-button {
+            width: 285px;
+        }
+
         md-input-container {
             width: 100%;
         }
@@ -38,9 +43,5 @@ $break-small: 600px;
         }
         height: 0px; // Setting this makes sure the content shows scroll
         max-width: 960px;
-    }
-    .chart {
-        padding-left: 0;
-        padding-right: 0;
     }
 }

@@ -1,6 +1,11 @@
 .search.recall-history {
+    p {
+        padding: 0;
+    }
+
     svg {
-        min-width: 240px;
-        min-height: 300px;
+        min-width: 270px;
+        width: 100%;
+        height: 300px;
     }
 }
