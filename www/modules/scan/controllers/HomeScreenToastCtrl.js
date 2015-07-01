@@ -23,13 +23,6 @@ main.controller('HomeScreenToastCtrl', function (/**ng.$rootScope.Scope*/ $scope
 
     var self = this;
 
-    $scope.$on('$destroy', function () {
-        //TODO: clean up work
-    });
-
-    //TODO: write your public controller logic into self, private members are in scope of this constructor
-    //code below is for example purposes and may be safely removed (just remember to update the unit tests!)
-
     /**
      * @private
      * @type {string}
@@ -46,14 +39,37 @@ main.controller('HomeScreenToastCtrl', function (/**ng.$rootScope.Scope*/ $scope
         return name;
     };
 
+    /**
+     * A flag that will be true when the user is viewing
+     * the app on an Android device.
+     * @name scan.controllers.HomeScreenToastCtrl#isAndroid
+     * @propertyOf scan.controllers.HomeScreenToastCtrl
+     * @property
+     * @type {boolean}
+     */
     self.isAndroid = false;
 
-    self.isIos = true;
+    /**
+     * A flag that will be true when the user is viewing
+     * the app on an iOS device.
+     * @name scan.controllers.HomeScreenToastCtrl#isIos
+     * @propertyOf scan.controllers.HomeScreenToastCtrl
+     * @type {boolean}
+     */
+    self.isIos = false;
 
+    /**
+     * Click handler for the Close X button. Closes the
+     * MD Toast panel.
+     * @name scan.controllers.HomeScreenToastCtrl#closeToast
+     * @methodOf scan.controllers.HomeScreenToastCtrl
+     * @function
+     */
     self.closeToast = function() {
         $mdToast.cancel();
     };
 
+    //Determine whether the user is using an Android or iOS device.
     if( navigator.userAgent.match(/Android/i) ){
         self.isAndroid = true;
     } else if(navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) {

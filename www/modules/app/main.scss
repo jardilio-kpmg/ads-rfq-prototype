@@ -2,6 +2,7 @@ $classification-1-color: #FE0000;
 $classification-2-color: #F47429;
 $classification-3-color: #FEF200;
 $screen-background-color: lightgrey;
+$toast-font-color: white;
 
 
 html, body, md-content, ng-view {
@@ -63,16 +64,23 @@ md-toast {
 
 .homescreen-toast {
     .homescreen-icon {
-        color: #ffffff;
+        color: $toast-font-color;
         font-size: 18px;
         height: 18px;
         width: 18px;
+        padding: 0 2px;
     }
 
     .ios-share {
-        background-image: url(splash/share-create.svg);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: contain;
+        margin: -5px 0 0 0;
+        width: 13px;
+    }
+
+    .close-button {
+        width: 20px;
+
+        md-icon {
+            color: $toast-font-color;
+        }
     }
 }

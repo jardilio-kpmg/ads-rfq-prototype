@@ -23,7 +23,7 @@ var main = require('../main'),
 main.controller('ScanCtrl', function ($scope, $mdToast) {
 
     var self = this,
-        isTargetMobile = true,
+        isTargetMobile = false,
         homescreenToastPosition = 'top right';
 
     /**
@@ -42,18 +42,18 @@ main.controller('ScanCtrl', function ($scope, $mdToast) {
         return name;
     };
 
-    self.clearHomescreenStorage = function() {
-        if(typeof(Storage) !== 'undefined') {
-            delete localStorage.homescreenMsgDisplayed;
-        }
-    };
-
+    /**
+     * Displays a MD Toast with a message that explains
+     * how to add the app to the user's Homescreen when
+     * running on iOS or Android.
+     * @private
+     */
     function showSaveToHomeScreenToast() {
         $mdToast.show({
             controller: 'HomeScreenToastCtrl',
             controllerAs: 'toast',
             template: require('../views/HomeScreenToast.html'),
-            hideDelay: 1000000,
+            hideDelay: 4000,
             position: homescreenToastPosition
         });
     }
@@ -73,12 +73,13 @@ main.controller('ScanCtrl', function ($scope, $mdToast) {
         homescreenToastPosition = 'bottom right';
     }
 
+    //Show the Add to Home Screen message if it has not already been shown.
     if(typeof(Storage) !== 'undefined') {
         if(!localStorage.homescreenMsgDisplayed && !navigator.standalone && isTargetMobile) {
-            //localStorage.homescreenMsgDisplayed = true;
+            //Set local storage so toast is not displayed again.
+            localStorage.homescreenMsgDisplayed = true;
             //Show Add to Homescreen toast
             showSaveToHomeScreenToast();
         }
     }
-
 });
