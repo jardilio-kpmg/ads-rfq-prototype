@@ -199,14 +199,6 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
     function processResults(results) {
         results = (results && results.results) || [];
         self.state = results.length ? self.states.RESULTS : self.states.SEARCH;
-        if (results.length === 1) {
-            $location.search({});
-            $location.replace();
-            $timeout(function () {
-                $location.path('/recall/' + results[0]['@id']);// jshint ignore:line
-            });
-            return;
-        }
         self.recalls = results;
     }
 
