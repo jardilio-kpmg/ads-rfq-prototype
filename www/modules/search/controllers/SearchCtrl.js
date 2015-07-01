@@ -115,7 +115,12 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
                                     .cancel(kLocalizeFilter('search.fuzzyMatch.cancel'))
                             )
                                 .then(function () {
+                                    //Yes button click handler
                                     self.searchByKeywords(products[0].name);
+                                },
+                                function() {
+                                    //No button click handler
+                                    self.state = self.states.SEARCH;
                                 });
                         }
                         else {
@@ -193,6 +198,7 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
 
     function processResults(results) {
         results = (results && results.results) || [];
+        self.state = results.length ? self.states.RESULTS : self.states.SEARCH;
         if (results.length === 1) {
             $location.search({});
             $location.replace();
@@ -202,7 +208,6 @@ main.controller('SearchCtrl', function (/**ng.$rootScope.Scope*/ $scope, $timeou
             return;
         }
         self.recalls = results;
-        self.state = self.recalls.length ? self.states.RESULTS : self.states.SEARCH;
     }
 
     function processClassification(results) {
