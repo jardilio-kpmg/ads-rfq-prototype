@@ -10,7 +10,7 @@
 | Setup Instructions | https://github.com/jardilio-kpmg/ads-rfq-prototype/blob/master/INSTRUCTIONS.md |
 
 #Cover Letter
-July 1, 2015
+July 2, 2015
 
 Hassan Harris
 Senior Contracting Officer
