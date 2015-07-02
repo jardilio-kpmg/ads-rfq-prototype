@@ -4,13 +4,14 @@ $max-width: 960px;
 
 .recall.index {
     md-content {
-        background: lighten(lightgrey, 10%);
+        background: none;
+    }
 
-        .detail-result {
-            @media screen and (min-width: $break-small) {
-                margin: auto;
-            }
-            max-width: $max-width;
+    .detail-result {
+        @media screen and (min-width: $break-small) {
+            margin: auto;
         }
+        max-width: $max-width;
+        width: 100%;
     }
 }
