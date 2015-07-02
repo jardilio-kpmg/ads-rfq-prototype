@@ -125,14 +125,12 @@
     </md-content>
     <md-content class="search-page-content" flex layout="column" layout-align="center center"
                 ng-show="search.state === search.states.SEARCH">
-        <div layout="column">
-            <div class="search-results-feedback"
-                 ng-if="search.recalls.length == 0" layout="row">
+        <div>
+            <div class="search-results-feedback" layout="row" ng-if="search.recalls.length == 0" >
                 <label i18n="search.noResults"></label>
             </div>
-            <form name="keywordSearch" class="search-form"
-                  ng-submit="search.searchByKeywords(searchForm.keywords)"
-                  layout="column">
+            <form name="keywordSearch" class="search-form" layout="column"
+                  ng-submit="search.searchByKeywords(searchForm.keywords)">
                 <md-input-container>
                     <label i18n="search.keywordSearch"></label>
                     <input ng-model="searchForm.keywords" type="search" required autocomplete="off">
@@ -141,10 +139,9 @@
                     <span i18n="search.searchKeywords"></span>
                 </md-button>
             </form>
-            <span class="or" i18n="search.or"></span>
-            <form name="barcodeSearch" class="search-form"
-                  ng-submit="search.searchByBarcode(searchForm.barcode)"
-                  layout="column">
+            <div class="or"><span i18n="search.or"></span></div>
+            <form name="barcodeSearch" class="search-form" layout="column"
+                  ng-submit="search.searchByBarcode(searchForm.barcode)">
                 <md-input-container>
                     <label i18n="search.barcodeSearch"></label>
                     <input ng-model="searchForm.barcode" type="search" required autocomplete="off">
@@ -153,7 +150,7 @@
                     <span i18n="search.searchBarcode"></span>
                 </md-button>
             </form>
-            <span class="or" i18n="search.or"></span>
+            <div class="or"><span i18n="search.or"></span></div>
             <div layout="column">
                 <md-button scan-button class="md-primary md-raised">
                     <md-icon>photo_camera</md-icon>
