@@ -1,0 +1,13 @@
+<md-toast class="homescreen-toast">
+    <span flex>
+        <span>Click</span>
+        <md-icon class="homescreen-icon" ng-if="toast.isAndroid" aria-label="Android Share Icon">more_vert</md-icon>
+        <md-icon class="homescreen-icon ios-share" ng-if="toast.isIos" md-svg-src="splash/share-create.svg" aria-label="iOS Share Icon"></md-icon>
+        <span>to add to Home screen.</span>
+    </span>
+
+    <md-button class="md-icon-button close-button" aria-label="Close Toast"
+               ng-click="toast.closeToast()">
+        <md-icon aria-label="Close">close</md-icon>
+    </md-button>
+</md-toast>
