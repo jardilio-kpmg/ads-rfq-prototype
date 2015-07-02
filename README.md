@@ -25,21 +25,44 @@ imports and then follow the same steps as *.css above. This also works for *.sas
 
 ##Getting Started
 
-Make sure you have the following prerequisites installed:
-
-* Install Node.js from http://nodejs.org/
-* Windows users must also install msysgit from https://github.com/msysgit/msysgit/releases/
-    * Download the "full installer for official Git for Windows" version
-    * During installation, choose the option "Run Git from the Windows Command Prompt"
-    * Restart your machine
-
-Once you have the prerequisites out of the way, you can clone the project from the command line:
+Clone the project from the command line:
 
 ```
     cd /path/to/projects
     git clone https://github.com/jardilio-kpmg/ads-rfq-prototype.git
     cd ads-rfq-prototype
 ```
+
+You can choose to use Vagrant or manual setup process to run the project on your local machine:
+
+### Using Vagrant Environment
+
+Note that when using the Vagrant Environment, the server tasks listed later in this document will not spawn
+the browser automatically on your host machine, you will see a warning. You must open those URL's in the browser
+on your host manually.
+
+* Make sure you have Vagrant installed from https://www.vagrantup.com/downloads.html
+* Run the following commands:
+
+```
+    cd /path/to/project
+    vagrant up
+    vagrant ssh
+```
+
+That's it, your environment will be setup automatically and when you connect via ssh, it will automatically startup
+in your project directory and ensure that node and bower dependencies are up to date. This will also run the default
+grunt task (see more on Grunt tasks below).
+
+### Manually Setup Environment
+
+Make sure you have the following prerequisites installed:
+
+* Install Node.js from http://nodejs.org/ (tested using version 0.12.x)
+* Windows users must also install msysgit from https://github.com/msysgit/msysgit/releases/
+    * Download the "full installer for official Git for Windows" version
+    * During installation, choose the option "Run Git from the Windows Command Prompt"
+    * Restart your machine
 
 * First time setup of global dependencies on your machine:
 
