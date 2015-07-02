@@ -1,0 +1,17 @@
+/* todo : need to set this on global variables file */
+$break-small: 600px; /* min small devices break for responsive design */
+$max-width: 960px;
+
+.recall.index {
+    md-content {
+        background: none;
+    }
+
+    .detail-result {
+        @media screen and (min-width: $break-small) {
+            margin: auto;
+        }
+        max-width: $max-width;
+        width: 100%;
+    }
+}

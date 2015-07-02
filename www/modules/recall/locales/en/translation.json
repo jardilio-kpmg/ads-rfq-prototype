@@ -1,0 +1,14 @@
+{
+    "recall": {
+        "title" : "Recall Details",
+        "reportDateTitle": "Report Date",
+        "reasonRecallTitle": "Reason for Recall",
+        "recallingFirmTitle": "Recalling Firm",
+        "productDescriptionTitle": "Product Description",
+        "distributionTitle": "Distribution",
+        "statusTitle": "Status",
+        "codeInfoTitle": "Code Info",
+        "recallNumberTitle": "Recall Number",
+        "initiationDateTitle": "Initiation Date"
+    }
+}

@@ -1,0 +1,162 @@
+<md-content class="search index" flex layout="column">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <nav-back-button></nav-back-button>
+            <h2 flex i18n="search.title"></h2>
+            <md-button class="md-icon-button"
+                       ng-if="search.state === search.states.RESULTS"
+                       ng-click="search.resetSearchForm()">
+                <md-icon>search</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content class="search-results" flex layout=column layout-gt-sm="row" ng-show="search.state === search.states.RESULTS">
+        <md-tabs flex class="search-page-content md-primary"
+                 md-stretch-tabs="auto" md-swipe-content="true" md-dynamic-height="false" md-no-disconnect="true"
+                 md-selected-gt-sm="0">
+            <md-tab>
+                <md-tab-label>
+                    <label i18n="search.recallsTab"></label>
+                </md-tab-label>
+                <md-tab-body>
+                    <recall-list recalls="search.recalls"></recall-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <label i18n="search.classificationsTab"></label>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout-padding>
+                        <md-card class="chart">
+                            <md-card-content layout="row" layout-align="center center">
+                                <classification-distribution counts="search.classifications"></classification-distribution>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class1Title"></h3>
+                                <p i18n="openfda.classDistribution.class1Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class2Title"></h3>
+                                <p i18n="openfda.classDistribution.class2Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class3Title"></h3>
+                                <p i18n="openfda.classDistribution.class3Description"></p>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>
+                    <label i18n="search.recallHistTab"></label>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout-padding>
+                        <md-card>
+                            <md-card-content layout="row" layout-align="center center">
+                                <recall-history recall-history-data="search.recallHistoryData"></recall-history>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class1Title"></h3>
+                                <p i18n="openfda.classDistribution.class1Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class2Title"></h3>
+                                <p i18n="openfda.classDistribution.class2Description"></p>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content>
+                                <h3 i18n="search.classDistribution.class3Title"></h3>
+                                <p i18n="openfda.classDistribution.class3Description"></p>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <md-content flex hide-sm>
+            <div layout-padding>
+                <md-card>
+                    <md-card-content class="chart" layout="row" layout-align="center center">
+                        <classification-distribution counts="search.classifications"></classification-distribution>
+                    </md-card-content>
+                </md-card>
+                <md-card>
+                    <md-card-content class="chart" layout="row" layout-align="center center">
+                        <recall-history recall-history-data="search.recallHistoryData"></recall-history>
+                    </md-card-content>
+                </md-card>
+                <md-card>
+                    <md-card-content>
+                        <h3 i18n="search.classDistribution.class1Title"></h3>
+                        <p i18n="openfda.classDistribution.class1Description"></p>
+                    </md-card-content>
+                </md-card>
+                <md-card>
+                    <md-card-content>
+                        <h3 i18n="search.classDistribution.class2Title"></h3>
+                        <p i18n="openfda.classDistribution.class2Description"></p>
+                    </md-card-content>
+                </md-card>
+                <md-card>
+                    <md-card-content>
+                        <h3 i18n="search.classDistribution.class3Title"></h3>
+                        <p i18n="openfda.classDistribution.class3Description"></p>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-content>
+    </md-content>
+    <md-content flex layout="column" layout-align="center center" ng-show="search.state === search.states.SEARCHING">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </md-content>
+    <md-content class="search-page-content" flex layout="column" layout-align="center center"
+                ng-show="search.state === search.states.SEARCH">
+        <div>
+            <div class="search-results-feedback" layout="row" ng-if="search.recalls.length == 0" >
+                <label i18n="search.noResults"></label>
+            </div>
+            <form name="keywordSearch" class="search-form" layout="column"
+                  ng-submit="search.searchByKeywords(searchForm.keywords)">
+                <md-input-container>
+                    <label i18n="search.keywordSearch"></label>
+                    <input ng-model="searchForm.keywords" type="search" required autocomplete="off">
+                </md-input-container>
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="keywordSearch.$invalid">
+                    <span i18n="search.searchKeywords"></span>
+                </md-button>
+            </form>
+            <div class="or"><span i18n="search.or"></span></div>
+            <form name="barcodeSearch" class="search-form" layout="column"
+                  ng-submit="search.searchByBarcode(searchForm.barcode)">
+                <md-input-container>
+                    <label i18n="search.barcodeSearch"></label>
+                    <input ng-model="searchForm.barcode" type="search" required autocomplete="off">
+                </md-input-container>
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="barcodeSearch.$invalid">
+                    <span i18n="search.searchBarcode"></span>
+                </md-button>
+            </form>
+            <div class="or"><span i18n="search.or"></span></div>
+            <div layout="column">
+                <md-button scan-button class="md-primary md-raised">
+                    <md-icon>photo_camera</md-icon>
+                    <span i18n="search.manualSearchScanButton"></span>
+                </md-button>
+            </div>
+        </div>
+    </md-content>
+</md-content>

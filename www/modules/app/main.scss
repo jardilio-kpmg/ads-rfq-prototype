@@ -1,10 +1,8 @@
-@import "../../libs/nvd3/nv.d3.css";
-
 $classification-1-color: #FE0000;
 $classification-2-color: #F47429;
 $classification-3-color: #FEF200;
 $screen-background-color: lightgrey;
-
+$toast-font-color: white;
 
 html, body, md-content, ng-view {
     background-color: $screen-background-color;
@@ -57,4 +55,31 @@ ng-view,
       transform: translateY(0) scale(1);
     }
   }
+}
+
+md-toast {
+    z-index: 1010;
+}
+
+.homescreen-toast {
+    .homescreen-icon {
+        color: $toast-font-color;
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+        padding: 0 2px;
+    }
+
+    .ios-share {
+        margin: -5px 0 0 0;
+        width: 13px;
+    }
+
+    .close-button {
+        width: 20px;
+
+        md-icon {
+            color: $toast-font-color;
+        }
+    }
 }

@@ -62,8 +62,8 @@ app.config(function ($mdThemingProvider, $routeProvider, $httpProvider) {
         });
 
     //TODO: we could have additional functional areas in this app later, for now all we have is recalls
-    $routeProvider.when('/', {
-        redirectTo: '/recalls'
+    $routeProvider.otherwise({
+        redirectTo: '/scan'
     });
 
     $httpProvider.interceptors.push('kHttpOptimizer');
@@ -78,6 +78,8 @@ module.exports = app;
 //NOTE: scaffolding task for new modules will register here automatically
 
 app.requires.push('ads');
-app.requires.push('recalls');
 app.requires.push('openfda');
 app.requires.push('factual');
+app.requires.push('search');
+app.requires.push('recall');
+app.requires.push('scan');

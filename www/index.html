@@ -86,6 +86,8 @@
     <link href="icons/icon_57.png"
           sizes="57x57"
           rel="apple-touch-icon-precomposed">
+    <link href="splash/share-create.svg"
+          rel="share-create icon">
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="shortcut icon" sizes="196x196" href="icons/icon_196.png">
     <link rel="shortcut icon" sizes="128x128" href="icons/icon_128.png">
@@ -101,7 +103,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body>
+<body layout="column" layout-fill>
 
 <!--[if lte IE 11]>
     <style>.unsupported-browser {
@@ -119,27 +121,41 @@
     </div>
 <![endif]-->
 
-<ng-view>
-    <style>
-        .splash {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            max-width: 691px;
-            margin: auto;
-            background: white;
-            background-image: url(splash/splash.png);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: contain;
-        }
-    </style>
-    <div class="splash"></div>
-</ng-view>
+<ng-view layout="column" layout-fill></ng-view>
+
+<style>
+    .splash {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: white;
+    }
+    .splash:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 691px;
+        height: 33%;
+        margin: auto;
+        background-image: url(splash/splash.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .app.ready .splash {
+        display: none;
+    }
+</style>
+<div class="splash"></div>
 
 <script type="application/javascript">window.timestamp = new Date();</script>
 

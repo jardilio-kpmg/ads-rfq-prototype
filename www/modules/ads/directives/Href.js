@@ -20,8 +20,8 @@ main.directive('href', function ($location) {
                     e.preventDefault();
                     e.stopPropagation();
                     $scope.$applyAsync(function () {
-                        $location.search({});
                         $location.url(href.charAt(0) === '#' ? href.substr(1) : href);
+                        $location.search({});
                     });
                 });
             }

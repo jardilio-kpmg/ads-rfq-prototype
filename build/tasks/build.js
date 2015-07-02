@@ -93,7 +93,10 @@ module.exports = function (grunt) {
                             [__dirname + '/libs/instrumentify'] : //this should be first thing we do
                             []
                         ),
-                        watch: options.watch //do not use this, when we rebuild it duplicates listeners
+                        watch: options.watch, //do not use this, when we rebuild it duplicates listeners
+                        watchifyOptions: {
+                            poll: true
+                        }
                     }
                 }
             },

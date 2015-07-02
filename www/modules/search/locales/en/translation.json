@@ -1,0 +1,38 @@
+{
+    "search": {
+        "or": "or",
+        "noResults": "No results were found...",
+        "scanButton": "Try Again?",
+        "manualSearchInput": "Keywords or UPC",
+        "manualSearchScanButton": "Scan Barcode",
+        "manualSearchButton": "Search",
+        "keywordSearch": "Keywords",
+        "searchKeywords": "Search by Keywords",
+        "barcodeSearch": "UPC",
+        "searchBarcode": "Search by UPC",
+        "classificationDistributionButton": "Class Distribution",
+        "classificationDistributionShortButton": "Class Distr",
+        "recallHistoryButton": "Recall History",
+        "recallHistoryShortButton": "Recall Hist",
+        "title": "Search",
+        "recallsTab": "Results",
+        "classificationsTab": "Severity",
+        "recallHistTab": "Trends",
+        "classDistribution": {
+            "title": "Classification Distribution",
+            "chartDescription": "This pie chart displays active recalls returned in the search results by class.",
+            "class1Title": "Class I",
+            "class2Title": "Class II",
+            "class3Title": "Class III"
+        },
+        "recallHistory": {
+            "chartDescription": "This stacked bar chart displays all recalls for the past 4 years by class."
+        },
+        "fuzzyMatch": {
+            "title": "UPC Not Found",
+            "content": "__upc__ was not found in the recall list. Would you like to search on related recalls for \"__keywords__\"?",
+            "ok": "Yes, Please!",
+            "cancel": "No Thanks"
+        }
+    }
+}
