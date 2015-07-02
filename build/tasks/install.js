@@ -12,11 +12,13 @@ module.exports = function (grunt) {
     'use strict';
 
     grunt.registerTask('install', function(target) {
-        var exec = require('child_process').exec,
+        var isWin = /^win/.test(process.platform),
+            exec = require('child_process').exec,
             fs = require('fs'),
             cb = this.async(),
             npm = 'npm prune && npm install',
-            bower = 'node_modules/.bin/bower prune && node_modules/.bin/bower install --force-latest',
+            bower = isWin ? '"node_modules/.bin/bower" prune && "node_modules/.bin/bower" install --force-latest' :
+                            'node_modules/.bin/bower prune && node_modules/.bin/bower install --force-latest',
             cmd = '';
 
 

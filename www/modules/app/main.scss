@@ -1,7 +1,85 @@
+$classification-1-color: #FE0000;
+$classification-2-color: #F47429;
+$classification-3-color: #FEF200;
+$screen-background-color: lightgrey;
+$toast-font-color: white;
+
+html, body, md-content, ng-view {
+    background-color: $screen-background-color;
+}
+
 .app {
     /*TODO: add application specific styles here*/
+
+    /*Recall item Classification-I*/
+    .classification-1 {
+        color: $classification-1-color;
+    }
+
+    /*Recall item Classification-II*/
+    .classification-2 {
+        color: $classification-2-color;
+    }
+
+    /*Recall item Classification-III*/
+    .classification-3 {
+        color: $classification-3-color;
+    }
 }
 
 .app.ready {
    /*TODO: application is ready and loaded*/
+}
+
+ng-view,
+[ng-view] {
+  &.ng-leave {
+    opacity: 1;
+    transition: all 250ms ease;
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
+  &.ng-enter {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transform: translateY(10%) scale(0.9);
+    transition: all 250ms ease;
+    &.ng-enter-active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+md-toast {
+    z-index: 1010;
+}
+
+.homescreen-toast {
+    .homescreen-icon {
+        color: $toast-font-color;
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+        padding: 0 2px;
+    }
+
+    .ios-share {
+        margin: -5px 0 0 0;
+        width: 13px;
+    }
+
+    .close-button {
+        width: 20px;
+
+        md-icon {
+            color: $toast-font-color;
+        }
+    }
 }

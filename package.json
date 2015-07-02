@@ -24,7 +24,7 @@
     "fs-extra": "^0.12.0",
     "glob-expand": "0.0.2",
     "grunt": "0.4.5",
-    "grunt-browserify": "3.5.0",
+    "grunt-browserify": "3.8.0",
     "grunt-cli": "^0.1.13",
     "eventemitter3": "0.1.6",
     "grunt-connect-proxy": "0.1.10",
@@ -88,6 +88,7 @@
     "touch": "0.0.3"
   },
   "dependencies": {
+    "quagga": "^0.6.9",
     "scriptjs": "2.5.7"
   },
   "browserify": {
@@ -127,6 +128,7 @@
     "backbone.marionette": "global:Marionette",
     "angular": "global:angular",
     "d3": "global:d3",
+      "nvd3": "global:nv",
     "modernizr": "global:Modernizr",
     "i18next": "global:i18n"
   }

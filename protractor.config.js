@@ -8,7 +8,9 @@ module.exports.config = {
 
     // Capabilities to be passed to the webdriver instance.
     capabilities: {
-        'browserName': 'chrome'
+        //TODO: switch setting to chrome when we have browsers installed on CI server
+        'browserName': 'phantomjs',
+        'phantomjs.binary.path': require('phantomjs').path
     },
 
     // Options to be passed to Jasmine-node.

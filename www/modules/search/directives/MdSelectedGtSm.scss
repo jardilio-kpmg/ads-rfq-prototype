@@ -1,0 +1,17 @@
+/* min small devices break for responsive design */
+$break-small: 600px;
+
+.search.md-selected-gt-sm {
+
+    md-tabs-wrapper {
+        @media screen and (min-width: $break-small) {
+            display: none;
+            width:0;
+        }
+    }
+    md-tabs-content-wrapper {
+        @media screen and (min-width: $break-small) {
+            top:0;
+        }
+    }
+}

@@ -1,5 +1,6 @@
 var angular = require('angular');
 
+require('../../libs/angular-material/angular-material.css');
 require('./main.scss');
 
 /**
@@ -45,20 +46,40 @@ require('./main.scss');
  */
 var app = angular.module('app', [
     'ng',
+    'ngAnimate',
     'ngRoute',
     'kpmgAngular',
-    'ngMaterial',
-    'login'
+    'ngMaterial'
 ]);
+
+app.config(function ($mdThemingProvider, $routeProvider, $httpProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue', {
+            default: '800'
+        })
+        .accentPalette('light-blue', {
+            default: '500'
+        });
+
+    //TODO: we could have additional functional areas in this app later, for now all we have is recalls
+    $routeProvider.otherwise({
+        redirectTo: '/scan'
+    });
+
+    $httpProvider.interceptors.push('kHttpOptimizer');
+});
 
 app.run(function ($rootElement) {
     $rootElement.addClass('app ready');
 });
-
-//TODO: register angular module dependencies, run and config functions...
 
 module.exports = app;
 
 //NOTE: scaffolding task for new modules will register here automatically
 
 app.requires.push('ads');
+app.requires.push('openfda');
+app.requires.push('factual');
+app.requires.push('search');
+app.requires.push('recall');
+app.requires.push('scan');

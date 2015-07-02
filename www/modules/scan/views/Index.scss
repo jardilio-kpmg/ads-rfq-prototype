@@ -1,0 +1,64 @@
+.scan.index {
+    background: white;
+
+    &.init {
+        .safer {
+            transform: translateY(0);
+        }
+        md-toolbar {
+            transform: translateY(100%);
+        }
+    }
+    .safer {
+        transform: translateY(-33%);
+        transition: transform 0.5s ease 0.5s;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        &:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            max-width: 691px;
+            height: 33%;
+            margin: auto;
+            background-image: url(splash/splash.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+    md-toolbar {
+        transform: translateY(33%);
+        transition: transform 0.5s ease 0.5s;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .md-button {
+        width: 200px;
+        &.md-raised {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+    }
+    h1 {
+        margin-bottom: 0;
+    }
+    h2 {
+        margin-top: 0;
+    }
+}

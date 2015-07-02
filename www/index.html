@@ -14,7 +14,84 @@
     <![endif]-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title data-i18n="preloader.title"></title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#10579b">
+    <meta name="apple-mobile-web-app-title" content="KPMG SAFER">
+    <link href="splash/iPad-retina-portrait.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+                 and (-webkit-device-pixel-ratio: 2)
+                 and (orientation: portrait)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPad-retina-landscape.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+                 and (-webkit-device-pixel-ratio: 2)
+                 and (orientation: landscape)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPad-non-retina-portrait.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+                 and (-webkit-device-pixel-ratio: 1)
+                 and (orientation: portrait)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPad-non-retina-landscape.png"
+          media="(device-width: 768px) and (device-height: 1024px)
+                 and (-webkit-device-pixel-ratio: 1)
+                 and (orientation: landscape)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPhone-6-Plus-portrait.png"
+          media="(device-width: 414px) and (device-height: 736px)
+                 and (-webkit-device-pixel-ratio: 3)
+                 and (orientation: portrait)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPhone-6-Plus-landscape.png"
+          media="(device-width: 414px) and (device-height: 736px)
+                 and (-webkit-device-pixel-ratio: 3)
+                 and (orientation: landscape)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPhone-6.png"
+          media="(device-width: 375px) and (device-height: 667px)
+                 and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPhone-5.png"
+          media="(device-width: 320px) and (device-height: 568px)
+                 and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPhone-legacy-retina.png"
+          media="(device-width: 320px) and (device-height: 480px)
+                 and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
+    <link href="splash/iPhone-legacy.png"
+          media="(device-width: 320px) and (device-height: 480px)
+                 and (-webkit-device-pixel-ratio: 1)"
+          rel="apple-touch-startup-image">
+    <link href="icons/icon_152.png"
+          sizes="152x152"
+          rel="apple-touch-icon-precomposed">
+    <link href="icons/icon_144.png"
+          sizes="144x144"
+          rel="apple-touch-icon-precomposed">
+    <link href="icons/icon_76.png"
+          sizes="76x76"
+          rel="apple-touch-icon-precomposed">
+    <link href="icons/icon_72.png"
+          sizes="72x72"
+          rel="apple-touch-icon-precomposed">
+    <link href="icons/icon_180.png"
+          sizes="120x120"
+          rel="apple-touch-icon-precomposed">
+    <link href="icons/icon_114.png"
+          sizes="114x114"
+          rel="apple-touch-icon-precomposed">
+    <link href="icons/icon_57.png"
+          sizes="57x57"
+          rel="apple-touch-icon-precomposed">
+    <link href="splash/share-create.svg"
+          rel="share-create icon">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" sizes="196x196" href="icons/icon_196.png">
+    <link rel="shortcut icon" sizes="128x128" href="icons/icon_128.png">
+    <title>KPMG SAFER</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="cache-control" content="max-age=0" />
@@ -23,9 +100,62 @@
     <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
     <link rel="localization" data-i18n="preloader.locale" type="application/vnd.oftn.l10n+json"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body>
+<body layout="column" layout-fill>
+
+<!--[if lte IE 11]>
+    <style>.unsupported-browser {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        border: 1px gray solid;
+        background: white;
+        max-width: 300px;
+    }</style>
+    <div class="unsupported-browser">
+        You are currently using an unsupported browser for this application. Please consider using
+        a modern browser from <a href="http://browsehappy.com/">http://browsehappy.com</a>.
+    </div>
+<![endif]-->
+
+<ng-view layout="column" layout-fill></ng-view>
+
+<style>
+    .splash {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: white;
+    }
+    .splash:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 691px;
+        height: 33%;
+        margin: auto;
+        background-image: url(splash/splash.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    .app.ready .splash {
+        display: none;
+    }
+</style>
+<div class="splash"></div>
 
 <script type="application/javascript">window.timestamp = new Date();</script>
 
@@ -44,8 +174,6 @@
 <!-- endbuild -->
 
 <script type="application/javascript">require('/www/modules/preloader/main.js').afterModules();</script>
-
-<ng-view></ng-view>
 
 </body>
 </html>
