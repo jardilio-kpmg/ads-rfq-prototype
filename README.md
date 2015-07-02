@@ -1,11 +1,13 @@
-|Application|http://ec2-52-1-174-71.compute-1.amazonaws.com:8888/origin/master/|
-|Application (Docker Container)|http://ec2-52-1-174-71.compute-1.amazonaws.com/|
-|Jenksins CI|http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/|
-|Build Artifacts (master release)|http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/|
-|Documentation (master release)|http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/javadoc/|
-|Test Results (master release)|http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/testReport/|
-|Code Coverage Reports (master release)|http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/cobertura/|
-|Setup Instructions|https://github.com/jardilio-kpmg/ads-rfq-prototype/blob/master/INSTRUCTIONS.md|
+| Name | URL |
+| ------------- | ------------- |
+| Application|http://ec2-52-1-174-71.compute-1.amazonaws.com:8888/origin/master/ |
+| Application (Docker Container) | http://ec2-52-1-174-71.compute-1.amazonaws.com/ |
+| Jenksins CI | http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/ |
+| Build Artifacts (master release) | http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/ |
+| Documentation (master release) | http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/javadoc/ |
+| Test Results (master release) | http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/testReport/ |
+| Code Coverage Reports (master release) | http://ec2-52-1-174-71.compute-1.amazonaws.com:8080/job/ads-rfq-prototype/201/cobertura/ |
+| Setup Instructions | https://github.com/jardilio-kpmg/ads-rfq-prototype/blob/master/INSTRUCTIONS.md |
 
 #Cover Letter
 July 1, 2015
