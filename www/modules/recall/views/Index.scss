@@ -1,14 +1,16 @@
+/* min small devices break for responsive design */
+$break-small: 600px;
+$max-width: 960px;
+
 .recall.index {
     md-content {
         background: lighten(lightgrey, 10%);
 
-        > div {
-            max-width: 960px;
-            margin: auto;
+        .detail-result {
+            @media screen and (min-width: $break-small) {
+                margin: auto;
+            }
+            max-width: $max-width;
         }
-    }
-
-    .result {
-        height: 0px; // Setting this makes sure the content shows scroll
     }
 }

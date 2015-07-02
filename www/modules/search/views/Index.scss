@@ -1,5 +1,6 @@
 /* min small devices break for responsive design */
 $break-small: 600px;
+$max-width: 960px;
 
 .search.index {
 
@@ -32,11 +33,10 @@ $break-small: 600px;
             width: 100%;
         }
     }
-    .result {
+    .search-results {
         @media screen and (min-width: $break-small) {
             margin: auto;
         }
-        height: 0px; // Setting this makes sure the content shows scroll
-        max-width: 960px;
+        max-width: $max-width;
     }
 }
