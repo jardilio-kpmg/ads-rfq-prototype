@@ -103,7 +103,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body>
+<body layout="column" layout-fill>
 
 <!--[if lte IE 11]>
     <style>.unsupported-browser {
@@ -121,7 +121,7 @@
     </div>
 <![endif]-->
 
-<ng-view></ng-view>
+<ng-view layout="column" layout-fill></ng-view>
 
 <style>
     .splash {

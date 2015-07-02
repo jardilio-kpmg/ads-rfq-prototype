@@ -1,5 +1,7 @@
-/* min small devices break for responsive design */
-$break-small: 600px;
+/* todo : need to set this on global variables file */
+$break-small: 600px; /* min small devices break for responsive design */
+$max-width: 960px;
+$screen-background-color: lightgrey;
 
 .search.index {
 
@@ -23,20 +25,41 @@ $break-small: 600px;
         > div > * {
             width: 300px;
         }
-        .or {
-            text-align: center;
-            margin: 10px;
-            position: relative;
-        }
+
         md-input-container {
             width: 100%;
         }
+
+        .or {
+            text-align: center;
+            display:block;
+            position: relative;
+            z-index: 1;
+            padding: 15px 0;
+
+            &:before {
+                border-top: 1px solid darkgrey;
+                content:"";
+                margin: 0 auto; /* this centers the line to the full width specified */
+                position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+                top: 50%; left: 0; right: 0; bottom: 0;
+                width: 100%;
+                z-index: -1;
+            }
+
+            span {
+                /* to hide the lines from behind the text, you have to set the background color the same as the container */
+                background: $screen-background-color;
+                padding: 0 15px;
+                position: relative;
+            }
+        }
     }
-    .result {
+    .search-results {
         @media screen and (min-width: $break-small) {
             margin: auto;
         }
-        height: 0px; // Setting this makes sure the content shows scroll
-        max-width: 960px;
+        max-width: $max-width;
+        width: 100%;
     }
 }

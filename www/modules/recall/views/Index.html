@@ -1,4 +1,4 @@
-<div class="recall index" layout="column" layout-fill>
+<md-content class="recall index" flex layout="column">
     <md-toolbar>
         <div class="md-toolbar-tools">
             <nav-back-button></nav-back-button>
@@ -11,9 +11,9 @@
     <md-content flex layout="column" layout-align="center center" ng-show="recall.state === recall.states.LOADING">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </md-content>
-    <md-content flex class="result" ng-show="recall.state === recall.states.RESULT" >
-        <div layout-wrap layout-gt-sm="row" >
-            <div ng-if="recall.product.imageUrl" flex-gt-sm="50" layout-gt-sm="column">
+    <md-content flex layout="column" ng-show="recall.state === recall.states.RESULT">
+        <div class="detail-result" layout-wrap layout-gt-sm="row">
+            <div flex-gt-sm="50" layout-gt-sm="column" ng-if="recall.product.imageUrl" >
                 <md-card layout-align="center center" flex-gt-sm>
                     <img ng-src="{{recall.product.imageUrl}}" class="md-card-image" alt="">
                 </md-card>
@@ -84,4 +84,4 @@
             </div>
         </div>
     </md-content>
-</div>
+</md-content>
