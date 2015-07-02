@@ -61,7 +61,7 @@ After validating the system test, the Product Manager then engaged the users and
 
 The Product Manager then rapidly determined factors that needed to be incorporated into subsequent Sprints, specifically the need for manual entry of keyword-based searches to overcome reliability challenges encountered with taking pictures of product UPC barcodes. Also, based on the observed lack of UPC data in the OpenFDA foods enforcement reports, the Product Manager determined more complete results could be attained by using keywords from UPC code lookups prior to submitting the query to OpenFDA and added the feature to the Product Backlog. A selection of readily available services was quickly evaluated and we selected an API from [Factual] (http://developer.factual.com/working-with-factual-products/) that provided UPC lookup and imaging data for food products.
 
-The Delivery Manager facilitated daily scrums with the Product Manager and Development resources for the feedback impacting the Sprint. The team followed the configuration management, communication and feedback process as outlined above for each daily Sprint. 
+The Delivery Manager facilitated daily scrums with the Product Manager and Development resources for the feedback impacting the Sprint. The team followed the configuration management, communication and feedback process as outlined above for each Sprint. 
 
 On notification of the submission deadline push to July 1, the Product Manager decided not to change scope and complete the release as per the planned features. On subsequent notification of the deadline push to July 7, the Product Manager decided to utilize the time to get additional user feedback on the released features and focus on issue resolution and clean-up. 
 
